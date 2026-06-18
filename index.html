@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PARAPIA - 혁신적인 소프트웨어 솔루션으로 비즈니스를 변화시키는 기술 파트너">
+    <meta name="keywords" content="소프트웨어, 개발, 디지털 솔루션, 기술">
+    <title>PARAPIA - Software Development Solutions</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%232563eb'>P</text></svg>">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="theme-dark">
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/logos/logo.png" alt="PARAPIA Logo">
+                <span>PARAPIA</span>
+            </div>
+            <div class="nav-links">
+                <a href="#services" data-i18n="services"></a>
+                <a href="#portfolio" data-i18n="portfolio"></a>
+                <a href="#team" data-i18n="team"></a>
+                <a href="#testimonials" data-i18n="testimonials"></a>
+                <a href="#faq" data-i18n="nav_faq">FAQ</a>
+                <a href="#contact" data-i18n="contact"></a>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden">
+        <div>
+            <a href="#services" data-i18n="services"></a>
+            <a href="#portfolio" data-i18n="portfolio"></a>
+            <a href="#team" data-i18n="team"></a>
+            <a href="#testimonials" data-i18n="testimonials"></a>
+            <a href="#faq" data-i18n="nav_faq">FAQ</a>
+            <a href="#contact" data-i18n="contact"></a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="badge" data-i18n="hero_badge"></div>
+                <h1>
+                    <span data-i18n="hero_title"></span>
+                    <span class="gradient-text" data-i18n="hero_title_highlight"></span>
+                </h1>
+                <p data-i18n="hero_description"></p>
+                <div class="btn-group">
+                    <a href="#contact" class="btn btn-primary" data-i18n="hero_btn1"></a>
+                    <a href="#portfolio" class="btn btn-secondary" data-i18n="hero_btn2"></a>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="hero-orb"><span class="hero-orb-emoji">🤖</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Strip -->
+    <section class="brand-strip">
+        <div class="container">
+            <p class="brand-eyebrow" data-i18n="brand_eyebrow"></p>
+            <div class="brand-row">
+                <span class="brand-logo" data-i18n="brand1"></span>
+                <span class="brand-logo" data-i18n="brand2"></span>
+                <span class="brand-logo" data-i18n="brand3"></span>
+                <span class="brand-logo" data-i18n="brand4"></span>
+                <span class="brand-logo" data-i18n="brand5"></span>
+                <span class="brand-logo" data-i18n="brand6"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="services_title"></h2>
+                <p data-i18n="services_desc"></p>
+            </div>
+
+            <div class="grid grid-3 gap-8" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="card">
+                    <div class="card-icon" data-i18n="service1_icon"></div>
+                    <h3 data-i18n="service1_title"></h3>
+                    <p data-i18n="service1_desc"></p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon" data-i18n="service2_icon"></div>
+                    <h3 data-i18n="service2_title"></h3>
+                    <p data-i18n="service2_desc"></p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon" data-i18n="service3_icon"></div>
+                    <h3 data-i18n="service3_title"></h3>
+                    <p data-i18n="service3_desc"></p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon" data-i18n="service4_icon"></div>
+                    <h3 data-i18n="service4_title"></h3>
+                    <p data-i18n="service4_desc"></p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon" data-i18n="service5_icon"></div>
+                    <h3 data-i18n="service5_title"></h3>
+                    <p data-i18n="service5_desc"></p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon" data-i18n="service6_icon"></div>
+                    <h3 data-i18n="service6_title"></h3>
+                    <p data-i18n="service6_desc"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why" class="bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="why_title"></h2>
+                <p data-i18n="why_desc"></p>
+            </div>
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="why-badge">✓</div>
+                    <h3 data-i18n="why1_title"></h3>
+                    <p data-i18n="why1_desc"></p>
+                </div>
+                <div class="why-item">
+                    <div class="why-badge">✓</div>
+                    <h3 data-i18n="why2_title"></h3>
+                    <p data-i18n="why2_desc"></p>
+                </div>
+                <div class="why-item">
+                    <div class="why-badge">✓</div>
+                    <h3 data-i18n="why3_title"></h3>
+                    <p data-i18n="why3_desc"></p>
+                </div>
+                <div class="why-item">
+                    <div class="why-badge">✓</div>
+                    <h3 data-i18n="why4_title"></h3>
+                    <p data-i18n="why4_desc"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="portfolio_title"></h2>
+                <p data-i18n="portfolio_desc"></p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item bg-blue">
+                    <h3 data-i18n="port1_title"></h3>
+                    <p data-i18n="port1_desc"></p>
+                    <span data-i18n="port1_tech"></span>
+                </div>
+
+                <div class="portfolio-item bg-purple">
+                    <h3 data-i18n="port2_title"></h3>
+                    <p data-i18n="port2_desc"></p>
+                    <span data-i18n="port2_tech"></span>
+                </div>
+
+                <div class="portfolio-item bg-green">
+                    <h3 data-i18n="port3_title"></h3>
+                    <p data-i18n="port3_desc"></p>
+                    <span data-i18n="port3_tech"></span>
+                </div>
+
+                <div class="portfolio-item bg-orange">
+                    <h3 data-i18n="port4_title"></h3>
+                    <p data-i18n="port4_desc"></p>
+                    <span data-i18n="port4_tech"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="team_title"></h2>
+                <p data-i18n="team_desc"></p>
+            </div>
+
+            <div class="grid grid-4 gap-8" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                <div class="team-member">
+                    <img src="assets/team/avatar1.png" alt="Team member">
+                    <h3 data-i18n="team1"></h3>
+                    <p data-i18n="team1_desc"></p>
+                </div>
+
+                <div class="team-member">
+                    <img src="assets/team/avatar2.png" alt="Team member">
+                    <h3 data-i18n="team2"></h3>
+                    <p data-i18n="team2_desc"></p>
+                </div>
+
+                <div class="team-member">
+                    <img src="assets/team/avatar3.png" alt="Team member">
+                    <h3 data-i18n="team3"></h3>
+                    <p data-i18n="team3_desc"></p>
+                </div>
+
+                <div class="team-member">
+                    <img src="assets/team/avatar4.png" alt="Team member">
+                    <h3 data-i18n="team4"></h3>
+                    <p data-i18n="team4_desc"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="testimonials_title"></h2>
+                <p data-i18n="testimonials_desc"></p>
+            </div>
+
+            <div class="grid grid-3 gap-8" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="testimonial-card">
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #2563eb, #06b6d4);" data-i18n="test1_avatar"></div>
+                        <div>
+                            <h4 data-i18n="test1_name"></h4>
+                            <p data-i18n="test1_company"></p>
+                        </div>
+                    </div>
+                    <p data-i18n="test1_text"></p>
+                    <div class="stars" data-i18n="test1_stars"></div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #a855f7, #e879f9);" data-i18n="test2_avatar"></div>
+                        <div>
+                            <h4 data-i18n="test2_name"></h4>
+                            <p data-i18n="test2_company"></p>
+                        </div>
+                    </div>
+                    <p data-i18n="test2_text"></p>
+                    <div class="stars" data-i18n="test2_stars"></div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #10b981, #14b8a6);" data-i18n="test3_avatar"></div>
+                        <div>
+                            <h4 data-i18n="test3_name"></h4>
+                            <p data-i18n="test3_company"></p>
+                        </div>
+                    </div>
+                    <p data-i18n="test3_text"></p>
+                    <div class="stars" data-i18n="test3_stars"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="faq_title"></h2>
+                <p data-i18n="faq_desc"></p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item open">
+                    <button class="faq-q" type="button">
+                        <span class="faq-num">01</span>
+                        <span class="faq-question" data-i18n="faq1_q"></span>
+                        <span class="faq-toggle"></span>
+                    </button>
+                    <div class="faq-a"><p data-i18n="faq1_a"></p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button">
+                        <span class="faq-num">02</span>
+                        <span class="faq-question" data-i18n="faq2_q"></span>
+                        <span class="faq-toggle"></span>
+                    </button>
+                    <div class="faq-a"><p data-i18n="faq2_a"></p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button">
+                        <span class="faq-num">03</span>
+                        <span class="faq-question" data-i18n="faq3_q"></span>
+                        <span class="faq-toggle"></span>
+                    </button>
+                    <div class="faq-a"><p data-i18n="faq3_a"></p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button">
+                        <span class="faq-num">04</span>
+                        <span class="faq-question" data-i18n="faq4_q"></span>
+                        <span class="faq-toggle"></span>
+                    </button>
+                    <div class="faq-a"><p data-i18n="faq4_a"></p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" type="button">
+                        <span class="faq-num">05</span>
+                        <span class="faq-question" data-i18n="faq5_q"></span>
+                        <span class="faq-toggle"></span>
+                    </button>
+                    <div class="faq-a"><p data-i18n="faq5_a"></p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-title" style="color: white;">
+                <h2 style="color: white;" data-i18n="contact_title"></h2>
+                <p style="color: rgba(255, 255, 255, 0.9);" data-i18n="contact_desc"></p>
+            </div>
+
+            <form id="contact-form" style="max-width: 600px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="form-group">
+                        <input type="text" name="name" data-i18n-placeholder="contact_name" placeholder="" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" data-i18n-placeholder="contact_email" placeholder="" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="subject" data-i18n-placeholder="contact_subject" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" data-i18n-placeholder="contact_message" placeholder="" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; background: white; color: #2563eb; border: none;" data-i18n="contact_send"></button>
+            </form>
+
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    <h4 data-i18n="contact_phone"></h4>
+                    <a href="tel:01036862785" data-i18n="contact_phone_value"></a>
+                </div>
+                <div class="contact-info-item">
+                    <h4 data-i18n="contact_email_label"></h4>
+                    <a href="mailto:parapia.syd@gmail.com" data-i18n="contact_email_value"></a>
+                </div>
+                <div class="contact-info-item">
+                    <h4 data-i18n="contact_address"></h4>
+                    <p data-i18n="contact_address_value"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <img src="assets/logos/logo.png" alt="PARAPIA Logo" style="width: 1.5rem; height: 1.5rem;">
+                        <h3 style="margin: 0;">PARAPIA</h3>
+                    </div>
+                    <p data-i18n="footer_desc"></p>
+                </div>
+                <div>
+                    <h4 data-i18n="footer_services"></h4>
+                    <ul>
+                        <li><a href="#services" data-i18n="footer_service1"></a></li>
+                        <li><a href="#services" data-i18n="footer_service2"></a></li>
+                        <li><a href="#services" data-i18n="footer_service3"></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-i18n="footer_contact"></h4>
+                    <ul>
+                        <li><a href="tel:01036862785" data-i18n="footer_phone"></a></li>
+                        <li><a href="mailto:parapia.syd@gmail.com" data-i18n="footer_email"></a></li>
+                        <li><a href="#contact" data-i18n="footer_message"></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-i18n="footer_follow"></h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_social1"></a></li>
+                        <li><a href="#" data-i18n="footer_social2"></a></li>
+                        <li><a href="#" data-i18n="footer_social3"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-i18n="footer_rights"></p>
+                <div style="margin-top: 1rem;">
+                    <a href="legal.html#privacy" data-i18n="footer_privacy"></a> | <a href="legal.html#terms" data-i18n="footer_terms"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script defer src="js/google-sheets-api.js"></script>
+    <script defer src="js/content-data.js"></script>
+    <script defer src="js/language.js"></script>
+    <script defer src="js/content-manager.js"></script>
+    <script defer src="js/main.js"></script>
+    <script>
+        // FAQ 아코디언 (한 번에 하나만 열림)
+        document.querySelectorAll('.faq-item .faq-q').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var item = btn.closest('.faq-item');
+                var wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        // 빈 값이 아닌 항목만 병합 (다른 텍스트가 지워지는 것 방지)
+        function mergeNonEmpty(target, source) {
+            if (!source) return;
+            for (const key in source) {
+                const val = source[key];
+                if (val !== undefined && val !== null && val !== '') {
+                    target[key] = val;
+                }
+            }
+        }
+
+        // 구글 시트 데이터 업데이트 함수
+        async function updateFromGoogleSheets() {
+            try {
+                const sheetId = localStorage.getItem('parapia_sheets_id');
+                if (!sheetId) return;
+
+                const data = await loadFromGoogleSheets();
+
+                if (data && typeof data === 'object') {
+                    mergeNonEmpty(translations.ko, data.ko);
+                    mergeNonEmpty(translations.en, data.en);
+                    applyTranslations();
+                    console.log('✅ 구글 시트 자동 업데이트 (' + new Date().toLocaleTimeString('ko-KR') + ')');
+                }
+            } catch (error) {
+                console.error('❌ 자동 업데이트 실패:', error);
+            }
+        }
+
+        // 페이지 로드 시 구글 시트에서 데이터 로드
+        window.addEventListener('load', async () => {
+            try {
+                const sheetId = localStorage.getItem('parapia_sheets_id');
+                if (sheetId) {
+                    console.log('🔄 구글 시트에서 데이터 로드 중...');
+                    await updateFromGoogleSheets();
+                    console.log('✅ 초기 데이터 로드 완료');
+                }
+            } catch (e) {
+                console.log('⚠️ 구글 시트 로드 실패, 기본 데이터 사용');
+            }
+        });
+
+        // 수동 새로고침 함수 (manager.html에서 호출)
+        async function refreshFromSheets() {
+            try {
+                console.log('🔄 수동 새로고침 시작...');
+                const sheetId = localStorage.getItem('parapia_sheets_id');
+                if (!sheetId) {
+                    alert('❌ 구글 시트가 설정되지 않았습니다.\n/auto-setup.html 에서 설정해주세요.');
+                    return false;
+                }
+
+                const data = await loadFromGoogleSheets();
+                if (data && (data.ko || data.en)) {
+                    // translations 객체 업데이트
+                    if (data.ko) Object.assign(translations.ko, data.ko);
+                    if (data.en) Object.assign(translations.en, data.en);
+                    applyTranslations();
+                    console.log('✅ 수동 새로고침 완료');
+                    return true;
+                } else {
+                    console.warn('⚠️ 구글 시트에서 데이터를 읽지 못했습니다.');
+                    return false;
+                }
+            } catch (error) {
+                console.error('❌ 새로고침 오류:', error);
+                alert('❌ 오류 발생: ' + error.message);
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

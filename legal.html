@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>PARAPIA - 개인정보 보호정책 · 서비스 약관</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%232563eb'>P</text></svg>">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .legal-nav {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(10, 11, 16, 0.8);
+            backdrop-filter: saturate(180%) blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .legal-nav .container {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 4.5rem;
+        }
+        .legal-nav .logo { color: #fff; font-weight: 800; font-size: 1.2rem; }
+        .legal-nav .logo img { width: 1.8rem; height: 1.8rem; }
+        .back-home {
+            color: #c8cad4; font-weight: 500; font-size: 0.95rem;
+            border: 1px solid rgba(255,255,255,0.15); padding: 0.5rem 1rem;
+            border-radius: 10px; transition: all 0.2s ease;
+        }
+        .back-home:hover { color: #fff; border-color: var(--d-blue, #2f6bff); background: rgba(47,107,255,0.12); }
+
+        .legal-wrap { max-width: 860px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+        .legal-head { text-align: center; margin-bottom: 2.5rem; }
+        .legal-head h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 0.6rem; }
+        .legal-head p { color: #8b8e9c; }
+
+        .legal-tabs {
+            display: flex; gap: 0.5rem; justify-content: center;
+            margin-bottom: 2.5rem; flex-wrap: wrap;
+        }
+        .legal-tab {
+            padding: 0.75rem 1.6rem; border-radius: 9999px; cursor: pointer;
+            font-weight: 600; font-size: 0.98rem; font-family: inherit;
+            background: rgba(255,255,255,0.05); color: #c8cad4;
+            border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s ease;
+        }
+        .legal-tab:hover { color: #fff; }
+        .legal-tab.active {
+            background: var(--d-blue, #2f6bff); color: #fff; border-color: transparent;
+            box-shadow: 0 10px 26px rgba(47,107,255,0.4);
+        }
+
+        .legal-panel { display: none; }
+        .legal-panel.active { display: block; animation: fadeInUp 0.4s ease; }
+
+        .legal-panel h2 {
+            font-size: 1.05rem; margin: 2rem 0 0.75rem; color: #fff;
+            padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .legal-panel h2:first-of-type { margin-top: 0; }
+        .legal-panel p, .legal-panel li {
+            color: #b6b9c5; font-size: 0.96rem; line-height: 1.85; margin-bottom: 0.6rem;
+        }
+        .legal-panel ul, .legal-panel ol { padding-left: 1.4rem; margin-bottom: 0.6rem; }
+        .legal-panel li { margin-bottom: 0.35rem; }
+        .legal-meta {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 1.1rem 1.3rem; margin-bottom: 2rem; font-size: 0.92rem;
+        }
+        .legal-meta strong { color: #fff; }
+        .legal-foot {
+            margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08);
+            text-align: center; color: #6f7280; font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body class="theme-dark">
+    <nav class="legal-nav">
+        <div class="container">
+            <a href="index.html" class="logo" style="display:flex;align-items:center;gap:0.5rem;">
+                <img src="assets/logos/logo.png" alt="PARAPIA"> <span>PARAPIA</span>
+            </a>
+            <a href="index.html" class="back-home">← 홈으로</a>
+        </div>
+    </nav>
+
+    <main class="legal-wrap">
+        <div class="legal-head">
+            <h1>약관 및 정책</h1>
+            <p>PARAPIA 서비스 이용에 적용되는 약관과 개인정보 처리 기준입니다.</p>
+        </div>
+
+        <div class="legal-tabs">
+            <button class="legal-tab active" data-tab="privacy">개인정보 보호정책</button>
+            <button class="legal-tab" data-tab="terms">서비스 약관</button>
+        </div>
+
+        <!-- ===== 개인정보 보호정책 ===== -->
+        <section class="legal-panel active" id="privacy">
+            <div class="legal-meta">
+                <strong>PARAPIA</strong>(이하 '회사')는 「개인정보 보호법」 등 관련 법령을 준수하며,
+                이용자의 개인정보를 소중히 보호하기 위해 다음과 같은 처리방침을 둡니다.<br>
+                시행일자: 2026년 6월 18일
+            </div>
+
+            <h2>제1조 (수집하는 개인정보 항목 및 수집방법)</h2>
+            <p>회사는 문의 접수, 서비스 제공 및 상담을 위하여 다음의 개인정보를 수집할 수 있습니다.</p>
+            <ul>
+                <li>필수항목: 이름, 이메일 주소</li>
+                <li>선택항목: 연락처(전화번호), 문의 제목 및 내용</li>
+                <li>자동수집항목: 접속 IP, 쿠키, 서비스 이용기록, 브라우저 및 기기 정보</li>
+            </ul>
+            <p>수집방법: 홈페이지 문의 양식, 이메일, 전화 등 이용자가 자발적으로 제공하는 경로 및 서비스 이용 과정에서의 자동 생성·수집.</p>
+
+            <h2>제2조 (개인정보의 수집 및 이용목적)</h2>
+            <ul>
+                <li>문의·상담 처리 및 결과 회신</li>
+                <li>서비스 제공, 계약의 이행 및 요금 정산</li>
+                <li>신규 서비스 안내 및 고지사항 전달</li>
+                <li>서비스 개선, 통계 분석 및 부정 이용 방지</li>
+            </ul>
+
+            <h2>제3조 (개인정보의 보유 및 이용기간)</h2>
+            <p>회사는 원칙적으로 개인정보의 수집·이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다.
+            다만 관계 법령에 따라 보존할 필요가 있는 경우 아래 기간 동안 보관합니다.</p>
+            <ul>
+                <li>계약 또는 청약철회 등에 관한 기록: 5년 (전자상거래법)</li>
+                <li>대금결제 및 재화 등의 공급에 관한 기록: 5년 (전자상거래법)</li>
+                <li>소비자의 불만 또는 분쟁처리에 관한 기록: 3년 (전자상거래법)</li>
+                <li>웹사이트 방문 기록: 3개월 (통신비밀보호법)</li>
+            </ul>
+
+            <h2>제4조 (개인정보의 제3자 제공)</h2>
+            <p>회사는 이용자의 개인정보를 제2조에서 고지한 범위 내에서만 처리하며, 이용자의 사전 동의 없이
+            해당 범위를 초과하여 이용하거나 제3자에게 제공하지 않습니다. 다만 법령에 특별한 규정이 있거나
+            수사기관의 적법한 요청이 있는 경우는 예외로 합니다.</p>
+
+            <h2>제5조 (개인정보 처리업무의 위탁)</h2>
+            <p>회사는 원활한 서비스 제공을 위해 필요한 경우 개인정보 처리업무를 외부 전문업체에 위탁할 수 있으며,
+            위탁 시에는 위탁받는 자와 위탁 업무 내용을 본 방침을 통해 고지합니다. 위탁계약 시 개인정보가 안전하게
+            관리될 수 있도록 필요한 사항을 규정합니다.</p>
+
+            <h2>제6조 (정보주체의 권리·의무 및 행사방법)</h2>
+            <p>이용자는 언제든지 자신의 개인정보에 대한 열람·정정·삭제·처리정지를 요구할 수 있습니다. 권리 행사는
+            이메일 등을 통해 요청할 수 있으며, 회사는 지체 없이 필요한 조치를 취합니다.</p>
+
+            <h2>제7조 (개인정보의 파기절차 및 방법)</h2>
+            <ul>
+                <li>전자적 파일: 복구가 불가능한 기술적 방법으로 영구 삭제</li>
+                <li>출력물 등: 분쇄하거나 소각하여 파기</li>
+            </ul>
+
+            <h2>제8조 (개인정보의 안전성 확보조치)</h2>
+            <ul>
+                <li>관리적 조치: 내부관리계획 수립·시행, 담당자 교육</li>
+                <li>기술적 조치: 접근권한 관리, 접근통제시스템 설치, 전송구간 암호화(HTTPS)</li>
+                <li>물리적 조치: 자료 보관장소의 접근 통제</li>
+            </ul>
+
+            <h2>제9조 (쿠키의 운영 및 거부)</h2>
+            <p>회사는 이용자 맞춤형 서비스 제공을 위해 쿠키(cookie)를 사용할 수 있습니다. 이용자는 웹브라우저
+            설정을 통해 쿠키 저장을 거부할 수 있으며, 이 경우 일부 서비스 이용에 제한이 있을 수 있습니다.</p>
+
+            <h2>제10조 (개인정보 보호책임자)</h2>
+            <ul>
+                <li>개인정보 보호책임자: PARAPIA 운영팀</li>
+                <li>이메일: parapia.syd@gmail.com</li>
+                <li>전화: 010-3686-2785</li>
+                <li>주소: 경기도 성남시 수정구 산성대로 331, 17층 1716호</li>
+            </ul>
+
+            <h2>제11조 (권익침해 구제방법)</h2>
+            <p>개인정보 침해에 대한 신고나 상담이 필요한 경우 아래 기관에 문의할 수 있습니다.</p>
+            <ul>
+                <li>개인정보침해신고센터 (privacy.kisa.or.kr / 국번없이 118)</li>
+                <li>개인정보 분쟁조정위원회 (kopico.go.kr / 1833-6972)</li>
+                <li>대검찰청 사이버수사과 (spo.go.kr / 1301)</li>
+                <li>경찰청 사이버수사국 (ecrm.cyber.go.kr / 182)</li>
+            </ul>
+
+            <h2>제12조 (개인정보처리방침의 변경)</h2>
+            <p>본 개인정보 처리방침은 법령·정책 또는 보안기술의 변경에 따라 내용이 추가·삭제·수정될 수 있으며,
+            변경 시 홈페이지를 통해 변경 사항을 공지합니다.</p>
+        </section>
+
+        <!-- ===== 서비스 약관 ===== -->
+        <section class="legal-panel" id="terms">
+            <div class="legal-meta">
+                본 약관은 <strong>PARAPIA</strong>(이하 '회사')가 제공하는 모든 서비스의 이용과 관련하여
+                회사와 이용자 간의 권리·의무 및 책임사항을 규정합니다.<br>
+                시행일자: 2026년 6월 18일
+            </div>
+
+            <h2>제1조 (목적)</h2>
+            <p>본 약관은 회사가 제공하는 소프트웨어 개발 및 관련 서비스(이하 '서비스')의 이용조건 및 절차,
+            회사와 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+
+            <h2>제2조 (용어의 정의)</h2>
+            <ul>
+                <li>'서비스'란 회사가 제공하는 소프트웨어 개발, 컨설팅, 유지보수 등 일체의 서비스를 의미합니다.</li>
+                <li>'이용자'란 본 약관에 따라 회사가 제공하는 서비스를 이용하는 자를 말합니다.</li>
+            </ul>
+
+            <h2>제3조 (약관의 게시와 개정)</h2>
+            <p>회사는 본 약관의 내용을 이용자가 쉽게 알 수 있도록 서비스 화면에 게시합니다. 회사는 관련 법령을
+            위배하지 않는 범위에서 약관을 개정할 수 있으며, 개정 시 적용일자와 개정사유를 명시하여 사전에
+            공지합니다.</p>
+
+            <h2>제4조 (서비스의 제공 및 변경)</h2>
+            <p>회사는 이용자에게 다음과 같은 서비스를 제공합니다. 회사는 운영상·기술상 필요에 따라 제공하는
+            서비스의 내용을 변경할 수 있으며, 변경 시 그 내용을 사전에 공지합니다.</p>
+            <ul>
+                <li>웹·모바일 애플리케이션 개발</li>
+                <li>데이터 분석, 클라우드·DevOps, AI 솔루션</li>
+                <li>기타 회사가 정하는 업무</li>
+            </ul>
+
+            <h2>제5조 (서비스 이용의 중단)</h2>
+            <p>회사는 시스템 점검·교체, 고장, 통신 두절 또는 천재지변 등 부득이한 사유가 발생한 경우 서비스의
+            제공을 일시적으로 중단할 수 있으며, 이 경우 사전 또는 사후에 이를 공지합니다.</p>
+
+            <h2>제6조 (이용계약의 성립)</h2>
+            <p>서비스 이용계약은 이용자의 이용 신청에 대하여 회사가 승낙함으로써 성립합니다. 구체적인 용역의
+            범위·기간·대가는 회사와 이용자가 별도로 체결하는 계약 또는 견적서에 따릅니다.</p>
+
+            <h2>제7조 (이용자의 의무)</h2>
+            <p>이용자는 다음 행위를 하여서는 안 됩니다.</p>
+            <ul>
+                <li>신청 또는 변경 시 허위 내용의 등록</li>
+                <li>회사 또는 제3자의 지식재산권 침해</li>
+                <li>회사의 서비스 운영을 고의로 방해하는 행위</li>
+                <li>법령 또는 공서양속에 위반되는 행위</li>
+            </ul>
+
+            <h2>제8조 (회사의 의무)</h2>
+            <p>회사는 관련 법령과 본 약관이 정하는 바에 따라 지속적이고 안정적으로 서비스를 제공하기 위하여
+            노력하며, 이용자의 개인정보를 보호하기 위해 보안 시스템을 갖추고 개인정보 처리방침을 준수합니다.</p>
+
+            <h2>제9조 (저작권의 귀속 및 이용제한)</h2>
+            <p>회사가 작성한 저작물에 대한 저작권 및 기타 지식재산권은 회사에 귀속합니다. 별도의 계약으로
+            정한 산출물의 권리 귀속은 해당 계약을 따릅니다. 이용자는 회사의 사전 승낙 없이 서비스를 이용하여
+            얻은 정보를 영리 목적으로 이용하거나 제3자에게 제공할 수 없습니다.</p>
+
+            <h2>제10조 (면책조항)</h2>
+            <p>회사는 천재지변, 이용자의 귀책사유 또는 제3자의 불법행위 등 회사의 합리적인 통제를 벗어난
+            사유로 인해 발생한 손해에 대하여 책임을 지지 않습니다. 회사는 이용자가 서비스를 통해 기대하는
+            특정 결과나 수익을 보장하지 않습니다.</p>
+
+            <h2>제11조 (분쟁의 해결 및 관할법원)</h2>
+            <p>본 약관과 관련하여 회사와 이용자 간에 발생한 분쟁은 대한민국 법령을 준거법으로 하며, 분쟁에
+            관한 소송은 민사소송법상의 관할법원에 제기합니다.</p>
+
+            <h2>부칙</h2>
+            <p>본 약관은 2026년 6월 18일부터 시행합니다.</p>
+        </section>
+
+        <div class="legal-foot">
+            &copy; 2005-2026 PARAPIA. All rights reserved.
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            var tabs = document.querySelectorAll('.legal-tab');
+            var panels = document.querySelectorAll('.legal-panel');
+            function show(name) {
+                tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.tab === name); });
+                panels.forEach(function (p) { p.classList.toggle('active', p.id === name); });
+                if (history.replaceState) history.replaceState(null, '', '#' + name);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            tabs.forEach(function (t) {
+                t.addEventListener('click', function () { show(t.dataset.tab); });
+            });
+            // URL 해시(#privacy / #terms)에 따라 초기 탭 선택
+            var hash = (location.hash || '').replace('#', '');
+            if (hash === 'terms' || hash === 'privacy') show(hash);
+        })();
+    </script>
+</body>
+</html>
