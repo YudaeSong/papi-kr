@@ -412,7 +412,7 @@
             <div class="footer-bottom">
                 <p data-i18n="footer_rights"></p>
                 <div style="margin-top: 1rem;">
-                    <a href="legal.html#privacy" data-i18n="footer_privacy"></a> | <a href="legal.html#terms" data-i18n="footer_terms"></a>
+                    <a href="legal.html#privacy" data-i18n="footer_privacy"></a> | <a href="legal.html#terms" data-i18n="footer_terms"></a> <a href="#" id="admin-gear" title="설정" aria-label="설정" style="margin-left:0.5rem; text-decoration:none;">⚙️</a>
                 </div>
             </div>
         </div>
@@ -446,67 +446,38 @@
             }
         }
 
-        // 구글 시트 데이터 업데이트 함수
+        // 구글 시트(Apps Script 웹앱)에서 데이터 로드
         async function updateFromGoogleSheets() {
             try {
-                const sheetId = localStorage.getItem('parapia_sheets_id');
-                if (!sheetId) return;
-
                 const data = await loadFromGoogleSheets();
-
                 if (data && typeof data === 'object') {
                     mergeNonEmpty(translations.ko, data.ko);
                     mergeNonEmpty(translations.en, data.en);
                     applyTranslations();
-                    console.log('✅ 구글 시트 자동 업데이트 (' + new Date().toLocaleTimeString('ko-KR') + ')');
                 }
             } catch (error) {
-                console.error('❌ 자동 업데이트 실패:', error);
+                console.error('시트 로드 실패(기본 콘텐츠 사용):', error);
             }
         }
 
-        // 페이지 로드 시 구글 시트에서 데이터 로드
-        window.addEventListener('load', async () => {
-            try {
-                const sheetId = localStorage.getItem('parapia_sheets_id');
-                if (sheetId) {
-                    console.log('🔄 구글 시트에서 데이터 로드 중...');
-                    await updateFromGoogleSheets();
-                    console.log('✅ 초기 데이터 로드 완료');
-                }
-            } catch (e) {
-                console.log('⚠️ 구글 시트 로드 실패, 기본 데이터 사용');
-            }
-        });
+        // 페이지 로드/새로고침 시 1회만 시트 반영 (주기적 자동 갱신 없음)
+        window.addEventListener('load', updateFromGoogleSheets);
 
-        // 수동 새로고침 함수 (manager.html에서 호출)
-        async function refreshFromSheets() {
-            try {
-                console.log('🔄 수동 새로고침 시작...');
-                const sheetId = localStorage.getItem('parapia_sheets_id');
-                if (!sheetId) {
-                    alert('❌ 구글 시트가 설정되지 않았습니다.\n/auto-setup.html 에서 설정해주세요.');
-                    return false;
-                }
-
-                const data = await loadFromGoogleSheets();
-                if (data && (data.ko || data.en)) {
-                    // translations 객체 업데이트
-                    if (data.ko) Object.assign(translations.ko, data.ko);
-                    if (data.en) Object.assign(translations.en, data.en);
-                    applyTranslations();
-                    console.log('✅ 수동 새로고침 완료');
-                    return true;
+        // 설정(⚙️): 관리자 암호 확인 후 구글 시트 열기
+        (function () {
+            var gear = document.getElementById('admin-gear');
+            if (!gear) return;
+            gear.addEventListener('click', function (e) {
+                e.preventDefault();
+                var pw = prompt('관리자 암호를 입력하세요');
+                if (pw === null) return; // 취소
+                if (pw === 'parapia6907') {
+                    window.open(getGoogleSheetsEditUrl(), '_blank');
                 } else {
-                    console.warn('⚠️ 구글 시트에서 데이터를 읽지 못했습니다.');
-                    return false;
+                    alert('암호가 일치하지 않습니다.');
                 }
-            } catch (error) {
-                console.error('❌ 새로고침 오류:', error);
-                alert('❌ 오류 발생: ' + error.message);
-                return false;
-            }
-        }
+            });
+        })();
     </script>
 </body>
 </html>
