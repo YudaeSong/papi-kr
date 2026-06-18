@@ -1115,6 +1115,10 @@ body.theme-dark::before {
     border-top: 1px solid var(--d-border);
 }
 
+/* 설정(⚙️) 아이콘 — 배경(#08090d)보다 아주 살짝만 진해 거의 안 보임 */
+.theme-dark #admin-gear { color: #15161c; transition: color 0.2s ease; }
+.theme-dark #admin-gear:hover { color: #33363f; }
+
 /* Scrollbar */
 .theme-dark::-webkit-scrollbar-track { background: #0d0e13; }
 .theme-dark::-webkit-scrollbar-thumb { background: #2a2c38; }

@@ -412,7 +412,7 @@
             <div class="footer-bottom">
                 <p data-i18n="footer_rights"></p>
                 <div style="margin-top: 1rem;">
-                    <a href="legal.html#privacy" data-i18n="footer_privacy"></a> | <a href="legal.html#terms" data-i18n="footer_terms"></a> <a href="#" id="admin-gear" title="설정" aria-label="설정" style="margin-left:0.5rem; text-decoration:none;">⚙️</a>
+                    <a href="legal.html#privacy" data-i18n="footer_privacy"></a> | <a href="legal.html#terms" data-i18n="footer_terms"></a> <a href="#" id="admin-gear" aria-label="설정" style="margin-left:0.5rem; line-height:0; vertical-align:middle; text-decoration:none;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.488.488 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></a>
                 </div>
             </div>
         </div>
@@ -463,15 +463,20 @@
         // 페이지 로드/새로고침 시 1회만 시트 반영 (주기적 자동 갱신 없음)
         window.addEventListener('load', updateFromGoogleSheets);
 
-        // 설정(⚙️): 관리자 암호 확인 후 구글 시트 열기
+        // 설정(⚙️): 관리자 암호(SHA-256 해시 비교) 확인 후 구글 시트 열기
         (function () {
             var gear = document.getElementById('admin-gear');
             if (!gear) return;
+            // 평문 대신 해시만 보관 (원문은 소스에 없음)
+            var ADMIN_HASH = '0b0c092b26a2331e87d07af7f7dd8ee088c935013a2b1119650725284948dbd1';
+            // 경량 SHA-256 (http/https 모두 동작)
+            function sha256(ascii){function r(v,a){return (v>>>a)|(v<<(32-a));}var mp=Math.pow,mw=mp(2,32),res="",words=[],bl=ascii.length*8;var h=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};for(var c=2;pc<64;c++){if(!comp[c]){for(var i=0;i<313;i+=c)comp[i]=c;h[pc]=(mp(c,.5)*mw)|0;k[pc++]=(mp(c,1/3)*mw)|0;}}ascii+="\x80";while(ascii.length%64-56)ascii+="\x00";for(var i=0;i<ascii.length;i++){var j=ascii.charCodeAt(i);if(j>>8)return;words[i>>2]|=j<<((3-i)%4)*8;}words[words.length]=(bl/mw)|0;words[words.length]=bl;for(var j=0;j<words.length;){var w=words.slice(j,j+=16),oh=h;h=h.slice(0,8);for(var i=0;i<64;i++){var w15=w[i-15],w2=w[i-2];var a=h[0],e=h[4];var t1=h[7]+(r(e,6)^r(e,11)^r(e,25))+((e&h[5])^((~e)&h[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(r(w15,7)^r(w15,18)^(w15>>>3))+w[i-7]+(r(w2,17)^r(w2,19)^(w2>>>10)))|0);var t2=(r(a,2)^r(a,13)^r(a,22))+((a&h[1])^(a&h[2])^(h[1]&h[2]));h=[(t1+t2)|0].concat(h);h[4]=(h[4]+t1)|0;}for(var i=0;i<8;i++)h[i]=(h[i]+oh[i])|0;}for(var i=0;i<8;i++)for(var j=3;j+1;j--){var b=(h[i]>>(j*8))&255;res+=((b<16)?0:"")+b.toString(16);}return res;}
+
             gear.addEventListener('click', function (e) {
                 e.preventDefault();
                 var pw = prompt('관리자 암호를 입력하세요');
                 if (pw === null) return; // 취소
-                if (pw === 'parapia6907') {
+                if (sha256(pw) === ADMIN_HASH) {
                     window.open(getGoogleSheetsEditUrl(), '_blank');
                 } else {
                     alert('암호가 일치하지 않습니다.');
