@@ -4,13 +4,8 @@
    ========================================== */
 
 // 현재 홈페이지의 모든 텍스트 데이터 추출 (구조화된 형식)
+// translations가 단일 소스 — content-data.js는 키 불일치 문제로 폐기됨
 function extractCurrentContent() {
-    // contentData.js의 데이터 구조 사용
-    if (typeof contentData !== 'undefined') {
-        return contentData;
-    }
-
-    // 폴백: translations 데이터에서 추출
     const content = {
         ko: {},
         en: {}

@@ -3,395 +3,594 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PARAPIA - 혁신적인 소프트웨어 솔루션으로 비즈니스를 변화시키는 기술 파트너">
-    <meta name="keywords" content="소프트웨어, 개발, 디지털 솔루션, 기술">
-    <title>PARAPIA - Software Development Solutions</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%232563eb'>P</text></svg>">
+    <title>PARAPIA — AI Software Engineering Studio</title>
+    <meta name="description" content="PARAPIA는 맞춤형 AI 소프트웨어, 멀티 에이전트 워크플로우, 확장 가능한 시스템을 설계하는 AI 엔지니어링 스튜디오입니다. We build custom AI-powered software and scalable systems.">
+    <meta name="keywords" content="AI 개발, LLM 통합, AI 에이전트, 소프트웨어 개발, AI studio, custom AI software">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="PARAPIA">
+    <meta property="og:title" content="PARAPIA — AI Software Engineering Studio">
+    <meta property="og:description" content="Engineering tomorrow's software with intelligence. Custom AI-powered software, multi-agent workflows, scalable systems.">
+    <meta property="og:url" content="https://papi.kr">
+    <meta property="og:image" content="https://papi.kr/assets/logos/logo.png">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#090D16">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%2300F2FE'/><stop offset='1' stop-color='%238B5CF6'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='%23090D16'/><text x='50' y='72' font-size='62' font-family='Arial Black' font-weight='900' text-anchor='middle' fill='url(%23g)'>P</text></svg>">
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "PARAPIA",
+        "url": "https://papi.kr",
+        "logo": "https://papi.kr/assets/logos/logo.png",
+        "description": "AI Software Engineering Studio — custom AI-powered software, multi-agent workflows, scalable systems.",
+        "email": "parapia.syd@gmail.com",
+        "telephone": "+82-10-3686-2785",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "산성대로 331, 17층 1716호",
+            "addressLocality": "성남시 수정구",
+            "addressRegion": "경기도",
+            "addressCountry": "KR"
+        }
+    }
+    </script>
 </head>
-<body class="theme-dark">
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <img src="assets/logos/logo.png" alt="PARAPIA Logo">
+<body>
+    <!-- ================= Navigation ================= -->
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+        <div class="container nav-inner">
+            <a href="#top" class="nav-logo">
+                <img src="assets/logos/logo.png" alt="PARAPIA logo" width="30" height="30">
                 <span>PARAPIA</span>
-            </div>
+                <span class="logo-dot" aria-hidden="true"></span>
+            </a>
+
             <div class="nav-links">
+                <a href="#philosophy" data-i18n="nav_studio"></a>
                 <a href="#services" data-i18n="services"></a>
-                <a href="#portfolio" data-i18n="portfolio"></a>
-                <a href="#team" data-i18n="team"></a>
-                <a href="#testimonials" data-i18n="testimonials"></a>
-                <a href="#faq" data-i18n="nav_faq">FAQ</a>
-                <a href="#contact" data-i18n="contact"></a>
+                <a href="#process" data-i18n="nav_process"></a>
+                <a href="#work" data-i18n="portfolio"></a>
+                <a href="#faq" data-i18n="nav_faq"></a>
             </div>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+
+            <div class="nav-actions">
+                <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <span id="lang-label">EN</span>
+                </button>
+                <a href="#contact" class="btn btn-primary nav-cta"><span data-i18n="nav_cta"></span></a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden">
-        <div>
-            <a href="#services" data-i18n="services"></a>
-            <a href="#portfolio" data-i18n="portfolio"></a>
-            <a href="#team" data-i18n="team"></a>
-            <a href="#testimonials" data-i18n="testimonials"></a>
-            <a href="#faq" data-i18n="nav_faq">FAQ</a>
-            <a href="#contact" data-i18n="contact"></a>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <nav aria-label="Mobile">
+            <a class="mm-link" href="#philosophy" style="--d:.05s"><span class="mm-num">01</span><span data-i18n="nav_studio"></span></a>
+            <a class="mm-link" href="#services" style="--d:.1s"><span class="mm-num">02</span><span data-i18n="services"></span></a>
+            <a class="mm-link" href="#process" style="--d:.15s"><span class="mm-num">03</span><span data-i18n="nav_process"></span></a>
+            <a class="mm-link" href="#work" style="--d:.2s"><span class="mm-num">04</span><span data-i18n="portfolio"></span></a>
+            <a class="mm-link" href="#faq" style="--d:.25s"><span class="mm-num">05</span><span data-i18n="nav_faq"></span></a>
+            <a class="mm-link" href="#contact" style="--d:.3s"><span class="mm-num">06</span><span data-i18n="contact"></span></a>
+        </nav>
+        <div class="mm-foot">
+            <button class="lang-toggle" id="lang-toggle-mobile" type="button" aria-label="Switch language">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span id="lang-label-mobile">EN</span>
+            </button>
+            <a href="#contact" class="btn btn-primary"><span data-i18n="nav_cta"></span></a>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-inner">
-            <div class="hero-content">
-                <div class="badge" data-i18n="hero_badge"></div>
-                <h1>
-                    <span data-i18n="hero_title"></span>
-                    <span class="gradient-text" data-i18n="hero_title_highlight"></span>
-                </h1>
-                <p data-i18n="hero_description"></p>
-                <div class="btn-group">
-                    <a href="#contact" class="btn btn-primary" data-i18n="hero_btn1"></a>
-                    <a href="#portfolio" class="btn btn-secondary" data-i18n="hero_btn2"></a>
-                </div>
-            </div>
-            <div class="hero-visual" aria-hidden="true">
-                <div class="hero-orb"><span class="hero-orb-emoji">🤖</span></div>
-            </div>
-        </div>
-    </section>
+    <main id="top">
+        <!-- ================= Hero ================= -->
+        <section class="hero">
+            <canvas id="neural-canvas" aria-hidden="true"></canvas>
 
-    <!-- Brand Strip -->
-    <section class="brand-strip">
-        <div class="container">
-            <p class="brand-eyebrow" data-i18n="brand_eyebrow"></p>
-            <div class="brand-row">
-                <span class="brand-logo" data-i18n="brand1"></span>
-                <span class="brand-logo" data-i18n="brand2"></span>
-                <span class="brand-logo" data-i18n="brand3"></span>
-                <span class="brand-logo" data-i18n="brand4"></span>
-                <span class="brand-logo" data-i18n="brand5"></span>
-                <span class="brand-logo" data-i18n="brand6"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="bg-light">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="services_title"></h2>
-                <p data-i18n="services_desc"></p>
-            </div>
-
-            <div class="grid grid-3 gap-8" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                <div class="card">
-                    <div class="card-icon" data-i18n="service1_icon"></div>
-                    <h3 data-i18n="service1_title"></h3>
-                    <p data-i18n="service1_desc"></p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon" data-i18n="service2_icon"></div>
-                    <h3 data-i18n="service2_title"></h3>
-                    <p data-i18n="service2_desc"></p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon" data-i18n="service3_icon"></div>
-                    <h3 data-i18n="service3_title"></h3>
-                    <p data-i18n="service3_desc"></p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon" data-i18n="service4_icon"></div>
-                    <h3 data-i18n="service4_title"></h3>
-                    <p data-i18n="service4_desc"></p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon" data-i18n="service5_icon"></div>
-                    <h3 data-i18n="service5_title"></h3>
-                    <p data-i18n="service5_desc"></p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon" data-i18n="service6_icon"></div>
-                    <h3 data-i18n="service6_title"></h3>
-                    <p data-i18n="service6_desc"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section id="why" class="bg-light">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="why_title"></h2>
-                <p data-i18n="why_desc"></p>
-            </div>
-            <div class="why-grid">
-                <div class="why-item">
-                    <div class="why-badge">✓</div>
-                    <h3 data-i18n="why1_title"></h3>
-                    <p data-i18n="why1_desc"></p>
-                </div>
-                <div class="why-item">
-                    <div class="why-badge">✓</div>
-                    <h3 data-i18n="why2_title"></h3>
-                    <p data-i18n="why2_desc"></p>
-                </div>
-                <div class="why-item">
-                    <div class="why-badge">✓</div>
-                    <h3 data-i18n="why3_title"></h3>
-                    <p data-i18n="why3_desc"></p>
-                </div>
-                <div class="why-item">
-                    <div class="why-badge">✓</div>
-                    <h3 data-i18n="why4_title"></h3>
-                    <p data-i18n="why4_desc"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="portfolio_title"></h2>
-                <p data-i18n="portfolio_desc"></p>
-            </div>
-
-            <div class="portfolio-grid">
-                <div class="portfolio-item bg-blue">
-                    <h3 data-i18n="port1_title"></h3>
-                    <p data-i18n="port1_desc"></p>
-                    <span data-i18n="port1_tech"></span>
-                </div>
-
-                <div class="portfolio-item bg-purple">
-                    <h3 data-i18n="port2_title"></h3>
-                    <p data-i18n="port2_desc"></p>
-                    <span data-i18n="port2_tech"></span>
-                </div>
-
-                <div class="portfolio-item bg-green">
-                    <h3 data-i18n="port3_title"></h3>
-                    <p data-i18n="port3_desc"></p>
-                    <span data-i18n="port3_tech"></span>
-                </div>
-
-                <div class="portfolio-item bg-orange">
-                    <h3 data-i18n="port4_title"></h3>
-                    <p data-i18n="port4_desc"></p>
-                    <span data-i18n="port4_tech"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team" class="bg-light">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="team_title"></h2>
-                <p data-i18n="team_desc"></p>
-            </div>
-
-            <div class="grid grid-4 gap-8" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-                <div class="team-member">
-                    <img src="assets/team/avatar1.png" alt="Team member">
-                    <h3 data-i18n="team1"></h3>
-                    <p data-i18n="team1_desc"></p>
-                </div>
-
-                <div class="team-member">
-                    <img src="assets/team/avatar2.png" alt="Team member">
-                    <h3 data-i18n="team2"></h3>
-                    <p data-i18n="team2_desc"></p>
-                </div>
-
-                <div class="team-member">
-                    <img src="assets/team/avatar3.png" alt="Team member">
-                    <h3 data-i18n="team3"></h3>
-                    <p data-i18n="team3_desc"></p>
-                </div>
-
-                <div class="team-member">
-                    <img src="assets/team/avatar4.png" alt="Team member">
-                    <h3 data-i18n="team4"></h3>
-                    <p data-i18n="team4_desc"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="testimonials_title"></h2>
-                <p data-i18n="testimonials_desc"></p>
-            </div>
-
-            <div class="grid grid-3 gap-8" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-                <div class="testimonial-card">
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #2563eb, #06b6d4);" data-i18n="test1_avatar"></div>
-                        <div>
-                            <h4 data-i18n="test1_name"></h4>
-                            <p data-i18n="test1_company"></p>
+            <div class="container hero-inner">
+                <div class="hero-content">
+                    <div class="hero-badge reveal">
+                        <span class="dot" aria-hidden="true"></span>
+                        <span data-i18n="hero_badge"></span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="line reveal" style="--d:.08s" data-i18n="hero_title"></span>
+                        <span class="line gradient-text reveal" style="--d:.16s" data-i18n="hero_title_highlight"></span>
+                    </h1>
+                    <p class="hero-desc reveal" style="--d:.24s" data-i18n="hero_description"></p>
+                    <div class="hero-ctas reveal" style="--d:.32s">
+                        <a href="#contact" class="btn btn-primary">
+                            <span data-i18n="hero_btn1"></span>
+                            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="#services" class="btn btn-ghost"><span data-i18n="hero_btn2"></span></a>
+                    </div>
+                    <div class="hero-stats reveal" style="--d:.4s">
+                        <div class="stat">
+                            <div class="stat-num" data-i18n="hero_stat1_num"></div>
+                            <div class="stat-label" data-i18n="hero_stat1_label"></div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-num" data-i18n="hero_stat2_num"></div>
+                            <div class="stat-label" data-i18n="hero_stat2_label"></div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-num" data-i18n="hero_stat3_num"></div>
+                            <div class="stat-label" data-i18n="hero_stat3_label"></div>
                         </div>
                     </div>
-                    <p data-i18n="test1_text"></p>
-                    <div class="stars" data-i18n="test1_stars"></div>
                 </div>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #a855f7, #e879f9);" data-i18n="test2_avatar"></div>
+                <div class="hero-visual reveal" style="--d:.3s" aria-hidden="true">
+                    <div class="float-chip chip-1"><span class="dot"></span><span>agents · 4 online</span></div>
+                    <div class="float-chip chip-2"><span class="dot"></span><span>latency 42ms</span></div>
+
+                    <div class="code-window">
+                        <div class="code-titlebar">
+                            <span class="tl-dot r"></span><span class="tl-dot y"></span><span class="tl-dot g"></span>
+                            <span class="tl-name">nexus_agent.py</span>
+                            <span class="tl-live"><span class="dot"></span>LIVE</span>
+                        </div>
+                        <div class="code-body" id="code-body"><span class="code-caret"></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-hint" aria-hidden="true">
+                <span data-i18n="hero_scroll"></span>
+                <span class="line"></span>
+            </div>
+        </section>
+
+        <!-- ================= Brand ticker ================= -->
+        <div class="ticker-section">
+            <p class="ticker-label" data-i18n="brand_eyebrow"></p>
+            <div class="ticker" aria-hidden="true">
+                <div class="ticker-track">
+                    <span class="ticker-item" data-i18n="brand1"></span>
+                    <span class="ticker-item" data-i18n="brand2"></span>
+                    <span class="ticker-item" data-i18n="brand3"></span>
+                    <span class="ticker-item" data-i18n="brand4"></span>
+                    <span class="ticker-item" data-i18n="brand5"></span>
+                    <span class="ticker-item" data-i18n="brand6"></span>
+                </div>
+                <div class="ticker-track">
+                    <span class="ticker-item" data-i18n="brand1"></span>
+                    <span class="ticker-item" data-i18n="brand2"></span>
+                    <span class="ticker-item" data-i18n="brand3"></span>
+                    <span class="ticker-item" data-i18n="brand4"></span>
+                    <span class="ticker-item" data-i18n="brand5"></span>
+                    <span class="ticker-item" data-i18n="brand6"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= Philosophy ================= -->
+        <section id="philosophy" class="section philosophy">
+            <div class="container phil-grid">
+                <div class="phil-sticky">
+                    <div class="section-head reveal" style="margin-bottom:0">
+                        <span class="label" data-i18n="phil_label"></span>
+                        <h2 class="section-title" data-i18n="phil_title"></h2>
+                    </div>
+                    <p class="phil-statement reveal" style="--d:.1s"><span class="gradient-text" data-i18n="phil_statement"></span></p>
+                    <p class="phil-desc reveal" style="--d:.18s" data-i18n="phil_desc"></p>
+                </div>
+
+                <div class="phil-cards">
+                    <div class="phil-card glass reveal">
+                        <span class="phil-num">/01</span>
                         <div>
-                            <h4 data-i18n="test2_name"></h4>
-                            <p data-i18n="test2_company"></p>
+                            <h3 data-i18n="phil1_title"></h3>
+                            <p data-i18n="phil1_desc"></p>
                         </div>
                     </div>
-                    <p data-i18n="test2_text"></p>
-                    <div class="stars" data-i18n="test2_stars"></div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #10b981, #14b8a6);" data-i18n="test3_avatar"></div>
+                    <div class="phil-card glass reveal" style="--d:.08s">
+                        <span class="phil-num">/02</span>
                         <div>
-                            <h4 data-i18n="test3_name"></h4>
-                            <p data-i18n="test3_company"></p>
+                            <h3 data-i18n="phil2_title"></h3>
+                            <p data-i18n="phil2_desc"></p>
                         </div>
                     </div>
-                    <p data-i18n="test3_text"></p>
-                    <div class="stars" data-i18n="test3_stars"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq">
-        <div class="container">
-            <div class="section-title">
-                <h2 data-i18n="faq_title"></h2>
-                <p data-i18n="faq_desc"></p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item open">
-                    <button class="faq-q" type="button">
-                        <span class="faq-num">01</span>
-                        <span class="faq-question" data-i18n="faq1_q"></span>
-                        <span class="faq-toggle"></span>
-                    </button>
-                    <div class="faq-a"><p data-i18n="faq1_a"></p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q" type="button">
-                        <span class="faq-num">02</span>
-                        <span class="faq-question" data-i18n="faq2_q"></span>
-                        <span class="faq-toggle"></span>
-                    </button>
-                    <div class="faq-a"><p data-i18n="faq2_a"></p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q" type="button">
-                        <span class="faq-num">03</span>
-                        <span class="faq-question" data-i18n="faq3_q"></span>
-                        <span class="faq-toggle"></span>
-                    </button>
-                    <div class="faq-a"><p data-i18n="faq3_a"></p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q" type="button">
-                        <span class="faq-num">04</span>
-                        <span class="faq-question" data-i18n="faq4_q"></span>
-                        <span class="faq-toggle"></span>
-                    </button>
-                    <div class="faq-a"><p data-i18n="faq4_a"></p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q" type="button">
-                        <span class="faq-num">05</span>
-                        <span class="faq-question" data-i18n="faq5_q"></span>
-                        <span class="faq-toggle"></span>
-                    </button>
-                    <div class="faq-a"><p data-i18n="faq5_a"></p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-title" style="color: white;">
-                <h2 style="color: white;" data-i18n="contact_title"></h2>
-                <p style="color: rgba(255, 255, 255, 0.9);" data-i18n="contact_desc"></p>
-            </div>
-
-            <form id="contact-form" style="max-width: 600px; margin: 0 auto;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-                    <div class="form-group">
-                        <input type="text" name="name" data-i18n-placeholder="contact_name" placeholder="" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" data-i18n-placeholder="contact_email" placeholder="" required>
+                    <div class="phil-card glass reveal" style="--d:.16s">
+                        <span class="phil-num">/03</span>
+                        <div>
+                            <h3 data-i18n="phil3_title"></h3>
+                            <p data-i18n="phil3_desc"></p>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="text" name="subject" data-i18n-placeholder="contact_subject" placeholder="" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" data-i18n-placeholder="contact_message" placeholder="" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn" style="width: 100%; background: white; color: #2563eb; border: none;" data-i18n="contact_send"></button>
-            </form>
+            </div>
+        </section>
 
-            <div class="contact-info">
-                <div class="contact-info-item">
-                    <h4 data-i18n="contact_phone"></h4>
-                    <a href="tel:01036862785" data-i18n="contact_phone_value"></a>
+        <!-- ================= Services ================= -->
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-head center reveal">
+                    <span class="label" data-i18n="services_label"></span>
+                    <h2 class="section-title" data-i18n="services_title"></h2>
+                    <p class="section-desc" data-i18n="services_desc"></p>
                 </div>
-                <div class="contact-info-item">
-                    <h4 data-i18n="contact_email_label"></h4>
-                    <a href="mailto:parapia.syd@gmail.com" data-i18n="contact_email_value"></a>
-                </div>
-                <div class="contact-info-item">
-                    <h4 data-i18n="contact_address"></h4>
-                    <p data-i18n="contact_address_value"></p>
+
+                <div class="services-grid">
+                    <article class="svc-card glass reveal">
+                        <div class="svc-top">
+                            <div class="svc-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.2-2.5 5.5-.9.9-1.5 2-1.5 3.5h-6c0-1.5-.6-2.6-1.5-3.5C6.2 13.2 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6M10 17v4M14 17v4"/></svg>
+                            </div>
+                            <span class="svc-num">SVC—01</span>
+                        </div>
+                        <h3 data-i18n="svc1_title"></h3>
+                        <p data-i18n="svc1_desc"></p>
+                        <div class="svc-tags">
+                            <span class="tag">RAG</span><span class="tag">Fine-tuning</span><span class="tag">LangChain</span>
+                        </div>
+                        <span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+                    </article>
+
+                    <article class="svc-card glass reveal" style="--d:.08s">
+                        <div class="svc-top">
+                            <div class="svc-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M8 4h8"/><circle cx="9" cy="14" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1.2" fill="currentColor" stroke="none"/><path d="M9.5 17.5h5"/></svg>
+                            </div>
+                            <span class="svc-num">SVC—02</span>
+                        </div>
+                        <h3 data-i18n="svc2_title"></h3>
+                        <p data-i18n="svc2_desc"></p>
+                        <div class="svc-tags">
+                            <span class="tag">Multi-agent</span><span class="tag">Tool Use</span><span class="tag">Orchestration</span>
+                        </div>
+                        <span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+                    </article>
+
+                    <article class="svc-card glass reveal" style="--d:.16s">
+                        <div class="svc-top">
+                            <div class="svc-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6M14 4l-4 16"/></svg>
+                            </div>
+                            <span class="svc-num">SVC—03</span>
+                        </div>
+                        <h3 data-i18n="svc3_title"></h3>
+                        <p data-i18n="svc3_desc"></p>
+                        <div class="svc-tags">
+                            <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Kubernetes</span>
+                        </div>
+                        <span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+                    </article>
+
+                    <article class="svc-card glass reveal" style="--d:.24s">
+                        <div class="svc-top">
+                            <div class="svc-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 16l4-6 4 3 4-8"/><circle cx="6" cy="16" r="1.3" fill="currentColor" stroke="none"/><circle cx="10" cy="10" r="1.3" fill="currentColor" stroke="none"/><circle cx="14" cy="13" r="1.3" fill="currentColor" stroke="none"/><circle cx="18" cy="5" r="1.3" fill="currentColor" stroke="none"/></svg>
+                            </div>
+                            <span class="svc-num">SVC—04</span>
+                        </div>
+                        <h3 data-i18n="svc4_title"></h3>
+                        <p data-i18n="svc4_desc"></p>
+                        <div class="svc-tags">
+                            <span class="tag">MLOps</span><span class="tag">Time-series</span><span class="tag">Vector DB</span>
+                        </div>
+                        <span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer>
+        <!-- ================= Process ================= -->
+        <section id="process" class="section process">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="label" data-i18n="proc_label"></span>
+                    <h2 class="section-title" data-i18n="proc_title"></h2>
+                    <p class="section-desc" data-i18n="proc_desc"></p>
+                </div>
+
+                <div class="proc-track reveal" aria-hidden="true">
+                    <div class="proc-fill" id="proc-fill"></div>
+                </div>
+
+                <div class="proc-grid" id="proc-grid">
+                    <article class="proc-step glass reveal" data-step="0" tabindex="0">
+                        <span class="proc-dot" aria-hidden="true"></span>
+                        <div class="proc-num">01</div>
+                        <h3 data-i18n="proc1_title"></h3>
+                        <p data-i18n="proc1_desc"></p>
+                        <span class="proc-time" data-i18n="proc1_time"></span>
+                    </article>
+                    <article class="proc-step glass reveal" style="--d:.08s" data-step="1" tabindex="0">
+                        <span class="proc-dot" aria-hidden="true"></span>
+                        <div class="proc-num">02</div>
+                        <h3 data-i18n="proc2_title"></h3>
+                        <p data-i18n="proc2_desc"></p>
+                        <span class="proc-time" data-i18n="proc2_time"></span>
+                    </article>
+                    <article class="proc-step glass reveal" style="--d:.16s" data-step="2" tabindex="0">
+                        <span class="proc-dot" aria-hidden="true"></span>
+                        <div class="proc-num">03</div>
+                        <h3 data-i18n="proc3_title"></h3>
+                        <p data-i18n="proc3_desc"></p>
+                        <span class="proc-time" data-i18n="proc3_time"></span>
+                    </article>
+                    <article class="proc-step glass reveal" style="--d:.24s" data-step="3" tabindex="0">
+                        <span class="proc-dot" aria-hidden="true"></span>
+                        <div class="proc-num">04</div>
+                        <h3 data-i18n="proc4_title"></h3>
+                        <p data-i18n="proc4_desc"></p>
+                        <span class="proc-time" data-i18n="proc4_time"></span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= Work ================= -->
+        <section id="work" class="section">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="label" data-i18n="work_label"></span>
+                    <h2 class="section-title" data-i18n="portfolio_title"></h2>
+                    <p class="section-desc" data-i18n="portfolio_desc"></p>
+                </div>
+
+                <div class="work-grid">
+                    <article class="work-card glass reveal">
+                        <div class="work-visual wv-1"><span class="work-ghost" aria-hidden="true">01</span></div>
+                        <div class="work-body">
+                            <h3 data-i18n="work1_title"></h3>
+                            <p data-i18n="work1_desc"></p>
+                            <div class="svc-tags"><span class="tag" data-i18n="work1_tag1"></span><span class="tag" data-i18n="work1_tag2"></span></div>
+                        </div>
+                    </article>
+                    <article class="work-card glass reveal" style="--d:.08s">
+                        <div class="work-visual wv-2"><span class="work-ghost" aria-hidden="true">02</span></div>
+                        <div class="work-body">
+                            <h3 data-i18n="work2_title"></h3>
+                            <p data-i18n="work2_desc"></p>
+                            <div class="svc-tags"><span class="tag" data-i18n="work2_tag1"></span><span class="tag" data-i18n="work2_tag2"></span></div>
+                        </div>
+                    </article>
+                    <article class="work-card glass reveal" style="--d:.16s">
+                        <div class="work-visual wv-3"><span class="work-ghost" aria-hidden="true">03</span></div>
+                        <div class="work-body">
+                            <h3 data-i18n="work3_title"></h3>
+                            <p data-i18n="work3_desc"></p>
+                            <div class="svc-tags"><span class="tag" data-i18n="work3_tag1"></span><span class="tag" data-i18n="work3_tag2"></span></div>
+                        </div>
+                    </article>
+                    <article class="work-card glass reveal" style="--d:.24s">
+                        <div class="work-visual wv-4"><span class="work-ghost" aria-hidden="true">04</span></div>
+                        <div class="work-body">
+                            <h3 data-i18n="work4_title"></h3>
+                            <p data-i18n="work4_desc"></p>
+                            <div class="svc-tags"><span class="tag" data-i18n="work4_tag1"></span><span class="tag" data-i18n="work4_tag2"></span></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= Testimonials ================= -->
+        <section id="testimonials" class="section">
+            <div class="container">
+                <div class="section-head center reveal">
+                    <span class="label" data-i18n="testi_label"></span>
+                    <h2 class="section-title" data-i18n="testimonials_title"></h2>
+                    <p class="section-desc" data-i18n="testimonials_desc"></p>
+                </div>
+
+                <div class="testi-grid">
+                    <article class="testi-card glass reveal">
+                        <div class="testi-stars" data-i18n="test1_stars"></div>
+                        <p class="testi-text" data-i18n="test1_text"></p>
+                        <div class="testi-author">
+                            <div class="testi-avatar" data-i18n="test1_avatar"></div>
+                            <div>
+                                <h4 data-i18n="test1_name"></h4>
+                                <p data-i18n="test1_company"></p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="testi-card glass reveal" style="--d:.08s">
+                        <div class="testi-stars" data-i18n="test2_stars"></div>
+                        <p class="testi-text" data-i18n="test2_text"></p>
+                        <div class="testi-author">
+                            <div class="testi-avatar" data-i18n="test2_avatar"></div>
+                            <div>
+                                <h4 data-i18n="test2_name"></h4>
+                                <p data-i18n="test2_company"></p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="testi-card glass reveal" style="--d:.16s">
+                        <div class="testi-stars" data-i18n="test3_stars"></div>
+                        <p class="testi-text" data-i18n="test3_text"></p>
+                        <div class="testi-author">
+                            <div class="testi-avatar" data-i18n="test3_avatar"></div>
+                            <div>
+                                <h4 data-i18n="test3_name"></h4>
+                                <p data-i18n="test3_company"></p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FAQ ================= -->
+        <section id="faq" class="section">
+            <div class="container">
+                <div class="section-head center reveal">
+                    <span class="label" data-i18n="faq_label"></span>
+                    <h2 class="section-title" data-i18n="faq_title"></h2>
+                    <p class="section-desc" data-i18n="faq_desc"></p>
+                </div>
+
+                <div class="faq-wrap reveal">
+                    <div class="faq-item open">
+                        <button class="faq-q" type="button" aria-expanded="true">
+                            <span class="faq-num">01</span>
+                            <span class="faq-question" data-i18n="faq1_q"></span>
+                            <span class="faq-toggle" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-a"><p data-i18n="faq1_a"></p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            <span class="faq-num">02</span>
+                            <span class="faq-question" data-i18n="faq2_q"></span>
+                            <span class="faq-toggle" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-a"><p data-i18n="faq2_a"></p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            <span class="faq-num">03</span>
+                            <span class="faq-question" data-i18n="faq3_q"></span>
+                            <span class="faq-toggle" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-a"><p data-i18n="faq3_a"></p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            <span class="faq-num">04</span>
+                            <span class="faq-question" data-i18n="faq4_q"></span>
+                            <span class="faq-toggle" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-a"><p data-i18n="faq4_a"></p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            <span class="faq-num">05</span>
+                            <span class="faq-question" data-i18n="faq5_q"></span>
+                            <span class="faq-toggle" aria-hidden="true"></span>
+                        </button>
+                        <div class="faq-a"><p data-i18n="faq5_a"></p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CTA ================= -->
+        <section class="section cta-section">
+            <div class="cta-orb cta-orb-1" aria-hidden="true"></div>
+            <div class="cta-orb cta-orb-2" aria-hidden="true"></div>
+            <div class="container cta-inner">
+                <span class="label reveal" data-i18n="cta_label"></span>
+                <h2 class="cta-title">
+                    <span class="line reveal" style="--d:.08s" data-i18n="cta_title"></span>
+                    <span class="line gradient-text reveal" style="--d:.16s" data-i18n="cta_title2"></span>
+                </h2>
+                <p class="cta-desc reveal" style="--d:.24s" data-i18n="cta_desc"></p>
+                <div class="cta-btn-row reveal" style="--d:.32s">
+                    <a href="#contact" class="btn btn-primary">
+                        <span data-i18n="cta_btn"></span>
+                        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= Contact ================= -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="label" data-i18n="contact_label"></span>
+                    <h2 class="section-title" data-i18n="contact_title"></h2>
+                    <p class="section-desc" data-i18n="contact_desc"></p>
+                </div>
+
+                <div class="contact-grid">
+                    <form id="contact-form" class="contact-form-card glass reveal" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cf-name" data-i18n="contact_name"></label>
+                                <input id="cf-name" type="text" name="name" data-i18n-placeholder="contact_name_ph" required autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-email" data-i18n="contact_email"></label>
+                                <input id="cf-email" type="email" name="email" data-i18n-placeholder="contact_email_ph" required autocomplete="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-subject" data-i18n="contact_subject"></label>
+                            <input id="cf-subject" type="text" name="subject" data-i18n-placeholder="contact_subject_ph" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-message" data-i18n="contact_message"></label>
+                            <textarea id="cf-message" name="message" rows="5" data-i18n-placeholder="contact_message_ph" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary form-submit"><span data-i18n="contact_send"></span></button>
+                    </form>
+
+                    <aside class="contact-info-card glass reveal" style="--d:.12s">
+                        <div class="contact-info-item">
+                            <div class="ci-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div>
+                                <h4 data-i18n="contact_phone"></h4>
+                                <a href="tel:01036862785" data-i18n="contact_phone_value"></a>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="ci-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/></svg>
+                            </div>
+                            <div>
+                                <h4 data-i18n="contact_email_label"></h4>
+                                <a href="mailto:parapia.syd@gmail.com" data-i18n="contact_email_value"></a>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="ci-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <h4 data-i18n="contact_address"></h4>
+                                <p data-i18n="contact_address_value"></p>
+                            </div>
+                        </div>
+                        <div class="contact-note">
+                            <span class="dot" aria-hidden="true"></span>
+                            <span data-i18n="contact_note"></span>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= Footer ================= -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                        <img src="assets/logos/logo.png" alt="PARAPIA Logo" style="width: 1.5rem; height: 1.5rem;">
-                        <h3 style="margin: 0;">PARAPIA</h3>
-                    </div>
+                <div class="footer-brand">
+                    <a href="#top" class="nav-logo">
+                        <img src="assets/logos/logo.png" alt="PARAPIA logo" width="30" height="30">
+                        <span>PARAPIA</span>
+                    </a>
                     <p data-i18n="footer_desc"></p>
                 </div>
-                <div>
+                <div class="footer-col">
                     <h4 data-i18n="footer_services"></h4>
                     <ul>
                         <li><a href="#services" data-i18n="footer_service1"></a></li>
                         <li><a href="#services" data-i18n="footer_service2"></a></li>
                         <li><a href="#services" data-i18n="footer_service3"></a></li>
+                        <li><a href="#services" data-i18n="footer_service4"></a></li>
                     </ul>
                 </div>
-                <div>
+                <div class="footer-col">
                     <h4 data-i18n="footer_contact"></h4>
                     <ul>
                         <li><a href="tel:01036862785" data-i18n="footer_phone"></a></li>
@@ -399,7 +598,7 @@
                         <li><a href="#contact" data-i18n="footer_message"></a></li>
                     </ul>
                 </div>
-                <div>
+                <div class="footer-col">
                     <h4 data-i18n="footer_follow"></h4>
                     <ul>
                         <li><a href="#" data-i18n="footer_social1"></a></li>
@@ -411,8 +610,16 @@
 
             <div class="footer-bottom">
                 <p data-i18n="footer_rights"></p>
-                <div style="margin-top: 1rem;">
-                    <a href="legal.html#privacy" data-i18n="footer_privacy"></a> | <a href="legal.html#terms" data-i18n="footer_terms"></a> <a href="#" id="admin-gear" aria-label="설정" style="margin-left:0.5rem; line-height:0; vertical-align:middle; text-decoration:none;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.488.488 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></a><a href="manual.html" id="manual-link" aria-label="운영자 매뉴얼" style="margin-left:0.4rem; line-height:0; vertical-align:middle; text-decoration:none;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg></a>
+                <div class="footer-legal">
+                    <a href="legal.html#privacy" data-i18n="footer_privacy"></a>
+                    <span class="sep">·</span>
+                    <a href="legal.html#terms" data-i18n="footer_terms"></a>
+                    <a href="#" id="admin-gear" class="icon-link" aria-label="관리자 콘텐츠 설정">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.488.488 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                    </a>
+                    <a href="manual.html" class="icon-link" aria-label="운영자 매뉴얼">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -420,69 +627,8 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script defer src="js/google-sheets-api.js"></script>
-    <script defer src="js/content-data.js"></script>
     <script defer src="js/language.js"></script>
     <script defer src="js/content-manager.js"></script>
     <script defer src="js/main.js"></script>
-    <script>
-        // FAQ 아코디언 (한 번에 하나만 열림)
-        document.querySelectorAll('.faq-item .faq-q').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var item = btn.closest('.faq-item');
-                var wasOpen = item.classList.contains('open');
-                document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
-                if (!wasOpen) item.classList.add('open');
-            });
-        });
-
-        // 빈 값이 아닌 항목만 병합 (다른 텍스트가 지워지는 것 방지)
-        function mergeNonEmpty(target, source) {
-            if (!source) return;
-            for (const key in source) {
-                const val = source[key];
-                if (val !== undefined && val !== null && val !== '') {
-                    target[key] = val;
-                }
-            }
-        }
-
-        // 구글 시트(Apps Script 웹앱)에서 데이터 로드
-        async function updateFromGoogleSheets() {
-            try {
-                const data = await loadFromGoogleSheets();
-                if (data && typeof data === 'object') {
-                    mergeNonEmpty(translations.ko, data.ko);
-                    mergeNonEmpty(translations.en, data.en);
-                    applyTranslations();
-                }
-            } catch (error) {
-                console.error('시트 로드 실패(기본 콘텐츠 사용):', error);
-            }
-        }
-
-        // 페이지 로드/새로고침 시 1회만 시트 반영 (주기적 자동 갱신 없음)
-        window.addEventListener('load', updateFromGoogleSheets);
-
-        // 설정(⚙️): 관리자 암호(SHA-256 해시 비교) 확인 후 구글 시트 열기
-        (function () {
-            var gear = document.getElementById('admin-gear');
-            if (!gear) return;
-            // 평문 대신 해시만 보관 (원문은 소스에 없음)
-            var ADMIN_HASH = '0b0c092b26a2331e87d07af7f7dd8ee088c935013a2b1119650725284948dbd1';
-            // 경량 SHA-256 (http/https 모두 동작)
-            function sha256(ascii){function r(v,a){return (v>>>a)|(v<<(32-a));}var mp=Math.pow,mw=mp(2,32),res="",words=[],bl=ascii.length*8;var h=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};for(var c=2;pc<64;c++){if(!comp[c]){for(var i=0;i<313;i+=c)comp[i]=c;h[pc]=(mp(c,.5)*mw)|0;k[pc++]=(mp(c,1/3)*mw)|0;}}ascii+="\x80";while(ascii.length%64-56)ascii+="\x00";for(var i=0;i<ascii.length;i++){var j=ascii.charCodeAt(i);if(j>>8)return;words[i>>2]|=j<<((3-i)%4)*8;}words[words.length]=(bl/mw)|0;words[words.length]=bl;for(var j=0;j<words.length;){var w=words.slice(j,j+=16),oh=h;h=h.slice(0,8);for(var i=0;i<64;i++){var w15=w[i-15],w2=w[i-2];var a=h[0],e=h[4];var t1=h[7]+(r(e,6)^r(e,11)^r(e,25))+((e&h[5])^((~e)&h[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(r(w15,7)^r(w15,18)^(w15>>>3))+w[i-7]+(r(w2,17)^r(w2,19)^(w2>>>10)))|0);var t2=(r(a,2)^r(a,13)^r(a,22))+((a&h[1])^(a&h[2])^(h[1]&h[2]));h=[(t1+t2)|0].concat(h);h[4]=(h[4]+t1)|0;}for(var i=0;i<8;i++)h[i]=(h[i]+oh[i])|0;}for(var i=0;i<8;i++)for(var j=3;j+1;j--){var b=(h[i]>>(j*8))&255;res+=((b<16)?0:"")+b.toString(16);}return res;}
-
-            gear.addEventListener('click', function (e) {
-                e.preventDefault();
-                var pw = prompt('관리자 암호를 입력하세요');
-                if (pw === null) return; // 취소
-                if (sha256(pw) === ADMIN_HASH) {
-                    window.open(getGoogleSheetsEditUrl(), '_blank');
-                } else {
-                    alert('암호가 일치하지 않습니다.');
-                }
-            });
-        })();
-    </script>
 </body>
 </html>

@@ -78,7 +78,7 @@
 
     <main>
         <div class="topbar">
-            <span class="pill">최종 업데이트: 2026-06-18</span>
+            <span class="pill">최종 업데이트: 2026-08-01 (AI 스튜디오 디자인 개편)</span>
             <a href="index.html">← 홈으로</a>
         </div>
 
@@ -124,16 +124,16 @@
         <h2 id="files">3. 파일 구조</h2>
         <table>
             <tr><th>경로</th><th>역할</th></tr>
-            <tr><td><code>index.html</code></td><td>메인 페이지. 모든 섹션 + 인라인 스크립트(시트 로드, 설정버튼, FAQ)</td></tr>
+            <tr><td><code>index.html</code></td><td>메인 페이지. 히어로(뉴얼 메시+코드 윈도우), 철학, 역량 매트릭스, 프로세스, 포트폴리오, 후기, FAQ, 연락처</td></tr>
             <tr><td><code>legal.html</code></td><td>개인정보 보호정책 + 서비스 약관 (탭 전환)</td></tr>
             <tr><td><code>manual.html</code></td><td>이 운영자 매뉴얼</td></tr>
-            <tr><td><code>css/styles.css</code></td><td>전체 디자인. 라이트 기본 + <code>body.theme-dark</code> 다크 오버라이드</td></tr>
+            <tr><td><code>css/styles.css</code></td><td>전체 디자인 시스템. 다크 퍼스트(<code>#090D16</code>) + 글래스모피즘 + 시안/바이올렛 그라데이션</td></tr>
             <tr><td><code>js/language.js</code></td><td><b>콘텐츠 기본값(한/영) + 다국어 엔진</b>. 가장 자주 보는 파일</td></tr>
             <tr><td><code>js/google-sheets-api.js</code></td><td>Apps Script 웹앱 URL, 시트 편집 URL, fetch 로직</td></tr>
-            <tr><td><code>js/main.js</code></td><td>모바일 메뉴, 스크롤 애니메이션, 연락처 폼(EmailJS)</td></tr>
-            <tr><td><code>js/content-data.js</code> / <code>content-manager.js</code></td><td>구버전 보조 스크립트(현재 핵심 동작과 무관, 유지만)</td></tr>
+            <tr><td><code>js/main.js</code></td><td>뉴얼 캔버스, 코드 타이핑, 프로세스 타임라인, 스크롤 리빌, 모바일 메뉴, FAQ, 연락처 폼(EmailJS), 시트 로드, 설정버튼</td></tr>
+            <tr><td><code>js/content-manager.js</code></td><td>콘텐츠 CSV 다운로드/업로드 보조(관리자용). <code>content-data.js</code>·<code>excel-manager.js</code>는 2026-08 개편에서 폐기</td></tr>
             <tr><td><code>assets/logos/</code></td><td><code>logo.png</code>(영문명, 실제 사용), 원본(.ai/.psd/.pdf)</td></tr>
-            <tr><td><code>assets/team/</code></td><td><code>avatar1~4.png</code> 팀 아바타</td></tr>
+            <tr><td><code>assets/team/</code></td><td><code>avatar1~4.png</code> (현재 디자인은 팀 섹션 미사용, 보관용)</td></tr>
             <tr><td><code>CNAME</code></td><td><code>papi.kr</code> (GitHub Pages 커스텀 도메인 지정)</td></tr>
             <tr><td><code>.nojekyll</code></td><td>GitHub Pages의 Jekyll 처리 비활성(파일 그대로 서빙)</td></tr>
             <tr><td><code>server.js</code> / <code>package.json</code></td><td>로컬 미리보기용. 배포(Pages)에는 사용되지 않음</td></tr>
@@ -190,6 +190,7 @@
             <span class="pill">Contact</span><span class="pill">Footer</span><span class="pill">Brands</span>
             <span class="pill">WhyChooseUs</span><span class="pill">FAQ</span>
         </p>
+        <div class="note warn">2026-08 디자인 개편으로 <b>Team·WhyChooseUs 섹션은 페이지에서 제거</b>됐고, <b>Philosophy·Process·Work·CTA 섹션이 새로 추가</b>됐습니다. 새 섹션 문구를 시트로 관리하려면 시트에 탭을 추가하고 Apps Script <code>MAP</code>에 키를 등록하세요(키 목록은 <code>js/language.js</code> 참고). 등록 전까지는 코드 기본값이 표시됩니다. 기존 시트의 Team/WhyChooseUs 탭은 무시됩니다.</div>
         <p>각 행은 <b>순서대로</b> 번역 키에 매핑됩니다(매핑표는 Apps Script 코드 안 <code>MAP</code> 객체). 행 순서를 바꾸면 매핑이 어긋나니 주의.</p>
         <h3>Apps Script 웹앱 (시트 → JSON)</h3>
         <ul>
@@ -203,32 +204,33 @@
             <li>클릭 → 암호 입력창 → 암호가 맞으면 구글 시트가 새 탭으로 열림</li>
             <li><b>관리자 암호: <code>parapia****</code></b></li>
         </ul>
-        <div class="note warn">암호는 소스에 평문이 아니라 <b>SHA-256 해시</b>로만 저장됩니다. 단, 클라이언트 측 잠금이라 강력한 보안은 아닙니다(14장 참고). 암호 변경은 새 해시를 계산해 <code>index.html</code> 의 <code>ADMIN_HASH</code> 값을 교체.</div>
+        <div class="note warn">암호는 소스에 평문이 아니라 <b>SHA-256 해시</b>로만 저장됩니다. 단, 클라이언트 측 잠금이라 강력한 보안은 아닙니다(14장 참고). 암호 변경은 새 해시를 계산해 <code>js/main.js</code> 의 <code>ADMIN_HASH</code> 값을 교체.</div>
 
         <!-- 7 -->
         <h2 id="i18n">7. 다국어</h2>
         <ul>
-            <li>접속 국가가 한국이면 한국어, 그 외는 영어로 자동 표시 (IP 기반 + 브라우저 언어 폴백)</li>
-            <li>강제 지정: 주소 뒤에 <code>?lang=ko</code> 또는 <code>?lang=en</code></li>
-            <li>선택 언어는 브라우저에 저장됨</li>
-            <li>관련 코드: <code>js/language.js</code> 의 <code>detectLanguage()</code></li>
+            <li>언어 결정 순서: ① URL <code>?lang=ko|en</code> ② 브라우저 저장값 ③ 브라우저 언어(한국어면 ko, 아니면 en)</li>
+            <li><b>내비게이션의 언어 버튼(KO/EN)</b>으로 방문자가 즉시 전환 가능</li>
+            <li>선택 언어는 브라우저에 저장되어 다음 방문에도 유지됨</li>
+            <li>관련 코드: <code>js/language.js</code> 의 <code>detectLanguage()</code>, 버튼 로직은 <code>js/main.js</code></li>
         </ul>
 
         <!-- 8 -->
         <h2 id="design">8. 디자인 / 테마</h2>
         <ul>
             <li>전부 <code>css/styles.css</code> 한 파일. 색/여백/반응형 모두 여기서.</li>
-            <li>다크 테마는 <code>&lt;body class="theme-dark"&gt;</code> + <code>.theme-dark …</code> 규칙으로 적용(범위 한정)</li>
-            <li>브랜드 포인트 색: 파랑 <code>#2f6bff</code> / 그라데이션 변수 <code>--brand-grad</code></li>
-            <li>폰트: Pretendard (CDN <code>@import</code>)</li>
-            <li>새 섹션(브랜드 스트립·Why·FAQ·히어로 비주얼) 스타일도 같은 파일 하단에 위치</li>
+            <li><b>다크 퍼스트</b>: 기본 배경 미드나이트 <code>#090D16</code>, 별도 테마 클래스 없음</li>
+            <li>브랜드 포인트 색: 시안 <code>#00F2FE</code> / 바이올렛 <code>#8B5CF6</code>, 그라데이션 변수 <code>--grad</code></li>
+            <li>카드는 글래스모피즘(<code>.glass</code>): 반투명 배경 + backdrop-blur + 얇은 보더</li>
+            <li>폰트: Pretendard(본문) + Space Grotesk(영문 제목) + JetBrains Mono(레이블/코드), 모두 CDN <code>@import</code></li>
+            <li>인터랙션: 히어로 뉴얼 메시 캔버스, 코드 타이핑, 스크롤 리빌, 스포트라이트 카드, 프로세스 진행 바 — 모두 <code>js/main.js</code></li>
         </ul>
 
         <!-- 9 -->
         <h2 id="assets">9. 팀 아바타 / 로고</h2>
         <ul>
-            <li>아바타: <code>assets/team/avatar1~4.png</code> (DiceBear "lorelei" 라인 스타일)</li>
-            <li>교체: 새 이미지를 같은 파일명으로 덮어쓰거나, <code>index.html</code> 의 팀 <code>&lt;img src&gt;</code> 수정</li>
+            <li>아바타: <code>assets/team/avatar1~4.png</code> — 2026-08 개편에서 팀 섹션이 제거되어 현재 페이지에서는 사용하지 않음(보관용)</li>
+            <li>팀 섹션을 다시 넣으려면 <code>index.html</code>에 섹션 마크업 추가 후 번역 키(<code>team1~4</code> 등)를 <code>js/language.js</code>에 등록</li>
             <li>로고: <code>assets/logos/logo.png</code> (한글 파일명은 Pages 호환 위해 영문 사용)</li>
         </ul>
 
