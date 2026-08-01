@@ -16,8 +16,8 @@ const translations = {
 
         // Hero
         hero_badge: "AI Engineering Studio",
-        hero_title: "지능으로 만드는",
-        hero_title_highlight: "내일의 소프트웨어",
+        hero_head1: "Engineering Tomorrow's",
+        hero_head2: "Software with Intelligence.",
         hero_description: "맞춤형 AI 소프트웨어, 멀티 에이전트 워크플로우, 확장 가능한 시스템을 구축해 당신의 비전을 시장을 정의하는 기술로 만듭니다.",
         hero_btn1: "AI 여정 시작하기",
         hero_btn2: "역량 매트릭스 보기",
@@ -187,8 +187,8 @@ const translations = {
 
         // Hero
         hero_badge: "AI Engineering Studio",
-        hero_title: "Engineering Tomorrow's",
-        hero_title_highlight: "Software with Intelligence.",
+        hero_head1: "Engineering Tomorrow's",
+        hero_head2: "Software with Intelligence.",
         hero_description: "We build custom AI-powered software, multi-agent workflows, and scalable systems to transform your vision into market-defining technology.",
         hero_btn1: "Start Your AI Journey",
         hero_btn2: "Explore Capability Matrix",
