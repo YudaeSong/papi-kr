@@ -174,7 +174,7 @@ PARAPIA 홈페이지 관리 (Google Sheets)
 정보 | 전화라벨 | 📞 전화 | 📞 Phone
 정보 | 전화번호 | 010-3686-2785 | 010-3686-2785
 정보 | 이메일라벨 | 📧 이메일 | 📧 Email
-정보 | 이메일주소 | parapia.syd@gmail.com | parapia.syd@gmail.com
+정보 | 이메일주소 | papi.syd@papi.kr | papi.syd@papi.kr
 정보 | 주소라벨 | 🏢 주소 | 🏢 Address
 정보 | 주소 | 경기도 성남시 수정구... | 331 Sansungdae-ro...
 ```
