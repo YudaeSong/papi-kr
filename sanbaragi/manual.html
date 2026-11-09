@@ -90,6 +90,11 @@ mark{background:var(--hl);color:inherit;padding:0 1px;border-radius:2px}
   figure.shot{width:62mm}
   .phone{box-shadow:none}
 }
+/* 목차 스크롤바 — 배경은 투명, 막대만 보인다 */
+nav.toc{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+nav.toc::-webkit-scrollbar{width:8px}
+nav.toc::-webkit-scrollbar-track{background:transparent}
+nav.toc::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
 /* 문서 전환 탭 — 세 문서가 같은 탭을 쓴다 */
 .doc-tabs{background:var(--accent-soft);border-bottom:3px solid var(--accent);padding:12px 16px 0}
 .doc-tabs>div{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 20px}
