@@ -21,7 +21,7 @@ window.TUTORIAL = {
   part1: {
     id: 'first',
     name: '첫 산행 따라 하기',
-    intro: '로그인부터 기록 공유까지 8단계입니다. 산에 가기 전날 1~4번을 끝내 두면 좋습니다.',
+    intro: '로그인부터 기록 공유까지 8단계입니다. 제목을 눌러 펼쳐 보세요. 산에 가기 전날 1~4번을 끝내 두면 좋습니다.',
     sections: [
       { id: 'first-login', title: '로그인하고 권한 허용',
         steps: [

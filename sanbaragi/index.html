@@ -160,7 +160,7 @@ footer .safety{color:var(--ink)}
 </div>
 <script src="tabs.js?v=311ff8fadc"></script>
 <script src="search.js?v=01a66714cf"></script>
-<script src="guide-data.js?v=f81dc87415"></script>
+<script src="guide-data.js?v=8fab507f85"></script>
 <script>
 (function(){
   const T = window.TUTORIAL;
@@ -211,7 +211,7 @@ footer .safety{color:var(--ink)}
     const allSteps = s.flows ? s.flows.flatMap(f => [f.label, ...f.steps]) : (s.steps || []);
     const search = norm([opts.groupName, s.title, s.when, ...allSteps, ...(s.tips || []), ...(s.warns || []),
       ...(s.shots || []).map(sh => sh.caption)].join(' '));
-    return `<details class="sec" id="${esc(s.id)}" data-t="${esc(search)}"${opts.open ? ' open data-open="1"' : ''}>
+    return `<details class="sec" id="${esc(s.id)}" data-t="${esc(search)}">
       <summary>${opts.no ? `<span class="num">${opts.no}</span>` : ''}<span>${esc(s.title)}</span></summary>
       <div class="body${shots ? '' : ' noshot'}">
         <div class="text">
@@ -230,14 +230,17 @@ footer .safety{color:var(--ink)}
   main.innerHTML =
     `<section class="part" id="${esc(P1.id)}">
        <h2>${esc(P1.name)}</h2>
-       <p class="intro">${esc(P1.intro)}</p>
-       ${P1.sections.map((s, i) => secHtml(s, { groupName: P1.name, no: i + 1, open: true })).join('')}
+       <div class="part-head">
+         <p class="intro">${esc(P1.intro)}</p>
+         <button type="button" class="toggle">모두 펼치기</button>
+       </div>
+       ${P1.sections.map((s, i) => secHtml(s, { groupName: P1.name, no: i + 1 })).join('')}
      </section>
      <section class="part" id="${esc(P2.id)}">
        <h2>${esc(P2.name)}</h2>
        <div class="part-head">
          <p class="intro">${esc(P2.intro)}</p>
-         <button type="button" class="toggle" id="toggleAll">모두 펼치기</button>
+         <button type="button" class="toggle">모두 펼치기</button>
        </div>
        ${P2.groups.map(g => `<section class="group" id="${esc(g.id)}">
          <h3>${esc(g.name)}</h3>
@@ -253,9 +256,10 @@ footer .safety{color:var(--ink)}
   const q = document.getElementById('q');
   const count = document.getElementById('count');
   const empty = document.getElementById('empty');
-  const toggleAll = document.getElementById('toggleAll');
   const allSecs = [...main.querySelectorAll('details.sec')];
-  const p2Secs = allSecs.filter(d => d.closest('.group'));
+  const toggles = [...main.querySelectorAll('button.toggle')].map(btn => ({
+    btn, secs: [...btn.closest('section.part').querySelectorAll('details.sec')],
+  }));
   let saved = null; // 찾기 전의 펼침 상태 — 찾기를 지우면 되돌린다
 
   function apply(){
@@ -281,14 +285,14 @@ footer .safety{color:var(--ink)}
     syncToggle();
   }
   function syncToggle(){
-    toggleAll.textContent = p2Secs.every(d => d.open) ? '모두 접기' : '모두 펼치기';
+    toggles.forEach(({ btn, secs }) => { btn.textContent = secs.every(d => d.open) ? '모두 접기' : '모두 펼치기'; });
   }
   q.addEventListener('input', apply);
-  toggleAll.addEventListener('click', () => {
-    const open = !p2Secs.every(d => d.open);
-    p2Secs.forEach(d => { if (!d.classList.contains('hidden')) d.open = open; });
+  toggles.forEach(({ btn, secs }) => btn.addEventListener('click', () => {
+    const open = !secs.every(d => d.open);
+    secs.forEach(d => { if (!d.classList.contains('hidden')) d.open = open; });
     syncToggle();
-  });
+  }));
   allSecs.forEach(d => d.addEventListener('toggle', syncToggle));
 
   // 다른 절로 가는 연결 — 찾기에 가려져 있으면 찾기를 풀고, 접혀 있으면 펼친 뒤 이동한다
