@@ -157,6 +157,7 @@ const translations = {
 
         // Footer
         footer_desc: "지능으로 내일의 소프트웨어를 설계하는 AI 엔지니어링 스튜디오.",
+        nav_sanbaragi: "산바라기 안내",
         footer_services: "서비스",
         footer_service1: "맞춤형 LLM 통합",
         footer_service2: "자율 AI 에이전트",
@@ -328,6 +329,7 @@ const translations = {
 
         // Footer
         footer_desc: "An AI engineering studio designing tomorrow's software with intelligence.",
+        nav_sanbaragi: "Sanbaragi Guide",
         footer_services: "Services",
         footer_service1: "Custom LLM Integration",
         footer_service2: "Autonomous AI Agents",

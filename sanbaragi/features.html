@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>산바라기 기능 한눈에</title>
+<style>
+:root{
+  --bg:#f6f4ee; --card:#ffffff; --ink:#1d2125; --sub:#5a626d; --line:#e2ddd1;
+  --accent:#1f6f5c; --accent-soft:#e2f0ea; --star:#b5541c;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171a; --card:#1e2125; --ink:#e6e8eb; --sub:#a1a8b2; --line:#30343a;
+    --accent:#5cc3a5; --accent-soft:#1d332d; --star:#f0a07a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171a; --card:#1e2125; --ink:#e6e8eb; --sub:#a1a8b2; --line:#30343a;
+  --accent:#5cc3a5; --accent-soft:#1d332d; --star:#f0a07a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:128px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header.top{padding:32px 0 18px}
+header.top h1{margin:0 0 6px;font-size:28px;line-height:1.3}
+header.top p{margin:0;color:var(--sub)}
+header.top a{color:var(--accent);font-weight:600}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0}
+.tools{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.tools input[type=search]{flex:1 1 220px;min-width:0;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+.tools label{display:inline-flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+.tools label b{color:var(--star);font-weight:700}
+.tools .count{color:var(--sub);font-size:13px;white-space:nowrap}
+.jump{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:8px}
+.jump a{font-size:13px;padding:2px 9px;border-radius:999px;color:var(--sub);text-decoration:none;background:var(--card);border:1px solid var(--line)}
+.jump a:hover{color:var(--accent);background:var(--accent-soft)}
+main{padding:10px 0 80px}
+section.group{margin-top:26px}
+section.group>h2{margin:0;font-size:20px;padding-bottom:6px;border-bottom:3px solid var(--accent)}
+.row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:0 20px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row h3{margin:0;font-size:15px;font-weight:700}
+.row ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:3px 22px}
+.row li{position:relative;padding-left:1.15em}
+.row li::before{content:"·";position:absolute;left:0;width:1.3em;text-align:center;color:var(--sub)}
+.row li.star{font-weight:600}
+.row li.star::before{content:"★";color:var(--star);font-size:.85em}
+.hidden{display:none!important}
+.empty{color:var(--sub);padding:40px 0;text-align:center}
+footer{color:var(--sub);font-size:13px;padding-bottom:40px}
+footer p{margin:6px 0}
+footer .safety{color:var(--ink);font-size:14px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--star);border-radius:8px;padding:10px 14px;margin-bottom:14px}
+footer .safety b{color:var(--star)}
+@media (max-width:640px){
+  html{scroll-padding-top:12px}
+  .bar{position:static}
+  .wrap{padding:0 16px}
+  header.top{padding-top:22px}
+  header.top h1{font-size:24px}
+  .row{grid-template-columns:minmax(0,1fr);gap:4px}
+  .row h3{color:var(--accent)}
+  .row ul{grid-template-columns:minmax(0,1fr)}
+}
+@media print{
+  .bar{display:none}
+  section.group{break-inside:avoid}
+  .row{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1 id="title"></h1>
+    <p id="lead"></p>
+  </header>
+</div>
+<div class="bar">
+  <div class="wrap">
+    <div class="tools">
+      <input id="q" type="search" placeholder="기능 찾기 (예: 오프라인 지도)" aria-label="기능 찾기">
+      <label><input id="starOnly" type="checkbox"><span><b>★</b> 눈여겨볼 기능만</span></label>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+    <nav class="jump" id="jump" aria-label="대분류 바로가기"></nav>
+  </div>
+</div>
+<div class="wrap">
+  <main id="main"></main>
+  <footer id="foot"></footer>
+</div>
+<script src="features-data.js"></script>
+<script>
+(function(){
+  const G = window.FEATURE_GUIDE;
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  // 찾기는 띄어쓰기·대소문자를 무시한다(사용자 매뉴얼의 찾기와 같은 기준)
+  const norm = s => String(s ?? '').replace(/\s+/g, '').toLowerCase();
+  const STAR = '★ ';
+
+  document.getElementById('title').textContent = G.title;
+  document.getElementById('lead').innerHTML = `${esc(G.lead)} 처음이라면 <a href="${esc(G.tutorialLink)}">산바라기 이용하기</a>를 따라 해 보세요. 화면별 설명은 <a href="${esc(G.manualLink)}">사용자 매뉴얼</a>에 있습니다.`;
+  document.getElementById('foot').innerHTML = `<p class="safety"><b>⚠ 안전 안내</b> ${esc(G.safetyNote)}</p><p>${esc(G.planNote)}</p><p>Android 앱 기준 · ${esc(G.updated)} 현재 · 일부 기능은 기기와 권한 설정에 따라 쓸 수 없을 수 있습니다.</p>`;
+
+  const main = document.getElementById('main');
+  const jump = document.getElementById('jump');
+  main.innerHTML = G.groups.map(g => `
+    <section class="group" id="${esc(g.id)}" data-t="${esc(norm(g.name))}">
+      <h2>${esc(g.name)}</h2>
+      ${g.sub.map(s => `
+        <div class="row" data-t="${esc(norm(s.name))}">
+          <h3>${esc(s.name)}</h3>
+          <ul>${s.items.map(i => {
+            const star = i.startsWith(STAR);
+            const name = star ? i.slice(STAR.length) : i;
+            return `<li class="${star ? 'star' : ''}" data-t="${esc(norm(name))}">${esc(name)}</li>`;
+          }).join('')}</ul>
+        </div>`).join('')}
+    </section>`).join('');
+  jump.innerHTML = G.groups.map(g => `<a href="#${esc(g.id)}" data-g="${esc(g.id)}">${esc(g.name)}</a>`).join('');
+
+  const empty = document.createElement('p');
+  empty.className = 'empty hidden';
+  empty.textContent = '찾는 기능이 없습니다.';
+  main.appendChild(empty);
+
+  const q = document.getElementById('q');
+  const starOnly = document.getElementById('starOnly');
+  const count = document.getElementById('count');
+  // 대분류·소분류 이름이 맞으면 그 아래 기능을 모두 보여 준다
+  function apply(){
+    const v = norm(q.value);
+    const onlyStar = starOnly.checked;
+    let shownTotal = 0;
+    main.querySelectorAll('section.group').forEach(sec => {
+      const groupHit = !!v && sec.dataset.t.includes(v);
+      let groupShown = 0;
+      sec.querySelectorAll('.row').forEach(row => {
+        const rowHit = groupHit || (!!v && row.dataset.t.includes(v));
+        let rowShown = 0;
+        row.querySelectorAll('li').forEach(li => {
+          const show = (!onlyStar || li.classList.contains('star')) && (!v || rowHit || li.dataset.t.includes(v));
+          li.classList.toggle('hidden', !show);
+          if (show) rowShown++;
+        });
+        row.classList.toggle('hidden', !rowShown);
+        groupShown += rowShown;
+      });
+      sec.classList.toggle('hidden', !groupShown);
+      jump.querySelector(`[data-g="${sec.id}"]`).classList.toggle('hidden', !groupShown);
+      shownTotal += groupShown;
+    });
+    empty.classList.toggle('hidden', shownTotal > 0);
+    count.textContent = `기능 ${shownTotal}개`;
+  }
+  q.addEventListener('input', apply);
+  starOnly.addEventListener('change', apply);
+  apply();
+})();
+</script>
+</body>
+</html>

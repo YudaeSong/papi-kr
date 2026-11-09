@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>산바라기 이용하기</title>
+<style>
+:root{
+  --bg:#f6f4ee; --card:#ffffff; --ink:#1d2125; --sub:#5a626d; --line:#e2ddd1;
+  --accent:#1f6f5c; --accent-soft:#e2f0ea; --mark:#c0392b;
+  --tip:#1f6f5c; --tip-bg:#e6f3ee; --warn:#a4481d; --warn-bg:#fbefe7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171a; --card:#1e2125; --ink:#e6e8eb; --sub:#a1a8b2; --line:#30343a;
+    --accent:#5cc3a5; --accent-soft:#1d332d; --mark:#e5584a;
+    --tip:#5cc3a5; --tip-bg:#1b2f29; --warn:#f0a07a; --warn-bg:#36251e;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171a; --card:#1e2125; --ink:#e6e8eb; --sub:#a1a8b2; --line:#30343a;
+  --accent:#5cc3a5; --accent-soft:#1d332d; --mark:#e5584a;
+  --tip:#5cc3a5; --tip-bg:#1b2f29; --warn:#f0a07a; --warn-bg:#36251e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;overflow-wrap:anywhere;word-break:keep-all}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header.top{padding:32px 0 16px}
+header.top h1{margin:0 0 6px;font-size:30px;line-height:1.3}
+header.top p{margin:0 0 8px;color:var(--sub)}
+.links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.safety{background:var(--warn-bg);border-left:5px solid var(--warn);border-radius:10px;padding:14px 16px;margin:0 0 16px}
+.safety h2{margin:0 0 4px;font-size:19px;color:var(--warn)}
+.safety p{margin:0 0 4px}
+.safety a.go{display:inline-block;margin-top:8px;padding:9px 14px;border-radius:8px;background:var(--warn);color:var(--bg);text-decoration:none;font-weight:700}
+.bar{background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0}
+.tools{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.tools input[type=search]{flex:1 1 220px;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+.count{color:var(--sub);font-size:16px}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.jump a{font-size:16px;padding:5px 12px;border-radius:999px;color:var(--ink);text-decoration:none;background:var(--card);border:1px solid var(--line)}
+.jump a:hover{color:var(--accent);background:var(--accent-soft)}
+main{padding:12px 0 40px}
+section.part{margin-top:28px}
+section.part>h2{margin:0 0 6px;font-size:25px;line-height:1.35;padding-bottom:8px;border-bottom:3px solid var(--accent)}
+.intro{color:var(--sub);margin:8px 0 14px}
+.part-head{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+.part-head .intro{flex:1 1 280px;margin:8px 0}
+button.toggle{font:inherit;font-size:16px;padding:7px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+section.group{margin-top:24px}
+section.group>h3{margin:0 0 4px;font-size:21px;color:var(--accent)}
+section.group>.intro{margin:0 0 8px}
+details.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0}
+details.sec>summary{cursor:pointer;list-style:none;display:flex;gap:10px;align-items:center;min-height:54px;padding:10px 16px;font-size:18px;font-weight:700;line-height:1.45}
+details.sec>summary::-webkit-details-marker{display:none}
+details.sec>summary::after{content:"▾";margin-left:auto;flex:none;color:var(--sub);transition:transform .15s}
+details.sec[open]>summary::after{transform:rotate(180deg)}
+details.sec>summary:hover{color:var(--accent)}
+.num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--bg);font:700 17px/32px system-ui;text-align:center}
+.body{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:0 26px;padding:0 16px 16px;border-top:1px solid var(--line)}
+.body.noshot{grid-template-columns:minmax(0,1fr)}
+.text{min-width:0;padding-top:14px}
+.when{margin:0 0 12px;color:var(--sub)}
+h4.flow{margin:14px 0 8px;font-size:17px;color:var(--accent)}
+h4.flow:first-child{margin-top:0}
+.steps{list-style:none;margin:0;padding:0}
+.steps li{display:flex;gap:10px;margin:0 0 10px}
+.steps .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--mark);color:#fff;font:700 16px/28px system-ui;text-align:center;margin-top:1px}
+.steps .t{min-width:0;flex:1}
+.box{border-radius:10px;padding:10px 14px;margin:10px 0}
+.box.tip{background:var(--tip-bg);border-left:4px solid var(--tip)}
+.box.warn{background:var(--warn-bg);border-left:4px solid var(--warn)}
+.box .h{display:block;color:var(--tip)}
+.box.warn .h{color:var(--warn)}
+.box ul{margin:0;padding-left:1.1em}
+.box li{margin:4px 0}
+.shots{display:flex;flex-direction:column;gap:14px;align-items:center;padding-top:14px;min-width:0}
+figure.shot{margin:0;width:100%;max-width:270px}
+.phone{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 3px 12px rgba(0,0,0,.12);background:#000;line-height:0}
+.phone img{width:100%;height:auto;display:block}
+.phone .ph{line-height:1.5;min-height:150px;display:flex;align-items:center;justify-content:center;color:#ddd;font-size:16px;background:repeating-linear-gradient(45deg,#2a2d31 0 12px,#24272b 12px 24px)}
+.phone .mk{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--mark);color:#fff;font:700 16px/28px system-ui;text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4)}
+figure.shot figcaption{font-size:16px;color:var(--sub);text-align:center;margin-top:6px;line-height:1.5}
+.hidden{display:none!important}
+.empty{color:var(--sub);padding:40px 0;text-align:center}
+footer{color:var(--sub);padding-bottom:48px}
+footer p{margin:6px 0}
+footer .safety{color:var(--ink)}
+@media (min-width:861px){
+  html{scroll-padding-top:128px}
+  .bar{position:sticky;top:0;z-index:5}
+}
+@media (max-width:760px){
+  .wrap{padding:0 16px}
+  header.top{padding-top:22px}
+  header.top h1{font-size:26px}
+  .body{grid-template-columns:minmax(0,1fr);padding:0 12px 14px}
+  details.sec>summary{padding:10px 12px}
+  figure.shot{max-width:260px}
+}
+@media print{
+  .bar,.safety a.go,button.toggle{display:none!important}
+  body{font-size:12pt;background:#fff;color:#000}
+  details.sec{break-inside:avoid;border-color:#bbb}
+  section.part{break-before:page}
+  details.sec>summary::after{display:none}
+  .body{grid-template-columns:minmax(0,1fr) 46mm}
+  figure.shot{max-width:46mm}
+  .phone{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1 id="title"></h1>
+    <p id="lead"></p>
+    <div class="links" id="links"></div>
+  </header>
+  <aside class="safety" id="safetyBox" aria-label="안전 안내"></aside>
+</div>
+<div class="bar">
+  <div class="wrap">
+    <div class="tools">
+      <input id="q" type="search" placeholder="찾기 (예: 내 위치, 오프라인 지도)" aria-label="따라 하기 찾기">
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+    <nav class="jump" id="jump" aria-label="바로가기"></nav>
+  </div>
+</div>
+<div class="wrap">
+  <main id="main"></main>
+  <footer id="foot"></footer>
+</div>
+<script src="guide-data.js"></script>
+<script>
+(function(){
+  const T = window.TUTORIAL;
+  const main = document.getElementById('main');
+  const jump = document.getElementById('jump');
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  // 글 안의 **굵게**(누를 버튼)와 [[절id|글자]](다른 절 연결)만 허용한다
+  const rich = s => esc(s)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/\[\[([\w-]+)\|(.+?)\]\]/g, '<a href="#$1" data-go="$1">$2</a>');
+  // 찾기용 글자 — 표시 기호를 걷어 낸다. 띄어쓰기·대소문자는 무시한다
+  const plain = s => String(s ?? '').replace(/\*\*/g, '').replace(/\[\[[\w-]+\|(.+?)\]\]/g, '$1');
+  const norm = s => plain(s).replace(/\s+/g, '').toLowerCase();
+
+  document.title = T.title;
+  document.getElementById('title').textContent = T.title;
+  document.getElementById('lead').textContent = T.lead;
+  document.getElementById('links').innerHTML =
+    `<a href="${esc(T.manualLink)}">사용자 매뉴얼</a><a href="${esc(T.guideLink)}">기능 한눈에</a>`;
+  document.getElementById("safetyBox").innerHTML =
+    `<h2>⚠ ${esc(T.safety.title)}</h2>${T.safety.lines.map(l => `<p>${rich(l)}</p>`).join('')}` +
+    `<a class="go" href="#${esc(T.safety.jumpTo)}" data-go="${esc(T.safety.jumpTo)}">${esc(T.safety.jumpLabel)}</a>`;
+  document.getElementById('foot').innerHTML =
+    `<div class="safety"><h2>⚠ ${esc(T.safety.title)}</h2>${T.safety.lines.map(l => `<p>${rich(l)}</p>`).join('')}</div>` +
+    `<p>${esc(T.planNote)}</p><p>Android 앱 기준 · ${esc(T.updated)} 현재 · 일부 기능은 기기와 권한 설정에 따라 쓸 수 없을 수 있습니다.</p>`;
+
+  const shotHtml = (sh, title) => {
+    if (!sh.img) return '';
+    const marks = (sh.marks || []).map(([n, x, y]) => `<span class="mk" style="left:${x}%;top:${y}%">${n}</span>`).join('');
+    const img = sh.img
+      ? `<img src="screens/${esc(sh.img)}.webp" alt="${esc(sh.caption || title)}" loading="lazy" onerror="this.outerHTML='<div class=ph>화면 준비 중</div>'">${marks}`
+      : `<div class="ph">화면 준비 중</div>`;
+    return `<figure class="shot"><div class="phone">${img}</div>${sh.caption ? `<figcaption>${esc(sh.caption)}</figcaption>` : ''}</figure>`;
+  };
+
+  // 절 하나 — 단계 번호는 절 안에서 이어진다(그림의 번호와 짝)
+  const secHtml = (s, opts) => {
+    let n = 0;
+    const list = steps => `<ol class="steps">${steps.map(t => `<li><span class="n">${++n}</span><span class="t">${rich(t)}</span></li>`).join('')}</ol>`;
+    const flows = s.flows
+      ? s.flows.map(f => `<h4 class="flow">${esc(f.label)}</h4>${list(f.steps)}`).join('')
+      : list(s.steps || []);
+    const box = (kind, head, items) => items && items.length
+      ? `<div class="box ${kind}"><span class="h">${head}</span>${items.length > 1
+          ? `<ul>${items.map(t => `<li>${rich(t)}</li>`).join('')}</ul>`
+          : rich(items[0])}</div>` : '';
+    const warns = box('warn', '⚠ 주의', s.warns);
+    const tips = box('tip', '참고', s.tips);
+    const shots = (s.shots || []).map(sh => shotHtml(sh, s.title)).join('');
+    const allSteps = s.flows ? s.flows.flatMap(f => [f.label, ...f.steps]) : (s.steps || []);
+    const search = norm([opts.groupName, s.title, s.when, ...allSteps, ...(s.tips || []), ...(s.warns || []),
+      ...(s.shots || []).map(sh => sh.caption)].join(' '));
+    return `<details class="sec" id="${esc(s.id)}" data-t="${esc(search)}"${opts.open ? ' open data-open="1"' : ''}>
+      <summary>${opts.no ? `<span class="num">${opts.no}</span>` : ''}<span>${esc(s.title)}</span></summary>
+      <div class="body${shots ? '' : ' noshot'}">
+        <div class="text">
+          ${s.when ? `<p class="when">${rich(s.when)}</p>` : ''}
+          ${s.warnFirst ? warns : ''}
+          ${flows}
+          ${s.warnFirst ? '' : warns}
+          ${tips}
+        </div>
+        ${shots ? `<div class="shots">${shots}</div>` : ''}
+      </div>
+    </details>`;
+  };
+
+  const P1 = T.part1, P2 = T.part2;
+  main.innerHTML =
+    `<section class="part" id="${esc(P1.id)}">
+       <h2>${esc(P1.name)}</h2>
+       <p class="intro">${esc(P1.intro)}</p>
+       ${P1.sections.map((s, i) => secHtml(s, { groupName: P1.name, no: i + 1, open: true })).join('')}
+     </section>
+     <section class="part" id="${esc(P2.id)}">
+       <h2>${esc(P2.name)}</h2>
+       <div class="part-head">
+         <p class="intro">${esc(P2.intro)}</p>
+         <button type="button" class="toggle" id="toggleAll">모두 펼치기</button>
+       </div>
+       ${P2.groups.map(g => `<section class="group" id="${esc(g.id)}">
+         <h3>${esc(g.name)}</h3>
+         ${g.intro ? `<p class="intro">${esc(g.intro)}</p>` : ''}
+         ${g.items.map(s => secHtml(s, { groupName: g.name })).join('')}
+       </section>`).join('')}
+     </section>
+     <p class="empty hidden" id="empty">찾는 내용이 없습니다. 다른 낱말로 찾아보세요.</p>`;
+
+  jump.innerHTML = [{ id: P1.id, name: P1.name }, ...P2.groups]
+    .map(g => `<a href="#${esc(g.id)}" data-g="${esc(g.id)}">${esc(g.name)}</a>`).join('');
+
+  const q = document.getElementById('q');
+  const count = document.getElementById('count');
+  const empty = document.getElementById('empty');
+  const toggleAll = document.getElementById('toggleAll');
+  const allSecs = [...main.querySelectorAll('details.sec')];
+  const p2Secs = allSecs.filter(d => d.closest('.group'));
+  let saved = null; // 찾기 전의 펼침 상태 — 찾기를 지우면 되돌린다
+
+  function apply(){
+    const v = q.value.replace(/\s+/g, '').toLowerCase();
+    if (v && !saved) saved = new Map(allSecs.map(d => [d, d.open]));
+    let shown = 0;
+    allSecs.forEach(d => {
+      const hit = !v || d.dataset.t.includes(v);
+      d.classList.toggle('hidden', !hit);
+      if (v && hit) d.open = true;
+      if (hit) shown++;
+    });
+    if (!v && saved) { saved.forEach((open, d) => { d.open = open; }); saved = null; }
+    const visibleIn = el => [...el.querySelectorAll('details.sec')].some(d => !d.classList.contains('hidden'));
+    main.querySelectorAll('section.group').forEach(g => g.classList.toggle('hidden', !visibleIn(g)));
+    main.querySelectorAll('section.part').forEach(p => p.classList.toggle('hidden', !visibleIn(p)));
+    jump.querySelectorAll('a').forEach(a => {
+      a.classList.toggle('hidden', !visibleIn(document.getElementById(a.dataset.g)));
+    });
+    empty.classList.toggle('hidden', shown > 0);
+    count.textContent = v ? `찾은 따라 하기 ${shown}개` : `따라 하기 ${allSecs.length}개`;
+    syncToggle();
+  }
+  function syncToggle(){
+    toggleAll.textContent = p2Secs.every(d => d.open) ? '모두 접기' : '모두 펼치기';
+  }
+  q.addEventListener('input', apply);
+  toggleAll.addEventListener('click', () => {
+    const open = !p2Secs.every(d => d.open);
+    p2Secs.forEach(d => { if (!d.classList.contains('hidden')) d.open = open; });
+    syncToggle();
+  });
+  allSecs.forEach(d => d.addEventListener('toggle', syncToggle));
+
+  // 다른 절로 가는 연결 — 찾기에 가려져 있으면 찾기를 풀고, 접혀 있으면 펼친 뒤 이동한다
+  function goTo(id, smooth){
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.classList.contains('hidden') || el.closest('.hidden')) { q.value = ''; apply(); }
+    if (el.tagName === 'DETAILS') el.open = true;
+    el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[data-go]');
+    if (!a) return;
+    e.preventDefault();
+    history.replaceState(null, '', '#' + a.dataset.go);
+    goTo(a.dataset.go, true);
+  });
+  window.addEventListener('hashchange', () => goTo(location.hash.slice(1), true));
+
+  // 인쇄할 때는 모두 펼친다
+  let beforePrint = null;
+  window.addEventListener('beforeprint', () => {
+    beforePrint = new Map(allSecs.map(d => [d, d.open]));
+    allSecs.forEach(d => { d.open = true; });
+    main.querySelectorAll('img[loading=lazy]').forEach(i => { i.loading = 'eager'; });
+  });
+  window.addEventListener('afterprint', () => {
+    if (beforePrint) beforePrint.forEach((open, d) => { d.open = open; });
+    beforePrint = null;
+  });
+
+  apply();
+  if (location.hash) goTo(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
