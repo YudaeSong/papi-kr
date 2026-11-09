@@ -31,8 +31,8 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--tabs-h,0px) + 16px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 "MaruBuri","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
-.layout{display:flex;min-height:100vh}
-nav.toc{width:270px;flex:none;position:sticky;top:var(--tabs-h,0px);height:calc(100vh - var(--tabs-h,0px));overflow-y:auto;background:var(--side);border-right:1px solid var(--line);padding:18px 14px}
+.layout{display:flex;min-height:100vh;max-width:1240px;margin:0 auto}
+nav.toc{width:270px;flex:none;position:sticky;top:var(--tabs-h,0px);height:calc(100vh - var(--tabs-h,0px));overflow-y:auto;background:var(--side);border-left:1px solid var(--line);border-right:1px solid var(--line);padding:18px 14px}
 nav.toc h1{font-size:18px;margin:0 0 2px}
 nav.toc .meta{font-size:12px;color:var(--sub);margin-bottom:12px}
 nav.toc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;font-size:14px;margin-bottom:12px}
