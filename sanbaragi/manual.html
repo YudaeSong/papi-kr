@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>산바라기 사용자 매뉴얼</title>
 <link rel="icon" href="sanbaragi-icon.png">
+<meta name="description" content="산행 일정 잡기부터 코스 고르기, 산행 기록, 기록 공유까지 화면별로 설명합니다.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="산바라기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="산바라기 사용자 매뉴얼">
+<meta property="og:description" content="산행 일정 잡기부터 코스 고르기, 산행 기록, 기록 공유까지 화면별로 설명합니다.">
+<meta property="og:url" content="https://papi.kr/sanbaragi/manual.html">
+<meta property="og:image" content="https://papi.kr/sanbaragi/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 @font-face{font-family:"MaruBuri";src:url("fonts/MaruBuri-SemiBold.woff2") format("woff2");font-weight:400 600;font-display:swap}
 @font-face{font-family:"MaruBuri";src:url("fonts/MaruBuri-Bold.woff2") format("woff2");font-weight:700 900;font-display:swap}
@@ -72,10 +83,14 @@ mark{background:var(--hl);color:inherit;padding:0 1px;border-radius:2px}
 .hidden{display:none!important}
 .empty{color:var(--sub);padding:40px 0;text-align:center}
 .topbar{display:none}
+.toc-close,.toc-scrim{display:none}
 @media (max-width:860px){
   .layout{display:block}
   nav.toc{position:fixed;inset:0 auto 0 0;width:min(300px,85vw);z-index:40;transform:translateX(-105%);transition:transform .2s;box-shadow:4px 0 20px rgba(0,0,0,.25)}
+  nav.toc{height:auto;overscroll-behavior:contain}
   nav.toc.open{transform:none}
+  nav.toc.open+.toc-scrim{display:block;position:fixed;inset:0;z-index:39;background:rgba(0,0,0,.5)}
+  .toc-close{display:block;position:sticky;top:0;float:right;z-index:1;width:44px;height:44px;margin:-8px -4px 0 8px;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--ink);font-size:20px;line-height:1;cursor:pointer}
   .topbar{display:flex;position:sticky;top:var(--tabs-h,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;gap:10px;align-items:center}
   .topbar button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 12px}
   main{padding:18px 16px 100px}
@@ -83,7 +98,7 @@ mark{background:var(--hl);color:inherit;padding:0 1px;border-radius:2px}
   figure.shot{width:100%;max-width:411px}
 }
 @media print{
-  nav.toc,.topbar{display:none!important}
+  nav.toc,.topbar,.toc-scrim{display:none!important}
   main{padding:0;max-width:none}
   article.sec{break-inside:avoid;box-shadow:none}
   section.chapter{break-before:page}
@@ -113,6 +128,8 @@ nav.toc::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
 .doc-tabs{position:sticky;top:0;z-index:30}
 .to-top{position:fixed;left:var(--top-x,auto);right:auto;top:calc(50% + var(--tabs-h,0px) / 2);z-index:25;width:52px;height:52px;border:0;border-radius:50%;background:var(--accent);color:var(--bg);font:700 26px/52px "MaruBuri",system-ui;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(calc(-50% + 8px));transition:opacity .2s,transform .2s,visibility .2s}
 .to-top.show{opacity:1;visibility:visible;transform:translateY(-50%)}
+.to-top.corner{left:auto;right:16px;top:auto;bottom:16px;transform:translateY(8px)}
+.to-top.corner.show{transform:none}
 .to-top:hover{filter:brightness(1.12)}
 .to-top:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 @media (max-width:640px){.doc-tabs .tabs a small{display:none}.doc-tabs .tabs a{min-height:48px}.to-top{width:44px;height:44px;font-size:22px;line-height:44px}.to-top.show{opacity:.85}}
@@ -124,14 +141,16 @@ nav.toc::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
 <div class="topbar"><button id="tocBtn" type="button">☰ 목차</button><b>산바라기 사용자 매뉴얼</b></div>
 <div class="layout">
   <nav class="toc" id="toc">
+    <button class="toc-close" id="tocClose" type="button" aria-label="목차 닫기">✕</button>
     <h1>산바라기 사용자 매뉴얼</h1>
     <div class="meta" id="meta"></div>
     <input id="q" type="search" placeholder="찾기 (예: 오프라인 지도)">
     <ol id="tocList"></ol>
   </nav>
+  <div class="toc-scrim" id="tocScrim"></div>
   <main id="main"></main>
 </div>
-<script src="tabs.js?v=311ff8fadc"></script>
+<script src="tabs.js?v=b26381f830"></script>
 <script src="search.js?v=01a66714cf"></script>
 <script src="manual-data.js?v=34e1950584"></script>
 <script>
@@ -225,8 +244,12 @@ nav.toc::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
 
   // 좁은 화면 목차 열기/닫기
   const toc = document.getElementById('toc');
+  const closeToc = () => toc.classList.remove('open');
   document.getElementById('tocBtn').addEventListener('click', () => toc.classList.toggle('open'));
-  toc.addEventListener('click', e => { if (e.target.tagName === 'A') toc.classList.remove('open'); });
+  document.getElementById('tocClose').addEventListener('click', closeToc);
+  document.getElementById('tocScrim').addEventListener('click', closeToc);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeToc(); });
+  toc.addEventListener('click', e => { if (e.target.tagName === 'A') closeToc(); });
 })();
 </script>
 </body>
