@@ -6,8 +6,6 @@ window.TUTORIAL = {
   title: '산바라기 이용하기',
   lead: '처음 쓰는 분을 위한 따라 하기 안내입니다. 위에서부터 순서대로 하면 첫 산행을 마칠 수 있습니다.',
   updated: '2026-11-09',
-  manualLink: 'manual.html',
-  guideLink: 'features.html',
   planNote: '요금제는 별도로 안내합니다.',
   safety: {
     title: '안전이 먼저입니다',

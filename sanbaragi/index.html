@@ -30,7 +30,6 @@ a{color:var(--accent)}
 header.top{padding:32px 0 16px}
 header.top h1{margin:0 0 6px;font-size:30px;line-height:1.3}
 header.top p{margin:0 0 8px;color:var(--sub)}
-.links{display:flex;flex-wrap:wrap;gap:4px 16px}
 .safety{background:var(--warn-bg);border-left:5px solid var(--warn);border-radius:10px;padding:14px 16px;margin:0 0 16px}
 .safety h2{margin:0 0 4px;font-size:19px;color:var(--warn)}
 .safety p{margin:0 0 4px}
@@ -110,14 +109,26 @@ footer .safety{color:var(--ink)}
   figure.shot{max-width:46mm}
   .phone{box-shadow:none}
 }
+/* 문서 전환 탭 — 세 문서가 같은 탭을 쓴다 */
+.doc-tabs{background:var(--accent-soft);border-bottom:3px solid var(--accent);padding:12px 16px 0}
+.doc-tabs>div{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.doc-tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:66px;padding:8px 6px;border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;background:var(--card);color:var(--accent);font-size:19px;font-weight:800;line-height:1.25;text-align:center;text-decoration:none;word-break:keep-all;overflow-wrap:break-word}
+.doc-tabs a small{margin-top:3px;color:var(--sub);font-size:13px;font-weight:500}
+.doc-tabs a:hover{box-shadow:inset 0 -3px 0 var(--accent)}
+.doc-tabs a:focus-visible{outline:3px solid var(--mark,var(--accent));outline-offset:-3px}
+.doc-tabs a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.doc-tabs a[aria-current="page"]:hover{box-shadow:none}
+.doc-tabs a[aria-current="page"] small{color:var(--bg);opacity:.9}
+@media (max-width:480px){.doc-tabs{padding:8px 8px 0}.doc-tabs>div{gap:4px}.doc-tabs a{min-height:62px;padding:6px 3px;font-size:15px}.doc-tabs a small{font-size:12px}}
+@media print{.doc-tabs{display:none}}
 </style>
 </head>
 <body>
+<nav class="doc-tabs" id="docTabs" aria-label="안내 문서 선택"><div><a href="index.html" aria-current="page">이용하기<small>튜토리얼</small></a><a href="features.html">한눈에 기능보기<small>기능 목록</small></a><a href="manual.html">사용자 매뉴얼<small>화면별 설명</small></a></div></nav>
 <div class="wrap">
   <header class="top">
     <h1 id="title"></h1>
     <p id="lead"></p>
-    <div class="links" id="links"></div>
   </header>
   <aside class="safety" id="safetyBox" aria-label="안전 안내"></aside>
 </div>
@@ -152,8 +163,6 @@ footer .safety{color:var(--ink)}
   document.title = T.title;
   document.getElementById('title').textContent = T.title;
   document.getElementById('lead').textContent = T.lead;
-  document.getElementById('links').innerHTML =
-    `<a href="${esc(T.manualLink)}">사용자 매뉴얼</a><a href="${esc(T.guideLink)}">기능 한눈에</a>`;
   document.getElementById("safetyBox").innerHTML =
     `<h2>⚠ ${esc(T.safety.title)}</h2>${T.safety.lines.map(l => `<p>${rich(l)}</p>`).join('')}` +
     `<a class="go" href="#${esc(T.safety.jumpTo)}" data-go="${esc(T.safety.jumpTo)}">${esc(T.safety.jumpLabel)}</a>`;

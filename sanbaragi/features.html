@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>산바라기 기능 한눈에</title>
+<title>산바라기 한눈에 기능보기</title>
 <style>
 :root{
   --bg:#f6f4ee; --card:#ffffff; --ink:#1d2125; --sub:#5a626d; --line:#e2ddd1;
@@ -67,9 +67,22 @@ footer .safety b{color:var(--star)}
   section.group{break-inside:avoid}
   .row{break-inside:avoid}
 }
+/* 문서 전환 탭 — 세 문서가 같은 탭을 쓴다 */
+.doc-tabs{background:var(--accent-soft);border-bottom:3px solid var(--accent);padding:12px 16px 0}
+.doc-tabs>div{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.doc-tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:66px;padding:8px 6px;border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;background:var(--card);color:var(--accent);font-size:19px;font-weight:800;line-height:1.25;text-align:center;text-decoration:none;word-break:keep-all;overflow-wrap:break-word}
+.doc-tabs a small{margin-top:3px;color:var(--sub);font-size:13px;font-weight:500}
+.doc-tabs a:hover{box-shadow:inset 0 -3px 0 var(--accent)}
+.doc-tabs a:focus-visible{outline:3px solid var(--mark,var(--accent));outline-offset:-3px}
+.doc-tabs a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.doc-tabs a[aria-current="page"]:hover{box-shadow:none}
+.doc-tabs a[aria-current="page"] small{color:var(--bg);opacity:.9}
+@media (max-width:480px){.doc-tabs{padding:8px 8px 0}.doc-tabs>div{gap:4px}.doc-tabs a{min-height:62px;padding:6px 3px;font-size:15px}.doc-tabs a small{font-size:12px}}
+@media print{.doc-tabs{display:none}}
 </style>
 </head>
 <body>
+<nav class="doc-tabs" id="docTabs" aria-label="안내 문서 선택"><div><a href="index.html">이용하기<small>튜토리얼</small></a><a href="features.html" aria-current="page">한눈에 기능보기<small>기능 목록</small></a><a href="manual.html">사용자 매뉴얼<small>화면별 설명</small></a></div></nav>
 <div class="wrap">
   <header class="top">
     <h1 id="title"></h1>
