@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>산바라기 이용하기</title>
+<link rel="icon" href="sanbaragi-icon.png">
 <style>
+@font-face{font-family:"MaruBuri";src:url("fonts/MaruBuri-SemiBold.woff2") format("woff2");font-weight:400 600;font-display:swap}
+@font-face{font-family:"MaruBuri";src:url("fonts/MaruBuri-Bold.woff2") format("woff2");font-weight:700 900;font-display:swap}
 :root{
   --bg:#f6f4ee; --card:#ffffff; --ink:#1d2125; --sub:#5a626d; --line:#e2ddd1;
   --accent:#1f6f5c; --accent-soft:#e2f0ea; --mark:#c0392b;
@@ -24,7 +27,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:16px}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;overflow-wrap:anywhere;word-break:keep-all}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "MaruBuri","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;overflow-wrap:anywhere;word-break:keep-all}
 a{color:var(--accent)}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
 header.top{padding:32px 0 16px}
@@ -57,7 +60,7 @@ details.sec>summary::-webkit-details-marker{display:none}
 details.sec>summary::after{content:"▾";margin-left:auto;flex:none;color:var(--sub);transition:transform .15s}
 details.sec[open]>summary::after{transform:rotate(180deg)}
 details.sec>summary:hover{color:var(--accent)}
-.num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--bg);font:700 17px/32px system-ui;text-align:center}
+.num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--bg);font:700 17px/32px "MaruBuri",system-ui;text-align:center}
 .body{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:0 26px;padding:0 16px 16px;border-top:1px solid var(--line)}
 .body.noshot{grid-template-columns:minmax(0,1fr)}
 .text{min-width:0;padding-top:14px}
@@ -66,7 +69,7 @@ h4.flow{margin:14px 0 8px;font-size:17px;color:var(--accent)}
 h4.flow:first-child{margin-top:0}
 .steps{list-style:none;margin:0;padding:0}
 .steps li{display:flex;gap:10px;margin:0 0 10px}
-.steps .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--mark);color:#fff;font:700 16px/28px system-ui;text-align:center;margin-top:1px}
+.steps .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--mark);color:#fff;font:700 16px/28px "MaruBuri",system-ui;text-align:center;margin-top:1px}
 .steps .t{min-width:0;flex:1}
 .box{border-radius:10px;padding:10px 14px;margin:10px 0}
 .box.tip{background:var(--tip-bg);border-left:4px solid var(--tip)}
@@ -80,7 +83,7 @@ figure.shot{margin:0;width:100%;max-width:270px}
 .phone{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 3px 12px rgba(0,0,0,.12);background:#000;line-height:0}
 .phone img{width:100%;height:auto;display:block}
 .phone .ph{line-height:1.5;min-height:150px;display:flex;align-items:center;justify-content:center;color:#ddd;font-size:16px;background:repeating-linear-gradient(45deg,#2a2d31 0 12px,#24272b 12px 24px)}
-.phone .mk{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--mark);color:#fff;font:700 16px/28px system-ui;text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4)}
+.phone .mk{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--mark);color:#fff;font:700 16px/28px "MaruBuri",system-ui;text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4)}
 figure.shot figcaption{font-size:16px;color:var(--sub);text-align:center;margin-top:6px;line-height:1.5}
 .hidden{display:none!important}
 .empty{color:var(--sub);padding:40px 0;text-align:center}
@@ -111,20 +114,23 @@ footer .safety{color:var(--ink)}
 }
 /* 문서 전환 탭 — 세 문서가 같은 탭을 쓴다 */
 .doc-tabs{background:var(--accent-soft);border-bottom:3px solid var(--accent);padding:12px 16px 0}
-.doc-tabs>div{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.doc-tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:66px;padding:8px 6px;border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;background:var(--card);color:var(--accent);font-size:19px;font-weight:800;line-height:1.25;text-align:center;text-decoration:none;word-break:keep-all;overflow-wrap:break-word}
-.doc-tabs a small{margin-top:3px;color:var(--sub);font-size:13px;font-weight:500}
-.doc-tabs a:hover{box-shadow:inset 0 -3px 0 var(--accent)}
+.doc-tabs>div{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 20px}
+.doc-brand{display:flex;align-items:center;gap:10px;align-self:center;padding-bottom:12px;color:var(--ink);font-size:24px;font-weight:700;line-height:1.2;text-decoration:none;word-break:keep-all}
+.doc-brand img{width:44px;height:auto;border-radius:10px;display:block}
+.doc-tabs .tabs{flex:1 1 520px;min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.doc-tabs .tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:66px;padding:8px 6px;border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;background:var(--card);color:var(--accent);font-size:19px;font-weight:700;line-height:1.25;text-align:center;text-decoration:none;word-break:keep-all;overflow-wrap:break-word}
+.doc-tabs .tabs a small{margin-top:3px;color:var(--sub);font-size:13px;font-weight:600}
+.doc-tabs .tabs a:hover{box-shadow:inset 0 -3px 0 var(--accent)}
 .doc-tabs a:focus-visible{outline:3px solid var(--mark,var(--accent));outline-offset:-3px}
-.doc-tabs a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.doc-tabs a[aria-current="page"]:hover{box-shadow:none}
-.doc-tabs a[aria-current="page"] small{color:var(--bg);opacity:.9}
-@media (max-width:480px){.doc-tabs{padding:8px 8px 0}.doc-tabs>div{gap:4px}.doc-tabs a{min-height:62px;padding:6px 3px;font-size:15px}.doc-tabs a small{font-size:12px}}
+.doc-tabs .tabs a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.doc-tabs .tabs a[aria-current="page"]:hover{box-shadow:none}
+.doc-tabs .tabs a[aria-current="page"] small{color:var(--bg);opacity:.9}
+@media (max-width:640px){.doc-tabs{padding:8px 8px 0}.doc-brand{font-size:20px;padding:0 0 2px 4px}.doc-brand img{width:32px;border-radius:8px}.doc-tabs .tabs{flex-basis:100%;gap:4px}.doc-tabs .tabs a{min-height:62px;padding:6px 3px;font-size:15px}.doc-tabs .tabs a small{font-size:12px}}
 @media print{.doc-tabs{display:none}}
 </style>
 </head>
 <body>
-<nav class="doc-tabs" id="docTabs" aria-label="안내 문서 선택"><div><a href="index.html" aria-current="page">이용하기<small>튜토리얼</small></a><a href="features.html">한눈에 기능보기<small>기능 목록</small></a><a href="manual.html">사용자 매뉴얼<small>화면별 설명</small></a></div></nav>
+<nav class="doc-tabs" id="docTabs" aria-label="안내 문서 선택"><div><a class="doc-brand" href="index.html"><img src="sanbaragi-icon.png" alt="" width="44" height="43">산바라기</a><div class="tabs"><a href="index.html" aria-current="page">이용하기<small>튜토리얼</small></a><a href="features.html">한눈에 기능보기<small>기능 목록</small></a><a href="manual.html">사용자 매뉴얼<small>화면별 설명</small></a></div></div></nav>
 <div class="wrap">
   <header class="top">
     <h1 id="title"></h1>
@@ -145,6 +151,7 @@ footer .safety{color:var(--ink)}
   <main id="main"></main>
   <footer id="foot"></footer>
 </div>
+<script src="search.js"></script>
 <script src="guide-data.js"></script>
 <script>
 (function(){
@@ -158,7 +165,7 @@ footer .safety{color:var(--ink)}
     .replace(/\[\[([\w-]+)\|(.+?)\]\]/g, '<a href="#$1" data-go="$1">$2</a>');
   // 찾기용 글자 — 표시 기호를 걷어 낸다. 띄어쓰기·대소문자는 무시한다
   const plain = s => String(s ?? '').replace(/\*\*/g, '').replace(/\[\[[\w-]+\|(.+?)\]\]/g, '$1');
-  const norm = s => plain(s).replace(/\s+/g, '').toLowerCase();
+  const norm = s => DocSearch.norm(plain(s));
 
   document.title = T.title;
   document.getElementById('title').textContent = T.title;
@@ -230,7 +237,7 @@ footer .safety{color:var(--ink)}
          ${g.items.map(s => secHtml(s, { groupName: g.name })).join('')}
        </section>`).join('')}
      </section>
-     <p class="empty hidden" id="empty">찾는 내용이 없습니다. 다른 낱말로 찾아보세요.</p>`;
+     <p class="empty hidden" id="empty">찾는 내용이 없습니다. 다른 검색어로 찾아보세요.</p>`;
 
   jump.innerHTML = [{ id: P1.id, name: P1.name }, ...P2.groups]
     .map(g => `<a href="#${esc(g.id)}" data-g="${esc(g.id)}">${esc(g.name)}</a>`).join('');
@@ -244,11 +251,12 @@ footer .safety{color:var(--ink)}
   let saved = null; // 찾기 전의 펼침 상태 — 찾기를 지우면 되돌린다
 
   function apply(){
-    const v = q.value.replace(/\s+/g, '').toLowerCase();
+    const match = DocSearch.matcher(q.value);
+    const v = !!match;
     if (v && !saved) saved = new Map(allSecs.map(d => [d, d.open]));
     let shown = 0;
     allSecs.forEach(d => {
-      const hit = !v || d.dataset.t.includes(v);
+      const hit = !match || match(d.dataset.t);
       d.classList.toggle('hidden', !hit);
       if (v && hit) d.open = true;
       if (hit) shown++;
