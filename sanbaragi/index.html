@@ -26,7 +26,7 @@
   --tip:#5cc3a5; --tip-bg:#1b2f29; --warn:#f0a07a; --warn-bg:#36251e;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:16px}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--tabs-h,0px) + 16px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "MaruBuri","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;overflow-wrap:anywhere;word-break:keep-all}
 a{color:var(--accent)}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
@@ -91,8 +91,8 @@ footer{color:var(--sub);padding-bottom:48px}
 footer p{margin:6px 0}
 footer .safety{color:var(--ink)}
 @media (min-width:861px){
-  html{scroll-padding-top:128px}
-  .bar{position:sticky;top:0;z-index:5}
+  html{scroll-padding-top:calc(var(--tabs-h,0px) + 128px)}
+  .bar{position:sticky;top:var(--tabs-h,0px);z-index:5}
 }
 @media (max-width:760px){
   .wrap{padding:0 16px}
@@ -127,6 +127,13 @@ footer .safety{color:var(--ink)}
 .doc-tabs .tabs a[aria-current="page"] small{color:var(--bg);opacity:.9}
 @media (max-width:640px){.doc-tabs{padding:8px 8px 0}.doc-brand{font-size:20px;padding:0 0 2px 4px}.doc-brand img{width:32px;border-radius:8px}.doc-tabs .tabs{flex-basis:100%;gap:4px}.doc-tabs .tabs a{min-height:62px;padding:6px 3px;font-size:15px}.doc-tabs .tabs a small{font-size:12px}}
 @media print{.doc-tabs{display:none}}
+.doc-tabs{position:sticky;top:0;z-index:30}
+.to-top{position:fixed;right:24px;bottom:24px;z-index:25;width:52px;height:52px;border:0;border-radius:50%;background:var(--accent);color:var(--bg);font:700 26px/52px "MaruBuri",system-ui;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{filter:brightness(1.12)}
+.to-top:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+@media (max-width:640px){.doc-tabs .tabs a small{display:none}.doc-tabs .tabs a{min-height:48px}.to-top{right:16px;bottom:16px;width:48px;height:48px;line-height:48px}}
+@media print{.to-top{display:none}}
 </style>
 </head>
 <body>
@@ -151,6 +158,7 @@ footer .safety{color:var(--ink)}
   <main id="main"></main>
   <footer id="foot"></footer>
 </div>
+<script src="tabs.js"></script>
 <script src="search.js"></script>
 <script src="guide-data.js"></script>
 <script>
