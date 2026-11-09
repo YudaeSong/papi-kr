@@ -86,11 +86,11 @@ footer .safety b{color:var(--star)}
 @media (max-width:640px){.doc-tabs{padding:8px 8px 0}.doc-brand{font-size:20px;padding:0 0 2px 4px}.doc-brand img{width:32px;border-radius:8px}.doc-tabs .tabs{flex-basis:100%;gap:4px}.doc-tabs .tabs a{min-height:62px;padding:6px 3px;font-size:15px}.doc-tabs .tabs a small{font-size:12px}}
 @media print{.doc-tabs{display:none}}
 .doc-tabs{position:sticky;top:0;z-index:30}
-.to-top{position:fixed;right:24px;bottom:24px;z-index:25;width:52px;height:52px;border:0;border-radius:50%;background:var(--accent);color:var(--bg);font:700 26px/52px "MaruBuri",system-ui;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s}
-.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top{position:fixed;left:var(--top-x,auto);right:auto;top:calc(50% + var(--tabs-h,0px) / 2);z-index:25;width:52px;height:52px;border:0;border-radius:50%;background:var(--accent);color:var(--bg);font:700 26px/52px "MaruBuri",system-ui;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(calc(-50% + 8px));transition:opacity .2s,transform .2s,visibility .2s}
+.to-top.show{opacity:1;visibility:visible;transform:translateY(-50%)}
 .to-top:hover{filter:brightness(1.12)}
 .to-top:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-@media (max-width:640px){.doc-tabs .tabs a small{display:none}.doc-tabs .tabs a{min-height:48px}.to-top{right:16px;bottom:16px;width:48px;height:48px;line-height:48px}}
+@media (max-width:640px){.doc-tabs .tabs a small{display:none}.doc-tabs .tabs a{min-height:48px}.to-top{width:44px;height:44px;font-size:22px;line-height:44px}.to-top.show{opacity:.85}}
 @media print{.to-top{display:none}}
 </style>
 </head>

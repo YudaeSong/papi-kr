@@ -21,6 +21,20 @@
   top.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   document.body.appendChild(top);
 
+  // 버튼은 내용 영역 오른쪽 끝 바로 옆, 화면 세로 가운데에 둔다. 옆에 자리가 없으면 화면 안쪽으로 붙인다.
+  const content = document.querySelector('main');
+  function place() {
+    const box = content.getBoundingClientRect();
+    const padding = parseFloat(getComputedStyle(content).paddingRight) || 0;
+    const gap = 12;
+    const edge = document.documentElement.clientWidth - top.offsetWidth - 8;
+    const x = Math.min(box.right - padding + gap, edge);
+    document.documentElement.style.setProperty('--top-x', `${Math.round(x)}px`);
+  }
+  place();
+  new ResizeObserver(place).observe(content);
+  window.addEventListener('resize', place);
+
   const toggle = () => top.classList.toggle('show', window.scrollY > 300);
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
