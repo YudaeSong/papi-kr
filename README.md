@@ -17,7 +17,15 @@ js/content-manager.js    관리자용 콘텐츠 CSV 다운로드/업로드
 assets/             로고, 팀 아바타(보관용)
 CNAME               papi.kr (커스텀 도메인)
 server.js           로컬 미리보기용 정적 서버 (배포엔 불필요)
+spec-map/           App Spec Map 웹 열람 (papi.kr/spec-map — 암호 잠금, 데이터는 NAS API)
+tools/spec-map-sync/  각 프로젝트 spec-map 데이터를 NAS로 올리는 동기화 스크립트
 ```
+
+## App Spec Map
+프로젝트별 사양 지도를 `https://papi.kr/spec-map/`에서 관리자 암호로 열람합니다(홈 바닥글 🗺️).
+화면은 이 저장소, 데이터는 NAS(`api.papi.kr`, Cloudflare Tunnel)에 있습니다.
+- **내용 수정·다른 PC에서 올리기**: [tools/spec-map-sync/GUIDE.md](tools/spec-map-sync/GUIDE.md)
+- 운영 전반: `manual.html` 15장
 
 ## 로컬 미리보기
 ```bash
@@ -31,8 +39,8 @@ npm start            # http://localhost:8080  (또는 python -m http.server 3000
 3. **Custom domain: `papi.kr`** 입력 → 저장 → `Enforce HTTPS` 체크
    - 저장소의 `CNAME` 파일이 papi.kr로 지정되어 있어 자동 연결됩니다.
 
-## 도메인 연결 (반값도메인 등 DNS 설정)
-papi.kr(루트 도메인)을 GitHub Pages로 향하게 하려면 **A 레코드 4개**를 추가합니다.
+## 도메인 연결 (DNS — Cloudflare에서 관리)
+도메인 등록은 반값도메인, DNS 레코드는 Cloudflare 대시보드에서 관리합니다. papi.kr(루트 도메인)을 GitHub Pages로 향하게 하는 **A 레코드 4개**(현재 설정됨):
 
 | 타입 | 호스트 | 값 |
 |------|--------|------|
@@ -40,7 +48,8 @@ papi.kr(루트 도메인)을 GitHub Pages로 향하게 하려면 **A 레코드 4
 | A | @ | 185.199.109.153 |
 | A | @ | 185.199.110.153 |
 | A | @ | 185.199.111.153 |
-| CNAME | www | `<GitHub사용자명>.github.io` |
+| CNAME | www | `yudaesong.github.io` |
+| CNAME | api | Cloudflare Tunnel `nas-papi`가 자동 생성 (App Spec Map 데이터 API → NAS, 직접 수정 금지) |
 
 > DNS 반영에는 보통 10분~수 시간 걸립니다. 반영 후 GitHub Pages가 자동으로 Let's Encrypt HTTPS 인증서를 발급합니다.
 

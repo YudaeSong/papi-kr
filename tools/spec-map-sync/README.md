@@ -7,6 +7,8 @@
 D:\Projects\<프로젝트>\docs\app-spec-map-data\*.js ──(sync.js, PC별 업로드 키)──▶ api.papi.kr ──▶ NAS DB ──▶ papi.kr/spec-map
 ```
 
+> 처음 쓰거나 다른 PC에서 올린다면 단계별 안내 **[GUIDE.md](GUIDE.md)** 부터 보세요. 이 문서는 옵션·세부 참고용입니다.
+
 ## 사용법 (papikr 레포 루트에서, Node 18+)
 
 ```bash
