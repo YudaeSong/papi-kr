@@ -56,6 +56,17 @@ body.sm-erd {
 #smErdBar[hidden] { display: none; }
 #smErdBar a { color: var(--accent); text-decoration: none; font-weight: 600; }
 #smErdState { color: var(--muted); flex: 1 1 auto; min-width: 0; }
+/* 테이블 카드: 원본은 overflow:hidden이라 표가 넓으면 오른쪽 설명 칸이 잘린다 → 웹에선 잘리지 않게(넘치면 카드 안 가로 스크롤).
+   태그는 줄바꿈하지 않는다(NUL/L처럼 쪼개짐) — 제약 칸 태그를 짧게 만드는 것은 API(erd.js) 쪽 */
+body.sm-erd .entity-card { overflow-x: auto; }
+body.sm-erd table.schema .tag { white-space: nowrap; }
+@media (max-width: 600px) {
+  body.sm-erd table.schema th, body.sm-erd table.schema td { padding-left: 8px; padding-right: 8px; }
+  body.sm-erd .entity-grid { grid-template-columns: minmax(0, 1fr); }
+  /* 컬럼명·타입은 API가 넣은 <wbr>("attempted_|at", "varchar|(45)")에서만 줄바꿈 */
+  body.sm-erd table.schema td.col, body.sm-erd table.schema td.ty { white-space: normal; }
+  body.sm-erd table.schema td.note code { overflow-wrap: anywhere; }
+}
 #smReload {
   font: inherit; padding: 4px 10px; border: 1px solid var(--line-strong); border-radius: 6px;
   background: var(--paper); color: var(--ink); cursor: pointer;
