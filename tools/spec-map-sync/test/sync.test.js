@@ -84,6 +84,24 @@ test('웹 셸 생성: 원본 style·body 유지, 데이터 script → 잠금+app
   assert.throws(() => s.buildIndexHtml('<html><body>no style</body></html>'), s.SyncError);
 });
 
+test('ERD 셸 → erd.html(잠금·CSP·CDN 제거) + erd-viewer.js(인라인 렌더 그대로)', () => {
+  const shell = '<html><head><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><style>.e{x:1}</style></head><body>\n' +
+    '<div class="titleblock" id="hd"></div><main id="main"></main>\n<!-- 데이터 -->\n<script src="data-model-erd-data.js"></script>\n' +
+    '<script>\n"use strict";\n(function render(){ document.getElementById("main").textContent = ERD_SECTIONS.length; })();\n</script>\n</body></html>';
+  const { html, js } = s.buildErdFiles(shell);
+  assert.match(html, /<style>\.e\{x:1\}<\/style>/);
+  assert.match(html, /<main id="main"><\/main>/);
+  assert.match(html, /id="smLock"/);
+  assert.match(html, /id="smErdBar"/);
+  assert.match(html, /<script src="config\.js"><\/script>\s*<script src="erd-app\.js"><\/script>/);
+  assert.doesNotMatch(html, /cdn\.jsdelivr|data-model-erd-data\.js|<!-- 데이터 -->/);
+  assert.match(html, /script-src 'self';/);
+  assert.match(html, /noindex/);
+  assert.match(js, /^\/\* 자동 생성/);
+  assert.match(js, /"use strict";\n\(function render\(\)\{ document\.getElementById\("main"\)\.textContent = ERD_SECTIONS\.length; \}\)\(\);\n$/);
+  assert.throws(() => s.buildErdFiles('<html><body><script>var a;</script></body></html>'), s.SyncError);
+});
+
 test('설정 파일 파서: 주석·빈 줄 무시, CRLF 허용', () => {
   const dir = tmpProject({ 'x.env': '# c\r\nSPECMAP_PC=pc-a\r\n\r\nSPECMAP_API = https://a/b \r\n' });
   assert.deepStrictEqual(s.readEnvFile(path.join(dir, 'x.env')), { SPECMAP_PC: 'pc-a', SPECMAP_API: 'https://a/b' });

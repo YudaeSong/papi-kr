@@ -69,5 +69,6 @@ SPECMAP_UPLOAD_KEY=<이 PC 전용 키>
 
 `node tools/spec-map-sync/sync.js --update-viewer`
 - InSearch의 v2 뷰어(`spec-map-viewer.js`)를 그대로 복사하고, 원본 `app-spec-map.html`의 스타일·마크업으로 `spec-map/index.html`을 다시 만든다(잠금 화면·CSP·noindex 포함).
-- 웹 전용 동작은 `spec-map/app.js`(잠금·API 조회·어댑터)와 `spec-map/web.css`(열람 전용·좁은 화면)에만 있다 — `index.html`·`spec-map-viewer.js`는 직접 고치지 않는다.
+- InSearch `data-model-erd.html`(ERD 셸)에서 `spec-map/erd.html`(스타일·마크업)과 `erd-viewer.js`(렌더 스크립트 그대로)를 만든다. ERD 데이터는 sync가 올리지 않는다 — 웹 ERD는 열 때 API가 운영 DB 구조를 조회한다(AdminHub `server/spec-map-api` README "ERD").
+- 웹 전용 동작은 `spec-map/app.js`(잠금·API 조회·어댑터), `erd-app.js`(ERD 잠금·조회), `web.css`(열람 전용·좁은 화면)에만 있다 — `index.html`·`spec-map-viewer.js`·`erd.html`·`erd-viewer.js`는 직접 고치지 않는다.
 - 공유 뷰어(v2)가 바뀌면 이 명령 → 로컬 확인 → push.

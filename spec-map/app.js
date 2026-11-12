@@ -141,6 +141,21 @@
       gs.appendChild(out);
     }
 
+    // 2-1) ERD 보기: 운영 DB 구조를 조회하는 웹 ERD(erd.html)로 — ERD가 없는 프로젝트는 숨김.
+    //      로그인 토큰이 탭 단위(sessionStorage)라 새 탭이 아닌 같은 탭으로 이동한다.
+    var erdBtn = document.getElementById('btnErd');
+    if (erdBtn) {
+      if (cur.erd) {
+        erdBtn.href = 'erd.html?p=' + encodeURIComponent(cur.slug);
+        erdBtn.removeAttribute('target');
+        erdBtn.removeAttribute('rel');
+        erdBtn.classList.add('sm-erd-on');
+        erdBtn.title = '운영 DB 구조를 지금 조회해 그린 ERD';
+      } else {
+        erdBtn.classList.remove('sm-erd-on');
+      }
+    }
+
     // 3) 열람 전용: INBOX·변경 이력 편집 표의 입력칸을 읽기 전용으로 (표는 화면 전환 때마다 다시 그려짐)
     function lockInputs(root) {
       var els = root.querySelectorAll('#inboxBody input, #inboxBody textarea, #chgBody input, #chgBody textarea');

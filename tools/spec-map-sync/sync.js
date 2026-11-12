@@ -7,7 +7,7 @@
  *   node tools/spec-map-sync/sync.js --all          이 PC에 있는 프로젝트 전부
  *   node tools/spec-map-sync/sync.js --list         등록 프로젝트와 이 PC의 경로·존재 여부
  *   … --dry-run                                     읽기·검증·수치만 출력(업로드 안 함)
- *   node tools/spec-map-sync/sync.js --update-viewer   InSearch v2 뷰어를 spec-map/ 로 복사
+ *   node tools/spec-map-sync/sync.js --update-viewer   InSearch v2 뷰어를 spec-map/ 로 복사 (+ ERD 셸 → erd.html·erd-viewer.js)
  *
  * PC별 설정: 사용자 폴더의 .spec-map-sync.env (레포 밖)
  *   SPECMAP_API=https://api.papi.kr/spec-map/v1
@@ -183,19 +183,68 @@ ${body[1].trim()}
 `;
 }
 
+// 원본 ERD 셸(data-model-erd.html) → 웹 erd.html + erd-viewer.js(인라인 렌더 스크립트 그대로).
+// 데이터 파일·CDN mermaid 대신 erd-app.js가 API 응답을 전역에 넣고 vendor/mermaid.min.js → erd-viewer.js 순서로 삽입한다.
+function buildErdFiles(shell) {
+  const style = shell.match(/<style>[\s\S]*?<\/style>/);
+  const body = shell.match(/<body>([\s\S]*?)<!--[^>]*-->\s*<script\s+src=/) || shell.match(/<body>([\s\S]*?)<script\s+src=/);
+  const inline = shell.match(/<script>\s*([\s\S]*?)<\/script>\s*<\/body>/);
+  if (!style || !body || !inline) throw new SyncError('원본 data-model-erd.html 구조가 예상과 다릅니다(<style>, <body>…<script src=, 끝의 인라인 <script>)');
+  if (!/ERD_SECTIONS/.test(inline[1])) throw new SyncError('원본 ERD 렌더 스크립트에 ERD_SECTIONS가 없습니다');
+  const html = `<!DOCTYPE html>
+<!-- 자동 생성: node tools/spec-map-sync/sync.js --update-viewer (원본: InSearch docs/data-model-erd.html). 직접 수정하지 말 것 — 웹 전용 변경은 erd-app.js·web.css -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://api.papi.kr; base-uri 'none'; form-action 'none'">
+<title>ERD — App Spec Map</title>
+${style[0]}
+<link rel="stylesheet" href="web.css">
+</head>
+<body class="sm-erd">
+<div id="smLock" hidden>
+  <form id="smLockForm" autocomplete="off">
+    <h1>🗄️ ERD</h1>
+    <p>관리자 암호를 입력하세요.</p>
+    <input id="smPw" type="password" autocomplete="current-password" aria-label="관리자 암호" required>
+    <button id="smBtn" type="submit">열기</button>
+    <p id="smLockMsg" role="alert"></p>
+  </form>
+</div>
+<div id="smErdBar" hidden><a id="smBack" href="./">⬅ Spec Map</a><span id="smErdState"></span><button id="smReload" type="button">🔄 다시 조회</button></div>
+${body[1].trim()}
+
+<script src="config.js"></script>
+<script src="erd-app.js"></script>
+</body>
+</html>
+`;
+  const js = `/* 자동 생성: sync.js --update-viewer (원본: InSearch docs/data-model-erd.html 인라인 렌더 스크립트, 수정 없음) */
+${inline[1].trim()}
+`;
+  return { html, js };
+}
+
 function updateViewer(settings) {
   const root = settings.SPECMAP_PROJECTS_ROOT || 'D:/Projects';
   const src = settings.SPECMAP_VIEWER_SRC || path.join(root, 'InSearch', 'docs', 'app-spec-map-data', 'spec-map-viewer.js');
   const shellSrc = settings.SPECMAP_SHELL_SRC || path.join(root, 'InSearch', 'docs', 'app-spec-map.html');
+  const erdSrc = settings.SPECMAP_ERD_SHELL_SRC || path.join(root, 'InSearch', 'docs', 'data-model-erd.html');
   const webDir = path.join(__dirname, '..', '..', 'spec-map');
-  for (const f of [src, shellSrc]) if (!fs.existsSync(f)) throw new SyncError(`원본 없음: ${f}`);
+  for (const f of [src, shellSrc, erdSrc]) if (!fs.existsSync(f)) throw new SyncError(`원본 없음: ${f}`);
   const text = fs.readFileSync(src, 'utf8');
   if (!/MENUS/.test(text)) throw new SyncError('원본 뷰어가 v2(MENUS)가 아닙니다');
   const html = buildIndexHtml(fs.readFileSync(shellSrc, 'utf8'));
   fs.mkdirSync(webDir, { recursive: true });
   fs.writeFileSync(path.join(webDir, 'spec-map-viewer.js'), text);
   fs.writeFileSync(path.join(webDir, 'index.html'), html);
-  return { src, dst: webDir, bytes: Buffer.byteLength(text) + Buffer.byteLength(html) };
+  const erd = buildErdFiles(fs.readFileSync(erdSrc, 'utf8'));
+  fs.writeFileSync(path.join(webDir, 'erd.html'), erd.html);
+  fs.writeFileSync(path.join(webDir, 'erd-viewer.js'), erd.js);
+  return { src, dst: webDir, bytes: Buffer.byteLength(text) + Buffer.byteLength(html) + Buffer.byteLength(erd.html) + Buffer.byteLength(erd.js) };
 }
 
 async function main(argv) {
@@ -207,7 +256,7 @@ async function main(argv) {
 
   if (flags.has('--update-viewer')) {
     const r = updateViewer(settings);
-    console.log(`웹 화면 갱신: ${r.src} → ${r.dst} (spec-map-viewer.js, index.html — ${r.bytes} B)`);
+    console.log(`웹 화면 갱신: ${r.src} → ${r.dst} (spec-map-viewer.js, index.html, erd.html, erd-viewer.js — ${r.bytes} B)`);
     return 0;
   }
   if (flags.has('--list')) {
@@ -264,4 +313,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { loadGlobals, buildPayload, countPayload, hashPayload, projectDir, loadSettings, readEnvFile, buildIndexHtml, SyncError };
+module.exports = { loadGlobals, buildPayload, countPayload, hashPayload, projectDir, loadSettings, readEnvFile, buildIndexHtml, buildErdFiles, SyncError };

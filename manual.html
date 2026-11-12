@@ -313,13 +313,14 @@ git push            # → GitHub Pages가 1~2분 뒤 자동 재배포</pre>
             <tr><th>하려는 일</th><th>방법</th></tr>
             <tr><td>InSearch 등 내용 수정 반영</td><td>원본 파일 수정 → papikr 폴더에서 <code>node tools/spec-map-sync/sync.js insearch</code> → 웹 새로고침</td></tr>
             <tr><td>다른 PC에서 다른 프로젝트 올리기</td><td>처음 한 번 그 PC 등록(업로드 키) → <code>sync.js &lt;프로젝트&gt;</code>. 단계별 안내: 저장소 <code>tools/spec-map-sync/GUIDE.md</code></td></tr>
-            <tr><td>웹 화면(뷰어) 갱신</td><td>공유 뷰어가 바뀌면 <code>sync.js --update-viewer</code> → 커밋·push</td></tr>
+            <tr><td>DB 구조(ERD) 보기</td><td>Spec Map 실행 메뉴 🗄️ <b>ERD 보기</b> — 운영 DB 구조를 <b>열 때마다 조회</b>해 그림(동기화 불필요). 현재 AdminHub(= NAS Spec Map DB)만. 설명은 DB의 <code>COMMENT</code>가 그대로 보이므로 컬럼 추가 시 COMMENT를 함께 씀</td></tr>
+            <tr><td>웹 화면(뷰어) 갱신</td><td>공유 뷰어·ERD 셸이 바뀌면 <code>sync.js --update-viewer</code> → 커밋·push</td></tr>
             <tr><td>열람 암호 변경</td><td>NAS의 API 설정(<code>ADMIN_PASSWORD_HASH</code>) 교체 후 재시작 — AdminHub 저장소 <code>server/spec-map-api/README.md</code>. ⚙️·매뉴얼 암호(<code>js/main.js</code>)와는 <b>별개</b>이므로 함께 바꿀 때 둘 다 변경</td></tr>
             <tr><td>PC 분실·교체</td><td>NAS 설정 <code>UPLOAD_KEYS</code>에서 그 PC 이름표만 삭제 후 재시작</td></tr>
         </table>
         <h3>규칙</h3>
         <ul>
-            <li>웹은 <b>열람 전용</b>. 수정은 항상 원본 파일에서. git push만으로는 웹 내용이 바뀌지 않음 — 동기화 명령 필요.</li>
+            <li>웹은 <b>열람 전용</b>(ERD는 운영 DB를 읽기만 함). 수정은 항상 원본 파일에서. git push만으로는 웹 내용이 바뀌지 않음 — 동기화 명령 필요.</li>
             <li>데이터는 <b>v2 형식</b>(<code>const MENUS</code>)만. v1(<code>SECTIONS</code>)은 먼저 전환.</li>
             <li>사양 문서에 실제 비밀번호·키·토큰·개인 연락처를 넣지 않음.</li>
             <li>▶ 서비스 시작·종료, 🛠️ 관리자·🌐 웹뷰 버튼은 해당 프로젝트가 있는 PC(프로토콜 등록·로컬 실행)에서만 동작.</li>
@@ -327,7 +328,7 @@ git push            # → GitHub Pages가 1~2분 뒤 자동 재배포</pre>
         <h3>구성 요소</h3>
         <table>
             <tr><th>구성</th><th>위치</th></tr>
-            <tr><td>웹 화면</td><td>이 저장소 <code>spec-map/</code> (웹 전용 동작은 <code>app.js</code>·<code>web.css</code>)</td></tr>
+            <tr><td>웹 화면</td><td>이 저장소 <code>spec-map/</code> (웹 전용 동작은 <code>app.js</code>·<code>erd-app.js</code>·<code>web.css</code>, 다이어그램 <code>vendor/mermaid.min.js</code> 10.9.1)</td></tr>
             <tr><td>동기화 스크립트</td><td>이 저장소 <code>tools/spec-map-sync/</code> (<code>GUIDE.md</code>, <code>README.md</code>)</td></tr>
             <tr><td>데이터 API 소스</td><td>AdminHub 저장소(비공개) <code>server/spec-map-api/</code> — NAS 배치·비밀값 관리 절차 포함</td></tr>
             <tr><td>외부 연결</td><td>Cloudflare Zero Trust(Free) 터널 <code>nas-papi</code> → <code>api.papi.kr</code></td></tr>
