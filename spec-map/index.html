@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<!-- 자동 생성: node tools/spec-map-sync/sync.js --update-viewer (원본: InSearch docs/app-spec-map.html). 직접 수정하지 말 것 — 웹 전용 변경은 web.css·app.js -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.papi.kr http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'">
+<title>App Spec Map</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --border: #e2e5ea;
+    --text: #1f2430;
+    --text-dim: #6b7280;
+    --accent: #2f7d4f;
+    --accent-soft: #e7f3ec;
+    --code-bg: #eef1f5;
+    --code-text: #334155;
+    --hover: #f0f2f5;
+    --selected: #e7f3ec;
+    --selected-border: #2f7d4f;
+    --chip-bg: #eef1f5;
+    --warn-bg: #fdf3e0;
+    --warn-border: #ecc35a;
+    --todo-bg: #e9f6f1;
+    --todo-border: #47b68c;
+    --issue-bg: #fdecec;
+    --issue-border: #d9534f;
+    --orange-bg: #fdead9;
+    --orange-border: #e08a3c;
+    --gold-bg: #faf0cd;
+    --gold-border: #cda429;
+    --shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181d;
+      --panel: #1e2128;
+      --border: #32363f;
+      --text: #e5e7eb;
+      --text-dim: #9ca3af;
+      --accent: #5cb87f;
+      --accent-soft: #23342a;
+      --code-bg: #2a2e37;
+      --code-text: #cdd5e0;
+      --hover: #262a32;
+      --selected: #23342a;
+      --selected-border: #5cb87f;
+      --chip-bg: #2a2e37;
+      --warn-bg: #3a3116;
+      --warn-border: #8a6108;
+      --todo-bg: #15352b;
+      --todo-border: #2fa377;
+      --issue-bg: #3a1d1d;
+      --issue-border: #b04543;
+      --orange-bg: #3f2c17;
+      --orange-border: #d98a44;
+      --gold-bg: #3a3315;
+      --gold-border: #cda429;
+      --shadow: 0 1px 3px rgba(0,0,0,.35);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    /* 기본 폰트 D2Coding(2026-07-20) — 설치본에 따라 패밀리명이 "D2Coding" 또는
+       "D2Coding ligature"(ligature 배포판)라 둘 다 나열. 미설치 PC는 기존 폴백. */
+    font-family: "D2Coding", "D2Coding ligature", "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    background: var(--bg); color: var(--text);
+    display: flex; flex-direction: column;
+    font-size: 14px; line-height: 1.6;
+  }
+  a { color: var(--accent); }
+  code {
+    font-family: "D2Coding", "D2Coding ligature", Consolas, monospace;
+    background: var(--code-bg); color: var(--code-text);
+    padding: 1px 5px; border-radius: 4px; font-size: .88em;
+    word-break: break-all;
+  }
+
+  /* ── 헤더 ── */
+  header {
+    padding: 10px 20px; background: var(--panel); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap; flex-shrink: 0;
+  }
+  header h1 { font-size: 17px; font-weight: 700; }
+  header .meta { color: var(--text-dim); font-size: 12px; }
+
+  /* ── 프로젝트 전환 드롭다운 ── */
+  #projSelect {
+    padding: 5px 8px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--text); font-size: 13px; cursor: pointer; outline: none;
+    max-width: 160px;
+  }
+  #projSelect:hover, #projSelect:focus { border-color: var(--accent); }
+
+  /* ── 전체 검색(헤더) ── */
+  #gsWrap { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+  #gsearch {
+    width: 280px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--text); font-size: 13px; outline: none;
+  }
+  #gsearch:focus { border-color: var(--accent); }
+  #gsClear { border: none; background: transparent; color: var(--text-dim); cursor: pointer; font-size: 14px; padding: 4px; }
+  #gsClear:hover { color: var(--accent); }
+  .hbtn {
+    border: 1px solid var(--border); background: var(--bg); color: var(--text);
+    border-radius: 8px; padding: 6px 12px; font-size: 13px; cursor: pointer; white-space: nowrap;
+  }
+  .hbtn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── 실행 드롭다운 메뉴(서비스 시작·종료·웹뷰 실행·수정사항관리·사이트 관리자·ERD 보기) ── */
+  .menu { position: relative; }
+  .menu-panel {
+    position: absolute; top: calc(100% + 6px); right: 0; min-width: 176px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    box-shadow: var(--shadow); padding: 6px; z-index: 20;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .menu-panel[hidden] { display: none; }
+  .menu-item {
+    display: block; width: 100%; text-align: left; border: none; background: transparent;
+    color: var(--text); font-size: 13px; padding: 7px 10px; border-radius: 6px; cursor: pointer;
+    white-space: nowrap; text-decoration: none; font-family: inherit;
+  }
+  .menu-item:hover { background: var(--hover); color: var(--accent); }
+  .menu-sep { height: 1px; background: var(--border); margin: 4px 2px; }
+  #toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--text); color: var(--bg); padding: 8px 16px; border-radius: 8px;
+    font-size: 13px; opacity: 0; transition: opacity .25s; pointer-events: none; z-index: 99; max-width: 80vw;
+  }
+  #toast.show { opacity: .95; }
+
+  /* ── 본문 레이아웃 ── */
+  .layout { flex: 1; display: flex; min-height: 0; }
+
+  /* ── 좌측 트리 ── */
+  #sidebar {
+    width: 300px; min-width: 0; flex-shrink: 0;
+    background: var(--panel); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+  }
+
+  /* ── 사이드바 크기 조절·숨김 ── */
+  #resizer { width: 6px; flex-shrink: 0; cursor: col-resize; position: relative; z-index: 5; }
+  #resizer:hover, #resizer.dragging { background: var(--accent-soft); }
+  #sidebarKnob {
+    position: absolute; top: 50%; left: -6px; transform: translateY(-50%);
+    width: 16px; height: 48px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--panel); color: var(--text-dim); font-size: 10px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: var(--shadow); user-select: none;
+  }
+  #sidebarKnob:hover { color: var(--accent); border-color: var(--accent); }
+  .layout.nav-hidden #sidebar { display: none; }
+  .layout.nav-hidden #resizer { cursor: default; }
+  .layout.nav-hidden #resizer:hover { background: transparent; }
+  #nav { flex: 1; overflow-y: auto; padding: 6px 6px 24px; font-size: 13px; line-height: 1.35; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+  #nav::-webkit-scrollbar { width: 8px; background: transparent; }
+  #nav::-webkit-scrollbar-track { background: transparent; }
+  #nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  #nav::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+  /* 왼쪽 목록 — 📊 개요 / ── 주요 메뉴 ── / ── 기능 분류 ── / ── 기타 ── (INBOX·변경 이력) */
+  .nav-sep { font-size: 11px; font-weight: 700; color: var(--text-dim); padding: 12px 8px 3px; user-select: none; }
+  .nav-item {
+    display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px;
+    cursor: pointer; border-left: 2px solid transparent; user-select: none;
+  }
+  .nav-item:hover { background: var(--hover); }
+  .nav-item.selected { background: var(--selected); border-left-color: var(--selected-border); }
+  .nav-item .ic { width: 18px; text-align: center; flex-shrink: 0; }
+  .nav-item .nm { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-item .count { font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
+
+  /* ── 전체 검색 결과(본문 카드 안에 표시) ── */
+  .res-row { padding: 4px 8px; border-radius: 6px; cursor: pointer; border-left: 2px solid transparent; font-size: 13px; }
+  .res-row:hover { background: var(--hover); }
+  .res-row .top { display: flex; align-items: center; gap: 6px; }
+  .res-row .nm { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .res-row .nid { color: var(--text-dim); font-size: 11px; margin-right: 6px; }
+  .res-row .rt {
+    font-family: "D2Coding", "D2Coding ligature", Consolas, monospace; font-size: 11px; color: var(--text-dim);
+    max-width: 40%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0;
+  }
+  .res-row .snip { font-size: 12px; color: var(--text-dim); margin: 1px 0 0 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* ── 화면 카드(메뉴를 고르면 화면마다 한 장 — 하위 화면은 들여쓰고 「└」) ── */
+  .scard-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .scard-name { font-size: 15px; font-weight: 700; }
+  .scard-name .nid { color: var(--text-dim); font-size: 11px; font-weight: 400; margin-right: 6px; }
+  .scard-sub { color: var(--text-dim); margin-right: 6px; font-weight: 400; }
+  .scard-head .plat-chips .chip { font-size: 12px; padding: 1px 8px; }
+  .scard-cnt { margin-left: auto; font-size: 12px; color: var(--text-dim); }
+  .scard-desc { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
+  .scard-issues { margin-bottom: 8px; }
+  /* 검색 결과·개요 목록에서 이동해 온 대상 카드·기능 행 */
+  .card.hit { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+  table.spec tr.hit td { background: var(--selected); }
+
+  /* ── 우측 상세 ── */
+  /* overflow-x:auto도 여기(실제로 스크롤이 일어나는 요소)에 둬야 표 헤더의 position:sticky가
+     이 영역 기준으로 붙는다 — .tblwrap에 두면 안 되는 이유는 위 .tblwrap 주석 참고.
+     padding은 #detail이 아니라 안쪽 #detailPad에 준다 — #detail 자체에 패딩을 주면 스크롤
+     영역(패딩 포함 박스) 맨 위에 그 패딩만큼 항상 빈 간격이 남아 고정 헤더가 최상단에
+     딱 붙지 못하고 뒤 행이 그 틈으로 살짝 보이는 문제가 있었다(2026-09-16 실사용 중 발견) */
+  #detail { flex: 1; overflow-y: auto; overflow-x: auto; padding: 0; min-width: 0; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+  #detailPad { padding: 24px 32px 60px; }
+  #detail::-webkit-scrollbar { width: 8px; background: transparent; }
+  #detail::-webkit-scrollbar-track { background: transparent; }
+  #detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  #detail::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+  #detail mark.hl { background: #ffd54d; color: #1f2430; padding: 0 2px; border-radius: 3px; }
+  @media (prefers-color-scheme: dark) {
+    #detail mark.hl { background: #caa116; color: #16181d; }
+  }
+  .d-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .d-head h2 { font-size: 21px; }
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; white-space: nowrap;
+  }
+  .badge.done { background: #d9f0e2; color: #1c6b3f; }
+  .badge.wip  { background: #fdf0d2; color: #8a6108; }
+  .badge.plan { background: #e8eaee; color: #555e6b; }
+  .badge.hold { background: #ecdcf7; color: #6b3f8f; }
+  @media (prefers-color-scheme: dark) {
+    .badge.done { background: #1f4230; color: #7fd9a2; }
+    .badge.wip  { background: #45390f; color: #ecc35a; }
+    .badge.plan { background: #30343c; color: #aab2bf; }
+    .badge.hold { background: #3c2a4d; color: #cfa4ee; }
+  }
+  .d-route { font-family: "D2Coding", "D2Coding ligature", Consolas, monospace; font-size: 13px; color: var(--text-dim); }
+  .d-path { font-size: 12px; color: var(--text-dim); margin-bottom: 18px; }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 20px; margin-bottom: 16px; box-shadow: var(--shadow);
+  }
+  .card h3 {
+    font-size: 13px; font-weight: 700; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: .04em; margin-bottom: 10px;
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  }
+  .card h3 .src { font-size: 11px; font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: auto; }
+  .plat-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .plat-chips .chip { background: var(--chip-bg); border-radius: 8px; padding: 3px 10px; font-size: 13px; }
+
+  ul.plainlist { list-style: none; }
+  ul.plainlist li {
+    padding: 5px 0 5px 18px; position: relative;
+    border-bottom: 1px dashed var(--border);
+  }
+  ul.plainlist li:last-child { border-bottom: none; }
+  ul.plainlist li::before { content: "•"; position: absolute; left: 4px; color: var(--text-dim); top: 5px; }
+  ul.plainlist.issues li { background: var(--issue-bg, #fdecec); border: 1px solid var(--issue-border, #d9534f); border-radius: 6px; padding: 6px 10px 6px 28px; margin-bottom: 6px; }
+  ul.plainlist.issues li::before { content: "⚠️"; left: 7px; top: 6px; font-size: 14px; }
+
+  /* 기능 테이블 / 조작 테이블 */
+  table.spec { border-collapse: collapse; width: 100%; font-size: 13px; }
+  table.spec th, table.spec td { border: 1px solid var(--border); padding: 5px 10px; text-align: left; vertical-align: top; }
+  /* 헤더 고정 — 표가 길어 아래로 스크롤해도 컬럼 헤더가 가려지지 않는다.
+     스크롤은 표를 감싼 .tblwrap이 아니라 바깥 #detail(또는 모달 .modal-body)에서 일어나므로
+     top:0 기준이 그 스크롤 영역과 맞는다 */
+  table.spec th { background: var(--chip-bg); white-space: nowrap; font-size: 12px; position: sticky; top: 0; z-index: 2; }
+  table.spec td.no { font-family: "D2Coding", "D2Coding ligature", Consolas, monospace; white-space: nowrap; font-size: 12px; }
+  table.spec td.st { white-space: nowrap; text-align: center; }
+  /* .tblwrap 자체에는 overflow-x를 주지 않는다 — CSS 스펙상 overflow가 visible이 아닌
+     조상이 하나라도 있으면 그 조상이 position:sticky의 스크롤 기준이 되어버려서,
+     여기(.tblwrap)에 overflow-x:auto를 주면 헤더가 #detail(또는 .modal-body) 스크롤이
+     아니라 높이가 콘텐츠에 맞춰 자동으로 늘어나는 .tblwrap 자신을 기준으로 붙어버려
+     사실상 고정되지 않는다(2026-09-16 실사용 중 발견). 가로 스크롤은 실제 스크롤이
+     일어나는 #detail·.modal-body 쪽에 두고 .tblwrap은 표시만 담당한다. */
+  .tblwrap { min-width: 0; }
+  /* 헤더 정렬 화살표·순번(2026-09-16, 전 프로젝트 공통) */
+  table.spec th.sortable-th { cursor: pointer; user-select: none; }
+  table.spec th.sortable-th:hover { color: var(--accent); }
+  table.spec th .sort-ico { margin-left: 4px; font-size: 10px; color: var(--accent); }
+  table.spec th .sort-rank {
+    display: inline-block; min-width: 14px; height: 14px; line-height: 14px; font-size: 10px;
+    background: var(--accent); color: #fff; border-radius: 50%; text-align: center;
+    margin-right: 3px; vertical-align: 2px;
+  }
+
+  /* 상세 화면 상단 이동경로(breadcrumb, 2026-09-16, 전 프로젝트 공통) —
+     "루트(뒤로가기) › 섹션 › 현재 화면  [상태] 라우트" 한 줄. 맨 앞 루트만 클릭 가능 */
+  .crumbbar { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .crumbbar .crumb { font-size: 13px; color: var(--text-dim); }
+  .crumbbar .crumb-sep { font-size: 11px; color: var(--border); }
+  .crumbbar .crumb-root { cursor: pointer; color: var(--accent); font-weight: 600; }
+  .crumbbar .crumb-root:hover { text-decoration: underline; }
+  .crumbbar .crumb-current { font-size: 19px; font-weight: 700; color: var(--text); margin-right: 4px; }
+
+  /* ── INBOX(기능정의) 행 편집 표 — inbox:true 노드의 "주요 기능" 표 대체 ── */
+  .inbox-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  /* 도구 모음(2026-09-10) — 같은 줄 오른쪽 끝에 [검색어][상태 필터]. margin-left:auto 로 버튼들과 떨어뜨린다 */
+  .inbox-tools { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  #inboxSearch {
+    width: 200px; max-width: 46vw; padding: 5px 9px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--text); font: inherit; font-size: 13px; outline: none;
+  }
+  #inboxSearch:focus { border-color: var(--accent); }
+  #inboxFilterPanel { min-width: 148px; }
+  .menu-item.ib-check { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+  .menu-item.ib-check input { accent-color: var(--accent); cursor: pointer; margin: 0; }
+  #inboxState { font-size: 12px; color: var(--text-dim); }
+  #inboxState.dirty { color: #e2a319; font-weight: 600; }
+  table.spec.inbox td { padding: 3px 5px; }
+  table.spec.inbox input[type="text"], table.spec.inbox textarea, table.spec.inbox select {
+    border: 1px solid transparent; border-radius: 6px; background: transparent;
+    color: var(--text); font: inherit; font-size: 13px; line-height: 1.45;
+    padding: 4px 6px; outline: none;
+  }
+  table.spec.inbox input[type="text"], table.spec.inbox textarea { width: 100%; }
+  table.spec.inbox input:hover, table.spec.inbox textarea:hover, table.spec.inbox select:hover {
+    border-color: var(--border); background: var(--bg);
+  }
+  table.spec.inbox input:focus, table.spec.inbox textarea:focus, table.spec.inbox select:focus {
+    border-color: var(--accent); background: var(--bg);
+  }
+  table.spec.inbox textarea { display: block; resize: none; overflow: hidden; min-height: 29px; }
+  table.spec.inbox select { cursor: pointer; }
+  .ib-del {
+    border: none; background: transparent; cursor: pointer; padding: 2px 6px;
+    font-size: 14px; font-weight: 700; color: var(--issue-border); opacity: .75; border-radius: 6px;
+  }
+  .ib-del:hover { opacity: 1; background: var(--issue-bg); }
+
+  /* ── CHANGELOG(버전별 변경 이력) 전용 — 표 자체는 .inbox 스타일 재사용 ── */
+  .chg-bulk { display: flex; gap: 8px; align-items: center; margin: 6px 0 10px; flex-wrap: wrap; }
+  .chg-bulk input {
+    flex: 1; min-width: 160px; max-width: 260px; padding: 6px 10px; border: 1px solid var(--border);
+    border-radius: 8px; background: var(--bg); color: var(--text); font-size: 13px; outline: none;
+  }
+  .chg-bulk input:focus { border-color: var(--accent); }
+  tr.chg-group-row td {
+    background: var(--chip-bg); font-weight: 700; font-size: 12px; color: var(--text-dim);
+    border-top: 1px solid var(--border);
+  }
+  .chg-preview-bar { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  #chgVerSelect {
+    flex: 1; min-width: 160px; max-width: 280px; padding: 6px 8px; border: 1px solid var(--border);
+    border-radius: 8px; background: var(--bg); color: var(--text); font-size: 13px; outline: none;
+  }
+  .chg-preview {
+    width: 100%; min-height: 140px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--code-bg); color: var(--code-text);
+    font-family: "D2Coding", "D2Coding ligature", Consolas, monospace; font-size: 13px; line-height: 1.5;
+    resize: vertical;
+  }
+
+  .empty-files { color: var(--text-dim); }
+
+  /* ── 개요 화면 ── */
+  .ov table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  .ov th, .ov td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
+  .ov th { background: var(--chip-bg); white-space: nowrap; }
+  .ov .stats { display: flex; gap: 14px; flex-wrap: wrap; margin: 4px 0 8px; }
+  .ov .stat {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 18px; text-align: center; min-width: 90px;
+  }
+  .ov .stat .n { font-size: 22px; font-weight: 700; }
+  .ov .stat .l { font-size: 12px; color: var(--text-dim); }
+  .ov .stat[data-key] { cursor: pointer; transition: border-color .12s, transform .12s; }
+  .ov .stat[data-key]:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .ov .stat.active { border-color: var(--selected-border); background: var(--selected); }
+  /* 현황판 구분 배경 — 화면구조도·화면·모듈(주황) · 기능명세 항목(금색), 상태 4카드는 기본색 유지 */
+  .ov .stat.c-orange { background: var(--orange-bg); border-color: var(--orange-border); }
+  .ov .stat.c-gold { background: var(--gold-bg); border-color: var(--gold-border); }
+  .ov .stat.c-orange.active, .ov .stat.c-gold.active { border-color: var(--selected-border); }
+  #ovList { margin-top: 12px; }
+  #ovList .hint { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; }
+  #ovList tr.rowlink { cursor: pointer; }
+  /* 통합 목록 — 화면·모듈 행 아래 기능명세 항목을 들여써 이어 붙인 행 */
+  #ovList tr.feat-row { background: var(--hover); }
+  #ovList td.feat-no, #ovList td.feat-name { padding-left: 26px; position: relative; }
+  #ovList td.feat-no::before, #ovList td.feat-name::before { content: "↳"; position: absolute; left: 10px; color: var(--text-dim); }
+  #ovList tr.rowlink:hover td { background: var(--hover); }
+
+  /* ── 개요 마인드맵(화면 구조도) — 루트→섹션은 가로 한 줄(줄바꿈), 그 아래는 세로 들여쓰기 트리.
+     가로 스크롤 없이 한 화면에 보이도록 섹션 열이 폭에 맞춰 자동 줄바꿈된다 ── */
+  .mm { overflow-x: auto; padding: 12px 4px; }
+  .mm ul { list-style: none; }
+  .mm-tree { display: flex; flex-direction: column; align-items: center; padding-bottom: 8px; }
+  .mm ul.secs {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start;
+    gap: 16px 28px; margin-top: 24px; position: relative; width: 100%;
+  }
+  .mm ul.secs::before { content: ""; position: absolute; top: -14px; left: 50%; width: 1px; height: 14px; background: var(--border); }
+  .mm ul.secs > li { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+  .mm ul.t { display: flex; flex-direction: column; margin: 3px 0 0 4px; }
+  .mm ul.t > li { position: relative; padding: 3px 0 0 7px; }
+  .mm ul.t > li::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .mm ul.t > li:last-child::before { height: 12px; bottom: auto; }
+  .mm ul.t > li::after { content: ""; position: absolute; left: 0; top: 12px; width: 6px; height: 1px; background: var(--border); }
+  /* 레벨별 연결선 굵기: 2레벨 3px → 3레벨 2px → 4레벨 이하 1px */
+  .mm ul.d2 > li::before { width: 3px; }
+  .mm ul.d2 > li::after { height: 3px; }
+  .mm ul.d3 > li::before { width: 2px; }
+  .mm ul.d3 > li::after { height: 2px; }
+  /* 2레벨부터는 박스 없이 텍스트만 — 라우트는 마우스 호버 시에만 옆에 표시 */
+  .mm ul.t .mm-node {
+    position: relative; flex-direction: row; align-items: center; gap: 4px;
+    border: none; background: transparent; box-shadow: none; padding: 0 3px; max-width: 260px;
+  }
+  .mm ul.t .mm-node.link:hover { background: var(--hover); border: none; border-radius: 4px; }
+  .mm ul.t .mm-node .rt { display: none; }
+  .mm ul.t .mm-node:hover .rt {
+    display: inline-block; position: absolute; left: 100%; top: 50%; transform: translateY(-50%);
+    margin-left: 6px; background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 2px 6px; box-shadow: var(--shadow); z-index: 3;
+  }
+  .mm-node {
+    display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 4px 9px; white-space: nowrap; box-shadow: var(--shadow); font-size: 13px; max-width: 240px;
+  }
+  .mm-node > span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  .mm-node .nid { color: var(--text-dim); font-size: 11px; }
+  .mm-node .rt { font-family: "D2Coding", "D2Coding ligature", Consolas, monospace; font-size: 11px; color: var(--text-dim); }
+  .mm-node.link { cursor: pointer; transition: border-color .12s; }
+  .mm-node.link:hover { border-color: var(--accent); background: var(--hover); }
+  .mm-node.sec { font-weight: 700; background: var(--chip-bg); align-items: center; }
+  .mm-node.root { font-weight: 700; background: var(--accent-soft); border-color: var(--accent); font-size: 14px; align-items: center; }
+  .mm-node .cnt { color: var(--text-dim); font-size: 11px; font-weight: 400; }
+
+  @media (max-width: 820px) {
+    .layout { flex-direction: column; }
+    #resizer { display: none; }
+    #sidebar { width: 100% !important; max-height: 45vh; border-right: none; border-bottom: 1px solid var(--border); }
+    #detailPad { padding: 16px; }
+  }
+</style>
+<link rel="stylesheet" href="web.css">
+</head>
+<body>
+<div id="smLock" hidden>
+  <form id="smLockForm" autocomplete="off">
+    <h1>🗺️ App Spec Map</h1>
+    <p>관리자 암호를 입력하세요.</p>
+    <input id="smPw" type="password" autocomplete="current-password" aria-label="관리자 암호" required>
+    <button id="smBtn" type="submit">열기</button>
+    <p id="smLockMsg" role="alert"></p>
+  </form>
+</div>
+<header>
+  <h1 id="projTitle"></h1>
+  <select id="projSelect" title="프로젝트 전환 — d:\Projects 아래 App Spec Map 보유 프로젝트 목록"></select>
+  <span class="meta" id="metaUpdated"></span>
+  <div id="gsWrap">
+    <input id="gsearch" type="search" placeholder="전체 검색 — 메뉴·화면·라우트·기능ID·기능명·설명·이슈" autocomplete="off">
+    <button id="gsClear" title="검색 지우기">✕</button>
+    <div id="runMenu" class="menu">
+      <button id="runMenuBtn" class="hbtn" aria-haspopup="true" aria-expanded="false">☰ 실행 ▾</button>
+      <div id="runMenuPanel" class="menu-panel" role="menu" hidden>
+        <button id="btnRun" class="menu-item" role="menuitem">▶ 서비스 시작</button>
+        <button id="btnStop" class="menu-item" role="menuitem">⏹ 서비스 종료</button>
+        <button id="btnWeb" class="menu-item" role="menuitem">🌐 웹뷰 실행</button>
+        <!-- 수정사항관리(2026-09-14, 전 프로젝트 공통) — 같은 폴더의 _수정사항관리.html(공유 셸) + _수정사항관리-data/ 폴더의 데이터(프로젝트 고유) -->
+        <a id="btnChanges" class="menu-item" role="menuitem" href="_수정사항관리.html" target="_blank" rel="noopener">📝 수정사항관리</a>
+        <button id="btnAdmin" class="menu-item" role="menuitem">🛠️ 사이트 관리자</button>
+        <div class="menu-sep"></div>
+        <!-- href 기본값 — PROJECT.erdUrl 지정 시 뷰어가 덮어씀 -->
+        <a id="btnErd" class="menu-item" role="menuitem" href="data-model-erd.html" target="_blank" rel="noopener">🗄️ ERD 보기</a>
+      </div>
+    </div>
+  </div>
+</header>
+<div id="toast"></div>
+
+<div class="layout">
+  <nav id="sidebar">
+    <div id="nav"></div>
+  </nav>
+  <div id="resizer" title="드래그해서 메뉴 목록 폭 조절">
+    <div id="sidebarKnob" title="메뉴 목록 숨기기">◀</div>
+  </div>
+  <main id="detail"><div id="detailPad"></div></main>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

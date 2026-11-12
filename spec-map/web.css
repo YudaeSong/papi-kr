@@ -1,0 +1,50 @@
+/* App Spec Map 웹 전용 — 잠금 화면 + 열람 전용(편집·저장·로컬 링크 숨김). 원본 스타일 변수(--bg, --panel …)를 따른다. */
+
+#smLock {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg); padding: 16px;
+}
+#smLock[hidden] { display: none; }
+#smLock form {
+  width: 100%; max-width: 360px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow); padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+#smLock h1 { margin: 0; font-size: 18px; }
+#smLock p { margin: 0; color: var(--text-dim); font-size: 13px; }
+#smLock input {
+  font: inherit; padding: 9px 11px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--bg); color: var(--text);
+}
+#smLock input:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+#smLock button {
+  font: inherit; font-weight: 600; padding: 9px 11px; border: none; border-radius: 8px;
+  background: var(--accent); color: #fff; cursor: pointer;
+}
+#smLock button:disabled { opacity: .6; cursor: wait; }
+#smLockMsg { min-height: 1.2em; color: var(--issue-border) !important; }
+#smLockMsg.info { color: var(--text-dim) !important; }
+
+#smStatus { font-size: 12px; color: var(--text-dim); margin-left: 6px; white-space: nowrap; }
+#smLogout { margin-left: 6px; }
+
+/* 열람 전용: 편집·저장 컨트롤 숨김 */
+#inboxAdd, #inboxSave, #inboxState,
+#chgAdd, #chgSave, #chgState, .chg-bulk,
+#inboxCard h3 .src, #chgCard h3 .src,
+#inboxBody td:last-child > *, #chgBody td:last-child > *,
+#inboxEmpty, #chgEmpty { display: none !important; }
+#inboxBody input, #inboxBody textarea, #inboxBody select,
+#chgBody input, #chgBody textarea, #chgBody select { pointer-events: none; }
+
+/* 로컬 파일 전용 링크(수정사항관리·ERD) */
+#btnChanges, #btnErd { display: none !important; }
+
+/* 좁은 화면(휴대폰): 원본 헤더는 PC 전용 폭(검색창 280px 고정)이라 웹에서만 줄바꿈·축소 */
+@media (max-width: 820px) {
+  header { padding: 10px 16px; gap: 8px 12px; }
+  #gsWrap { margin-left: 0; width: 100%; min-width: 0; }
+  #gsearch { flex: 1 1 auto; width: auto; min-width: 0; }
+  #smStatus { margin-left: 0; }
+}

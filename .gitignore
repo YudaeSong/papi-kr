@@ -29,3 +29,8 @@ Thumbs.db
 /data/
 current-content.json
 server.log
+
+# 작업 문서 (개인 보관용 — 저장소에 올리지 않음)
+tasks/
+docs/
+.claude/next-session*.md

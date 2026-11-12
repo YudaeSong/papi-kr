@@ -1,0 +1,9 @@
+[
+  { "slug": "adminhub",    "name": "AdminHub" },
+  { "slug": "andspark",    "name": "AndSpark" },
+  { "slug": "insearch",    "name": "InSearch" },
+  { "slug": "papicrawler", "name": "PapiCrawler" },
+  { "slug": "sanmaru",     "name": "SanMaru" },
+  { "slug": "snspark",     "name": "snSpark" },
+  { "slug": "thnkn-app",   "name": "THNKN-app" }
+]
