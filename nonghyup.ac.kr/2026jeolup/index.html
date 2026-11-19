@@ -1,0 +1,1262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>졸업인증제도 개편 고도화</title>
+<style>
+:root{
+  --bg:#f6f6f3;--panel:#ffffff;--panel2:#fafaf8;--text:#1f2328;--muted:#5d6470;--line:#e3e3df;
+  --accent:#2f6f4f;--accent-soft:#e6f1eb;
+  --new:#1f7a4d;--new-soft:#dff3e7;--chg:#b45309;--chg-soft:#fdeedc;--del:#b42318;--del-soft:#fdecea;
+  --info:#1d4ed8;--info-soft:#e8eefc;--code:#f1f1ee;--mock:#fdfdfc;--mockbar:#eceff2;--mockline:#d5d9de;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17191c;--panel:#1f2226;--panel2:#24282d;--text:#e6e6e3;--muted:#9aa1ab;--line:#30343a;
+    --accent:#6cc297;--accent-soft:#1f3329;
+    --new:#6cc297;--new-soft:#1d3428;--chg:#f0a868;--chg-soft:#3a2b1d;--del:#f2877d;--del-soft:#3b2220;
+    --info:#93b4f5;--info-soft:#1e2840;--code:#262a2f;--mock:#1b1e22;--mockbar:#2a2f35;--mockline:#3a4048;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#17191c;--panel:#1f2226;--panel2:#24282d;--text:#e6e6e3;--muted:#9aa1ab;--line:#30343a;
+  --accent:#6cc297;--accent-soft:#1f3329;
+  --new:#6cc297;--new-soft:#1d3428;--chg:#f0a868;--chg-soft:#3a2b1d;--del:#f2877d;--del-soft:#3b2220;
+  --info:#93b4f5;--info-soft:#1e2840;--code:#262a2f;--mock:#1b1e22;--mockbar:#2a2f35;--mockline:#3a4048;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",system-ui,sans-serif;font-size:15px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px 80px}
+a{color:var(--accent)}
+code{font-family:Consolas,"D2Coding",monospace;font-size:12.5px;background:var(--code);padding:1px 5px;border-radius:4px}
+h1{font-size:24px;margin:0}
+h2{font-size:21px;margin:0 0 6px}
+h3{font-size:16px;margin:20px 0 8px}
+p{margin:6px 0}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+
+/* 상단 고정 */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{padding-bottom:0}
+.titlebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:12px 0 8px}
+.titlebar .grow{flex:1;min-width:220px}
+.dirty{font-size:12px;line-height:20px;padding:0 8px;border-radius:10px;background:var(--chg-soft);color:var(--chg);white-space:nowrap}
+.dirty[hidden]{display:none}
+.btn{font:inherit;font-size:13px;padding:5px 11px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--text);cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.btn.pri:hover{opacity:.9;color:var(--panel)}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:thin}
+nav.tabs a{flex:none;font-size:13.5px;text-decoration:none;color:var(--muted);padding:5px 12px;border-radius:16px;border:1px solid var(--line);background:var(--panel)}
+nav.tabs a:hover{color:var(--accent)}
+nav.tabs a.on{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+
+section.sec{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin-top:22px}
+.lead{color:var(--muted);margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.stack{display:grid;grid-template-columns:1fr;gap:14px}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--panel2)}
+.card h4{margin:0 0 6px;font-size:15px}
+.tblw{overflow-x:auto}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th,table.t td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t th{color:var(--muted);font-weight:600;white-space:nowrap;background:var(--panel2)}
+.tag{display:inline-block;font-size:11.5px;line-height:18px;padding:0 7px;border-radius:9px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;vertical-align:1px}
+.tag.new{background:var(--new-soft);color:var(--new)}
+.tag.chg{background:var(--chg-soft);color:var(--chg)}
+.tag.keep{background:var(--code);color:var(--muted)}
+.tag.info{background:var(--info-soft);color:var(--info)}
+.tag.red{background:var(--del-soft);color:var(--del)}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:12px 14px;margin:12px 0}
+.callout.warn{border-color:var(--chg);background:var(--chg-soft)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);margin:8px 0 14px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.pinfo{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;margin-top:2px}
+.pinfo span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.pinfo input[type=date]{display:inline-block;width:auto;margin:0;height:auto;font:inherit;padding:1px 6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--text);color-scheme:light dark}
+.pinfo a{color:var(--accent)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.meta label{display:block;font-size:12.5px;color:var(--muted)}
+input[type=text],input[type=date],textarea,select{font:inherit;font-size:14px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 8px;width:100%}
+textarea{min-height:58px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+
+/* 프로세스 스윔레인 */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.seg button{font:inherit;font-size:13.5px;border:0;background:var(--panel);color:var(--muted);padding:6px 14px;cursor:pointer}
+.seg button.on{background:var(--accent);color:var(--panel)}
+.lane-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.lanes{display:grid;min-width:980px}
+.lanes .hd{background:var(--panel2);font-weight:600;font-size:13px;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);border-left:1px solid var(--line)}
+.lanes .ln{background:var(--panel2);font-weight:700;font-size:13.5px;padding:10px;border-bottom:1px solid var(--line);display:flex;align-items:center}
+.lanes .cell{padding:8px;border-bottom:1px solid var(--line);border-left:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.step{border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;background:var(--panel);line-height:1.45;position:relative}
+.step.new{border-color:var(--new);background:var(--new-soft)}
+.step.chg{border-color:var(--chg);background:var(--chg-soft)}
+.step.out{border-style:dashed;color:var(--muted)}
+.step .org{color:var(--del);font-weight:700;font-size:12px;margin-bottom:2px}
+.step .go{font-size:11.5px;display:inline-block;margin-top:3px;color:var(--accent);cursor:pointer;text-decoration:underline}
+.both{display:grid;grid-template-columns:1fr;gap:16px}
+.shots{display:flex;flex-direction:column;gap:12px;margin:6px 0 16px}
+.shot .cap{font-weight:700;font-size:13px;margin-bottom:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.shot img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:6px;cursor:zoom-in;background:#fff}
+.shot .none{border:1px dashed var(--line);border-radius:6px;padding:14px;color:var(--muted);font-size:13px;text-align:center}
+.mockcap{font-weight:700;font-size:13px;color:var(--muted);margin:4px 0 6px}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;z-index:100;overflow:auto;padding:44px 16px 16px;cursor:zoom-out}
+#lb.on{display:block}
+#lb img{display:block;max-width:none;max-height:none;width:auto;height:auto;margin:0 auto;background:#fff}
+#lb .lbbar{position:fixed;top:0;left:0;right:0;height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:rgba(0,0,0,.6);color:#fff;font-size:13px}
+.lanes .cell.mg{padding:0;gap:0}
+.half{padding:6px 8px 8px;display:flex;flex-direction:column;gap:5px;border-left:1px solid var(--line)}
+.half.as{border-bottom:0}
+.half.to{border-bottom:1px solid var(--line)}
+.lanes .ln.mg{grid-row:span 2}
+.half.as{background:var(--panel2)}
+.half.to{border-top:2px dashed var(--accent)}
+.half .hl{font-size:11px;font-weight:700;letter-spacing:.02em}
+.half.as .hl{color:var(--muted)}
+.half.to .hl{color:var(--accent)}
+.half .none{font-size:12px;color:var(--muted)}
+.half.as .step{opacity:.85}
+.lw3{border:0;border-radius:0}
+.lanes3{display:grid;min-width:1120px}
+.lanes3 .cn{grid-row:span 2}
+.lanes3 .ah{grid-column:span 2;font-weight:700;font-size:15px;padding:10px 12px;background:var(--panel2);border:1px solid var(--line);border-top:4px solid var(--accent);border-bottom:0;border-radius:10px 10px 0 0}
+.lanes3 .sh{font-size:12px;font-weight:700;padding:6px 10px;background:var(--panel2);border-bottom:1px solid var(--muted)}
+.lanes3 .sh.as{color:var(--muted);border-left:1px solid var(--line)}
+.lanes3 .sh.to{color:var(--accent);border-left:2px dashed var(--accent);border-right:1px solid var(--line)}
+.lanes3 .ph{display:flex;justify-content:center;align-items:center;padding:12px 0;border-bottom:1px solid var(--muted)}
+.lanes3 .ph.first{border-top:1px solid var(--muted)}
+.lanes3 .ah,.lanes3 .sh{text-align:center}
+.lanes3 .ah{border-bottom:1px solid var(--accent)}
+.step .sq{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.lanes3 .ph span{writing-mode:vertical-rl;text-orientation:upright;font-size:18px;font-weight:700;color:var(--text);letter-spacing:2px;white-space:nowrap}
+.lanes3 .half{border-bottom:1px solid var(--muted)}
+.lanes3 .half.as{border-left:1px solid var(--line);background:var(--panel2)}
+.lanes3 .half.to{border-top:0;border-left:2px dashed var(--accent);border-right:1px solid var(--line);background:var(--panel)}
+.lanes3 .half.last.as{border-bottom-left-radius:10px}
+.lanes3 .half.last.to{border-bottom-right-radius:10px}
+.lanes3 .ah{border-left:2px solid var(--accent);border-right:2px solid var(--accent)}
+.lanes3 .sh.as,.lanes3 .half.as{border-left:2px solid var(--accent)}
+.lanes3 .sh.to,.lanes3 .half.to{border-right:2px solid var(--accent)}
+.lanes3 .half.last{border-bottom:2px solid var(--accent)}
+
+/* 화면 */
+.scr-layout{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:start}
+.scr-list{position:sticky;top:130px;display:flex;flex-direction:column;gap:4px;max-height:calc(100vh - 150px);overflow:auto}
+.scr-list .grp{font-size:12px;color:var(--muted);margin:10px 0 2px;font-weight:600}
+.scr-list button{font:inherit;font-size:13.5px;text-align:left;border:1px solid transparent;background:transparent;color:var(--text);padding:6px 8px;border-radius:6px;cursor:pointer;display:flex;gap:6px;align-items:flex-start}
+.scr-list button:hover{background:var(--panel2)}
+.scr-list button.on{border-color:var(--accent);background:var(--accent-soft)}
+.scr-list button .dot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:8px;background:var(--line)}
+.scr-list button .dot.done{background:var(--accent)}
+.scr{display:none}
+.scr.on{display:block}
+.scr-head{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:6px}
+.scr-head h3{margin:0;font-size:18px}
+.chg-list{margin:6px 0 14px;padding-left:20px}
+.chg-list li{margin:2px 0}
+.ab{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ab>div>.lbl{font-weight:700;font-size:13px;margin-bottom:6px;display:flex;gap:6px;align-items:center}
+.ab .lbl.as{color:var(--muted)}
+.ab .lbl.to{color:var(--accent)}
+
+/* 화면 목업 */
+.mock{border:1px solid var(--mockline);border-radius:8px;background:var(--mock);font-size:12.5px;overflow:hidden}
+.mock .mt{background:var(--mockbar);padding:6px 10px;font-weight:700;font-size:12.5px;display:flex;justify-content:space-between;gap:8px}
+.mock .mt small{font-weight:400;color:var(--muted)}
+.mock .mb{padding:10px;display:flex;flex-direction:column;gap:8px}
+.mbar{display:flex;flex-wrap:wrap;gap:6px 12px;padding:7px 8px;border:1px solid var(--mockline);border-radius:6px;background:var(--panel2)}
+.mbar span b{font-weight:600;color:var(--muted);margin-right:4px}
+.fld{display:inline-block;min-width:60px;padding:1px 6px;border:1px solid var(--mockline);border-radius:4px;background:var(--panel)}
+.mbtns{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}
+.mbtns span{border:1px solid var(--mockline);border-radius:4px;padding:1px 8px;background:var(--panel)}
+.mform{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center}
+.mform .l{color:var(--muted);text-align:right;white-space:nowrap}
+.mgrid{overflow-x:auto}
+.mgrid table{border-collapse:collapse;width:100%;font-size:12px}
+.mgrid th,.mgrid td{border:1px solid var(--mockline);padding:3px 6px;white-space:nowrap;text-align:left}
+.mgrid th{background:var(--mockbar);font-weight:600}
+.mcards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mcard{border:1px solid var(--mockline);border-radius:6px;padding:8px;background:var(--panel)}
+.mcard.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.mcard b{display:block;margin-bottom:2px}
+.mchips{display:flex;flex-wrap:wrap;gap:6px}
+.mchips span{border:1px solid var(--mockline);border-radius:12px;padding:1px 9px;background:var(--panel)}
+.mnote{color:var(--muted);font-size:12px;border-left:3px solid var(--mockline);padding-left:8px}
+.mempty{padding:26px 12px;text-align:center;color:var(--muted);border:1px dashed var(--mockline);border-radius:6px}
+.msub{font-weight:700;color:var(--muted);font-size:12px;margin-top:2px}
+.mstat{display:flex;flex-direction:column;gap:4px}
+.mstat div{display:grid;grid-template-columns:150px 64px 1fr;gap:8px;align-items:center;padding:3px 6px;border:1px solid var(--mockline);border-radius:4px;background:var(--panel)}
+.st{font-size:11.5px;border-radius:9px;padding:0 6px;text-align:center}
+.st.ok{background:var(--new-soft);color:var(--new)}
+.st.no{background:var(--del-soft);color:var(--del)}
+.st.wait{background:var(--info-soft);color:var(--info)}
+.st.tbd{background:var(--chg-soft);color:var(--chg)}
+.mk{border-radius:3px;padding:0 3px}
+.mk.new{background:var(--new-soft);color:var(--new);outline:1px solid var(--new)}
+.mk.chg{background:var(--chg-soft);color:var(--chg);outline:1px solid var(--chg)}
+.mk.del{color:var(--del);text-decoration:line-through}
+
+/* 의견·질문 */
+.verdict{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.vopts{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
+.chip{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:16px;padding:3px 11px;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.qs-in{margin-top:14px}
+.qs-in>.ttl{font-weight:700;font-size:14px;margin-bottom:6px}
+.q{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--panel);margin-bottom:10px}
+.q.answered{border-left:4px solid var(--accent)}
+.q .qh{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:4px}
+.q .qid{font-weight:700;font-size:13px}
+.q .qt{font-weight:600}
+.q .ctx{font-size:13px;color:var(--muted);margin:3px 0 6px}
+.q .res{font-size:13.5px;border-left:4px solid var(--new);background:var(--new-soft);border-radius:6px;padding:7px 10px;margin:4px 0 8px}
+.q .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.q .row select{width:auto;font-size:13px;padding:3px 6px}
+.matrix{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+.matrix th,.matrix td{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left;vertical-align:middle}
+.matrix th{color:var(--muted);font-weight:600}
+.matrix select,.matrix input{font-size:13px;padding:3px 6px}
+.qgroup{margin-top:22px}
+.qgroup h3{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+/* 5절 확정내역 표 */
+table.rt td.ans{white-space:pre-line}
+table.rt tr.gh td{background:var(--panel2);font-weight:700}
+table.rt tr.hit td{background:var(--info-soft)!important;transition:background .2s}
+
+/* API 모드(배포 사본) — 접속·저장 상태, 새 소식, 댓글, 알림 */
+.apist{font-size:12px;line-height:20px;padding:0 8px;border-radius:10px;background:var(--new-soft);color:var(--new);white-space:nowrap}
+.apist.busy{background:var(--info-soft);color:var(--info)}
+.apist.fail{background:var(--chg-soft);color:var(--chg)}
+.apiwho{font-size:12.5px;color:var(--muted);white-space:nowrap}
+.apiwho a{cursor:pointer;margin-left:6px}
+#newsPanel{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:0 0 8px;padding:8px 10px;max-height:40vh;overflow:auto}
+#newsPanel .nh{display:flex;gap:8px;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px}
+#newsPanel .ni{display:block;width:100%;text-align:left;font:inherit;font-size:13px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--text);padding:5px 2px;cursor:pointer}
+#newsPanel .ni:hover{color:var(--accent)}
+#newsPanel .ni .muted{font-size:12px}
+.qlast{font-size:12px;color:var(--muted);margin-top:4px}
+details.cmt{margin-top:8px;border-top:1px dashed var(--line);padding-top:6px;font-size:13px}
+details.cmt summary{cursor:pointer;color:var(--muted)}
+details.cmt .ci{border-left:3px solid var(--info);background:var(--panel2);border-radius:6px;padding:5px 8px;margin:6px 0}
+details.cmt .ci.done{border-color:var(--line);opacity:.7}
+details.cmt .ci .cm{font-size:12px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+details.cmt .ci .ct{white-space:pre-wrap;word-break:break-word}
+details.cmt .cin{display:flex;gap:6px;align-items:flex-end;margin-top:6px}
+details.cmt .cin textarea{min-height:38px}
+details.cmt .cin .btn{white-space:nowrap}
+.btn.xs{font-size:11.5px;padding:0 7px}
+#login{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+#login .lg{background:var(--panel);border-radius:12px;padding:22px 24px;max-width:420px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+#login .lg h2{margin-bottom:8px}
+#login .lg .r{display:flex;gap:8px;margin-top:12px}
+#login .lg .msg{color:var(--del);font-size:13px;min-height:20px;margin-top:8px}
+#toasts{position:fixed;right:16px;bottom:16px;z-index:150;display:flex;flex-direction:column;gap:8px;max-width:min(440px,calc(100vw - 32px))}
+#toasts .tst{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--chg);border-radius:8px;padding:10px 12px;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+#toasts .tst.err{border-left-color:var(--del)}
+#toasts .tst .x{float:right;margin-left:8px}
+#toasts .tst .mine{white-space:pre-wrap;word-break:break-word;background:var(--panel2);border-radius:4px;padding:4px 6px;margin-top:4px;max-height:140px;overflow:auto}
+
+/* 흐름 */
+.flow{display:flex;flex-direction:column;gap:0;margin:8px 0}
+.fs{display:grid;grid-template-columns:120px 24px 1fr;gap:0 10px}
+.fs .when{font-size:13px;color:var(--muted);text-align:right;padding-top:9px;line-height:1.35}
+.fs .rail{position:relative}
+.fs .rail:before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--line)}
+.fs .rail i{position:absolute;left:5px;top:12px;width:14px;height:14px;border-radius:50%;background:var(--panel);border:2px solid var(--muted)}
+.fs .rail i.new{border-color:var(--new);background:var(--new-soft)}
+.fs .rail i.chg{border-color:var(--chg);background:var(--chg-soft)}
+.fs .body{padding:6px 0 14px}
+.fs .body .what{font-weight:600}
+.fs .body .det{font-size:13.5px;color:var(--muted)}
+.fs .body .links{margin-top:3px;display:flex;flex-wrap:wrap;gap:4px}
+.lnk{font-size:12px;border:1px solid var(--line);border-radius:10px;padding:0 8px;cursor:pointer;background:var(--panel);color:var(--accent)}
+.lnk:hover{border-color:var(--accent)}
+.lnk.q{color:var(--chg)}
+
+
+@media (max-width:900px){
+  .scr-layout{grid-template-columns:1fr}
+  .scr-list{position:static;max-height:none;flex-direction:row;flex-wrap:wrap}
+  .scr-list .grp{width:100%}
+  .ab{grid-template-columns:1fr}
+  section.sec{padding:18px 16px}
+  .fs{grid-template-columns:84px 24px 1fr}
+  .mcards{grid-template-columns:1fr}
+  .mstat div{grid-template-columns:110px 56px 1fr}
+}
+@media print{
+  .top,.no-print,.scr-list,.seg{display:none!important}
+  body{background:#fff;font-size:12px}
+  section.sec{break-inside:auto;border:0;padding:0;margin-top:18px}
+  .scr{display:block!important;break-inside:avoid;border-top:1px solid #ccc;padding-top:10px;margin-top:10px}
+  .scr-layout{display:block}
+  .pv{display:block!important}
+  .q{break-inside:avoid}
+  .lanes{min-width:0}
+  .lanes3{min-width:0}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="wrap">
+    <div class="titlebar">
+      <div class="grow">
+        <h1>2026학년도 졸업인증제도 개편에 따른 학사시스템 고도화<span class="tag chg" style="font-size:13px;vertical-align:4px">2차 자료 · 인터뷰 결과 반영(2026-11-18)</span></h1>
+        <div class="pinfo small muted"><span>프로젝트 시작일 <b>2026-11-17</b></span><span>종료일 <b>2026-12-11</b></span><span>현업 담당자 <b>손정의 과장</b> <a href="mailto:lovely2635@nonghyup.ac.kr">lovely2635@nonghyup.ac.kr</a></span></div>
+      </div>
+      <span class="dirty" id="dirtyMark" hidden>저장 안 된 변경 있음</span>
+      <button class="btn pri" data-act="datajs" title="지금 답변·추가 질문을 담은 졸업인증개편작업.data.js를 내려받습니다">저장</button>
+      <button class="btn" data-act="print">인쇄</button>
+      <button class="btn no-print" data-act="deploy" title="작업관리 폴더의 배포.bat을 실행합니다 — 폴더의 html·data.js·img를 papi.kr에 올립니다(복사·push 전에 확인). 처음 한 번 배포버튼_등록.reg 더블클릭 필요">배포</button>
+    </div>
+    <nav class="tabs" id="tabs">
+      <a href="#s-intro">1. 개요</a>
+      <a href="#s-proc">2. 프로세스 As-Is→To-Be</a>
+      <a href="#s-scr">3. 화면 As-Is→To-Be</a>
+      <a href="#s-q">4. 질문지</a>
+      <a href="#s-res">5. 결정사항·이슈</a>
+      <a href="#s-code">6. 첨부·코드표</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section class="sec" id="s-intro">
+  <h2>1. 개요</h2>
+  <div class="tblw"><table class="t small">
+    <tr><th style="width:110px">목적</th><td>교육·산업환경 변화에 맞춘 졸업인증제도 개편 — 농업·농촌·농협 현장 맞춤형 전문 인재 양성, 인증 트랙 다변화로 학생 선택권 확대</td></tr>
+    <tr><th>목표</th><td>금융·유통 등 전문자격증 취득, 수요 기반 개선으로 학생·취업처 만족도 제고, 자격 취득 활성화로 취업 경쟁력 강화</td></tr>
+    <tr><th>관련 규정</th><td>학사내규 제37조(졸업), 학칙 제50조(졸업)</td></tr>
+    <tr><th>적용 방법</th><td>자격증 취득(필수 3개) + 활동 분야(필수 2개, 선택 2개) 인정, 교과 학점 112학점 이상 취득</td></tr>
+    <tr><th>적용 대상</th><td><b>의무</b> 2027학년도 입학자(27학번)부터 전원 · <b>선택</b> 2026학년도 입학자(26학번)에 한해 기존 제도와 개정 제도 중 선택</td></tr>
+  </table></div>
+</section>
+
+<section class="sec" id="s-proc">
+  <h2>2. 업무 프로세스 As-Is → To-Be</h2>
+  <div class="both">
+    <div class="pv" id="pv-merge"><div class="legend" style="justify-content:flex-end;margin:0 0 8px"><span><span class="tag new">신규</span></span><span><span class="tag chg">변경</span></span><span><span class="tag keep">유지</span></span><span><span class="step out" style="padding:0 6px">점선</span> 시스템 밖</span></div><div class="lane-wrap lw3"><div class="lanes3" id="lanes-merge"></div></div></div>  </div>
+</section>
+
+<section class="sec" id="s-scr">
+  <h2>3. 화면 As-Is → To-Be</h2>
+  <p class="lead">화면마다 위에 개발 서버의 실제 화면과 실제 디자인에 맞춘 To-Be 화면을, 아래에 바뀌는 항목 요약을 두었습니다. 이미지를 누르면 크게 보입니다. 이번에 손대는 화면은 12개입니다(신규 6, 변경 6). To-Be 디자인과 목업은 인터뷰에서 확정한 내용을 반영했습니다. 화면에 나오는 값은 예시입니다.</p>
+  <div class="legend"><span><span class="mk new">새 항목</span></span><span><span class="mk chg">바뀌는 항목</span></span><span><span class="mk del">없어지는 항목</span></span></div>
+  <div class="scr-layout">
+    <div class="scr-list no-print" id="scrList"></div>
+    <div id="scrBody"></div>
+  </div>
+</section>
+
+<section class="sec" id="s-q">
+  <h2>4. 질문지</h2>
+  <p class="lead">아직 확정되지 않은 질문과 인터뷰 중 추가한 질문(U01…)입니다. 답과 메모는 이 브라우저에 바로 저장되고, 파일로 보관하려면 상단 「저장」을 누르세요. 상태를 「확정」으로 바꾸면 오늘 날짜가 확정일로 기록되고 질문이 5번 「결정사항·이슈」 아래 인터뷰 확정내역의 해당 날짜 블록으로 옮겨집니다.</p>
+  <div id="qBody"></div>
+  <details class="card no-print" id="addQBox" style="margin-top:12px">
+    <summary style="cursor:pointer"><b>질문 추가</b> <span class="small muted">인터뷰 중 새로 나온 질문을 U01, U02… 번호로 추가합니다. 선택한 그룹 끝에 「추가」 표시와 함께 나타나고 답변과 함께 저장(data.js)에 들어갑니다.</span></summary>
+    <div class="meta" style="margin-top:10px">
+      <div><label>그룹</label><select id="aqG"></select></div>
+      <div><label>유형</label><select id="aqType"><option value="single">하나 선택(single)</option><option value="multi">복수 선택(multi)</option><option value="text">서술형(text, 보기 없음)</option></select></div>
+    </div>
+    <div style="margin-top:8px"><label class="small muted">질문</label><textarea id="aqT" placeholder="질문 문구"></textarea></div>
+    <div style="margin-top:8px"><label class="small muted">설명(선택)</label><textarea id="aqC" placeholder="배경·예시 등"></textarea></div>
+    <div style="margin-top:8px" id="aqOWrap"><label class="small muted">보기 (한 줄에 하나)</label><textarea id="aqO" placeholder="예)&#10;동의&#10;수정 필요&#10;기타(메모)"></textarea></div>
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px"><button type="button" class="btn pri" id="aqSave">질문 추가</button><button type="button" class="btn" id="aqCancel" style="display:none">수정 취소</button><span class="small" id="aqMsg"></span></div>
+  </details>
+</section>
+
+<section class="sec" id="s-res">
+  <h2>5. 결정사항·이슈</h2>
+  <p class="lead">확정된 의사결정(K), 확정 대기(W), 기존 결함(D), 위험과 인터뷰 질문별 확정내역입니다. 확정 대기가 정해지면 상태를 「확정」으로 바꾸고 결정 내용을 K번호로 추가합니다. 일정·진행 현황은 작업계획(WBS)에서 관리합니다.</p>
+  <h3>확정된 의사결정 (K)</h3>
+  <div class="tblw"><table class="t small" id="decTable"></table></div>
+  <p class="small muted" id="decNote"></p>
+  <h3>확정 대기 (W)</h3>
+  <div class="tblw"><table class="t small" id="issueTable"></table></div>
+  <h3>기존 결함 (D — 변경영향도분석 06)</h3>
+  <div class="tblw"><table class="t small" id="defectTable"></table></div>
+  <h3>위험 관리</h3>
+  <div class="tblw"><table class="t small" id="riskTable"></table></div>
+  <h3>인터뷰 확정내역 (질문별)</h3>
+  <p class="small muted">인터뷰 회차(확정일)별로 확정된 질문을 쌓습니다 — 날짜 오름차순, 최신 회차가 맨 아래입니다. 번호 아래 W·D 태그는 그 질문으로 풀린 확정 대기 항목입니다. 답변 칸은 선택한 보기와 메모, 확정 결론은 질문에 정리된 결론(없으면 답변)입니다. 질문 문구는 인터뷰 당시 그대로이고, 「질문지로 되돌리기」를 누르면 확정이 취소되어 4번 질문지로 돌아갑니다.</p>
+  <div id="resBlocks"></div>
+</section>
+
+<section class="sec" id="s-code">
+  <h2>6. 첨부 — 코드표 (관리 화면 초기 등록값(안))</h2>
+  <p class="lead">인정 자격증·활동 항목 관리 화면(A12)의 초기 등록값(안)입니다. 학생은 자격증 신청 때 인정 자격증을, 활동 신청 때 활동 항목을 고르고, 담당자는 관리 화면에서 추가·수정합니다(P33). 등급 조건·특례② 인정 범위와 수상 가중치는 승인 담당자가 판단하고, 선택 활동은 항목(코드)당 1회만 인정합니다.</p>
+  <div class="no-print" style="margin-bottom:8px"><button class="btn" data-dl="code">코드표 내려받기(.csv)</button></div>
+  <div class="grid2" id="codeBody"></div>
+</section>
+
+</div>
+
+<div id="lb"><div class="lbbar"><span>원본 크기(100%) — 스크롤해서 보세요</span><span>닫기: 클릭 또는 Esc</span></div><img alt="확대 이미지"></div>
+<script src="졸업인증개편작업.data.js"></script>
+<script>
+/* ============================== 데이터 — 졸업인증개편작업.data.js 에서 읽음 ============================== */
+if(!window.INTERVIEW_DATA){
+  document.body.insertAdjacentHTML('afterbegin', '<div style="position:fixed;top:0;left:0;right:0;z-index:300;background:#c62828;color:#fff;padding:14px 16px;font-weight:700;text-align:center">데이터 파일(졸업인증개편작업.data.js)을 같은 폴더에 두세요. 파일이 있는데도 이 안내가 보이면 파일 내용(JSON 문법)을 확인하세요.</div>');
+  throw new Error('INTERVIEW_DATA 없음 — 졸업인증개편작업.data.js 를 같은 폴더에 두세요');
+}
+const {QGROUPS, SCREENS, PROC, SHOT_NOTE, CERTS, ACTCODES, IMGS} = window.INTERVIEW_DATA;
+const BASEQ = window.INTERVIEW_DATA.QUESTIONS;   // data.js의 정규 질문
+const QUESTIONS = BASEQ.slice();                 // 정규 질문 + 추가 질문(S.addQ) — applyAddQ()가 채움
+const DATA_HEAD = "// 졸업인증개편작업 데이터 파일 — 내용은 순수 JSON입니다(편집 시 JSON 문법 유지). HTML과 같은 폴더에 두세요.";
+/* API 모드 — data.js에 API 키(Apps Script 웹 앱 주소)가 있을 때만 켜진다. 웹게시.mjs가 배포 사본에만 넣으므로 로컬 file:// 원본은 지금과 같다 */
+const API = window.INTERVIEW_DATA.API || '';
+const APIMODE = !!API;
+function shotHtml(id){
+  const im = IMGS[id] || {}, nt = SHOT_NOTE[id] || {};
+  const one = (k, label, cls) => '<div class="shot"><div class="cap"><span class="tag '+cls+'">'+label+'</span>'+(k==='asis'?(nt.asiscap||'개발 서버 실제 화면(이름·학번 가림)'):'실제 시스템 디자인에 맞춘 개편 후 화면 — 주황 점선이 바뀌는 곳')+'</div>'+
+    (im[k] ? '<img src="'+im[k]+'" alt="'+id+' '+label+'" data-zoom>' : '<div class="none">'+esc(nt[k]||'준비 중')+'</div>')+'</div>';
+  return '<div class="shots">'+one('asis','As-Is 실제 화면','keep')+one('tobe','To-Be 디자인','new')+'</div><div class="mockcap">변경 요약(목업)</div>';
+}
+document.addEventListener('click', e=>{
+  const im = e.target.closest('img[data-zoom]');
+  const lb = document.getElementById('lb');
+  if(im){ lb.querySelector('img').src = im.src; lb.classList.add('on'); return; }
+  if(e.target.closest('#lb')) lb.classList.remove('on');
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.getElementById('lb').classList.remove('on'); });
+
+/* ============================== 코드표 ============================== */
+function renderCode(){
+  qs('#codeBody').innerHTML =
+    '<div><div class="msub" style="margin-bottom:4px">인정 자격증 목록 (학생이 신청 때 선택 · 등급 조건·특례②는 승인 때 담당자 판단)</div><div class="tblw"><table class="t"><thead><tr><th>코드</th><th>영역</th><th>자격증</th><th>등급 조건</th><th>특례</th></tr></thead><tbody>'+CERTS.map(c=>'<tr><td><b>'+c[0]+'</b></td><td class="small">'+esc(c[1])+'</td><td>'+esc(c[2])+'</td><td class="small">'+esc(c[3])+'</td><td>'+(c[4]?'<span class="tag info">'+c[4]+'</span>':'')+'</td></tr>').join('')+'</tbody></table></div></div>'+
+    '<div><div class="msub" style="margin-bottom:4px">활동 항목 (학생 활동 신청 화면의 목록 · 선택 활동은 항목당 1회)</div><div class="tblw"><table class="t"><thead><tr><th>코드</th><th>구분</th><th>활동</th></tr></thead><tbody>'+ACTCODES.map(a=>'<tr><td><b>'+a[0]+'</b></td><td>'+a[1]+'</td><td>'+esc(a[2])+'</td></tr>').join('')+'</tbody></table></div></div>';
+}
+function csv(rows){
+  return '﻿' + rows.map(r=>r.map(x=>{ x = String(x==null?'':x); return /[",\n]/.test(x) ? '"'+x.replace(/"/g,'""')+'"' : x; }).join(',')).join('\r\n');
+}
+document.addEventListener('click', e=>{
+  const b = e.target.closest('[data-dl]'); if(!b) return;
+  if(b.dataset.dl==='code'){
+    download('코드표_인정자격증_활동.csv', csv([['구분','코드','영역/구분','이름','등급 조건','특례']].concat(CERTS.map(c=>['자격증',c[0],c[1],c[2],c[3],c[4]]), ACTCODES.map(a=>['활동',a[0],a[1],a[2],'','']))), 'text/csv;charset=utf-8');
+  }
+});
+
+/* ============================== 상태 ============================== */
+const KEY = 'gradcert-interview-v2';
+let S = {meta:{}, q:{}, scr:{}, fb:{}, extra:'', addQ:[]};
+/* data.js에 보관된 답변(ANSWERS) — 이 브라우저(localStorage)에 저장된 것이 없을 때의 시작 상태 */
+function fileState(){ let a = {}; try{ a = JSON.parse(JSON.stringify(window.INTERVIEW_DATA.ANSWERS || {})); }catch(e){} return Object.assign({meta:{}, q:{}, scr:{}, fb:{}, extra:'', addQ:[]}, a); }
+/* API 모드(배포 사본)는 시트가 원본 — 이 브라우저(localStorage)의 옛 저장값을 읽지 않는다. 미전송 대기열은 apiReadPending()이 따로 읽는다 */
+function load(){ S = fileState(); if(!APIMODE){ try{ const v = localStorage.getItem(KEY); if(v){ const o = JSON.parse(v); S = Object.assign({meta:{}, q:{}, scr:{}, fb:{}, extra:'', addQ:[]}, o); } }catch(e){} } cleanS(); }
+/* 저장 데이터 정리 — id 없는 요소에서 생긴 S.q["undefined"] 키는 버린다. 확정일(dt)은 확정 처리(markDone)로만 기록한다 */
+function cleanS(){ if(!S.q || typeof S.q!=='object') S.q = {}; delete S.q['undefined']; delete S.q['']; if(!Array.isArray(S.addQ)) S.addQ = []; }
+let saveT;
+function save(){ if(APIMODE){ apiSave(); return; } clearTimeout(saveT); saveT = setTimeout(()=>{ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }, 200); setDirty(true); }
+/* 저장 안 된 변경 — 마지막 「저장」(data.js 내려받기) 이후 바뀐 것이 있는지. 이 탭 세션 기준(sessionStorage, 안 되면 메모리) */
+const DIRTY_KEY = KEY + '-dirty';
+let dirty = false;
+try{ dirty = sessionStorage.getItem(DIRTY_KEY)==='1'; }catch(e){}
+function setDirty(v){ dirty = !!v; try{ if(dirty) sessionStorage.setItem(DIRTY_KEY, '1'); else sessionStorage.removeItem(DIRTY_KEY); }catch(e){} paintDirty(); }
+function paintDirty(){ const m = document.getElementById('dirtyMark'); if(m) m.hidden = !dirty; }
+window.addEventListener('beforeunload', e=>{
+  let msg;
+  if(APIMODE){ const n = apiDirtyKeys().length; if(!n) return; msg = '아직 시트에 보내지 못한 변경이 '+n+'건 있습니다. 이 브라우저에 남겨 두었다가 다음에 열 때 보냅니다.'; }
+  else { if(!dirty) return; msg = '저장하지 않은 변경이 있습니다. 상단 「저장」으로 data.js를 내려받은 뒤 닫으세요.'; }
+  e.preventDefault(); e.returnValue = msg; return msg; });
+const qs = (sel, el=document) => el.querySelector(sel);
+const qsa = (sel, el=document) => [...el.querySelectorAll(sel)];
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const QMAP = Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
+const SMAP = Object.fromEntries(SCREENS.map(s=>[s.id,s]));
+const KIND = {new:['신규','new'], chg:['변경','chg'], keep:['유지','keep'], opt:['선택','info'], off:['제외','red']};
+function qState(id){ if(!id || !QMAP[id]) return {o:[], m:{}, a:'', st:''}; return S.q[id] || (S.q[id] = {o:[], m:{}, a:'', st:''}); }
+/* 추가 질문(S.addQ)을 정규 질문 뒤에 붙여 QUESTIONS·QMAP에 반영. data.js에 같은 id가 이미 있으면(데이터 파일로 합친 경우) 건너뜀 */
+function applyAddQ(){
+  const base = new Set(BASEQ.map(q=>q.id));
+  const add = (S.addQ||[]).filter(q=>q && q.id && !base.has(q.id) && QGROUPS.some(g=>g.id===q.g)).map(q=>Object.assign({}, q, {u:1}));
+  QUESTIONS.length = 0; QUESTIONS.push(...BASEQ, ...add);
+  Object.keys(QMAP).forEach(k=>delete QMAP[k]); QUESTIONS.forEach(q=>QMAP[q.id] = q);
+}
+/* 확정일(S.q[id].dt)이 없는 질문 — 4절 질문지 카드. 있으면 5절 인터뷰 결과의 해당 날짜 블록 */
+function isOpen(q){ const x = q && S.q[q.id]; return !(x && x.dt); }
+const plainT = s => String(s==null?'':s).replace(/<[^>]*>/g, '');
+function answered(id){ const x = S.q[id]; if(!x) return false; return (x.o && x.o.length) || (x.a && x.a.trim()) || (x.m && Object.values(x.m).some(v=>v && (v.o || v.d))); }
+
+/* ============================== 목업 ============================== */
+function fmt(s){
+  s = String(s);
+  const c = s[0];
+  if(c==='+') return '<span class="mk new">'+s.slice(1)+'</span>';
+  if(c==='~') return '<span class="mk chg">'+s.slice(1)+'</span>';
+  if(c==='!') return '<span class="mk del">'+s.slice(1)+'</span>';
+  return s;
+}
+function mock(m){
+  let h = '<div class="mock"><div class="mt"><span>'+esc(m.title)+'</span><small>'+esc(m.path||'')+'</small></div><div class="mb">';
+  for(const b of m.b){
+    if(b.t==='empty') h += '<div class="mempty">'+b.s+'</div>';
+    else if(b.t==='bar') h += '<div class="mbar">'+b.f.map(([l,v])=>'<span>'+(l?'<b>'+fmt(l)+'</b>':'')+'<span class="fld">'+fmt(v)+'</span></span>').join('')+'</div>';
+    else if(b.t==='btn') h += '<div class="mbtns">'+b.b.map(x=>'<span>'+fmt(x)+'</span>').join('')+'</div>';
+    else if(b.t==='form') h += '<div class="mform">'+b.f.map(([l,v])=>'<span class="l">'+fmt(l)+'</span><span>'+fmt(v)+'</span>').join('')+'</div>';
+    else if(b.t==='grid') h += '<div class="mgrid"><table><tr>'+b.h.map(x=>'<th>'+fmt(x)+'</th>').join('')+'</tr>'+b.r.map(r=>'<tr>'+r.map(x=>'<td>'+fmt(x)+'</td>').join('')+'</tr>').join('')+'</table></div>';
+    else if(b.t==='cards') h += '<div class="mcards">'+b.c.map(x=>'<div class="mcard'+(x.on?' on':'')+'"><b>'+x.h+'</b>'+x.d+'</div>').join('')+'</div>';
+    else if(b.t==='chips') h += '<div class="mchips">'+b.c.map(x=>'<span>'+x+'</span>').join('')+'</div>';
+    else if(b.t==='note') h += '<div class="mnote">'+b.s+'</div>';
+    else if(b.t==='check') h += '<div class="mk new" style="padding:4px 6px">'+b.s+'</div>';
+    else if(b.t==='sub') h += '<div class="msub">'+fmt(b.s)+'</div>';
+    else if(b.t==='stat') h += '<div class="mstat">'+b.r.map(([a,st,d])=>'<div><span>'+a+'</span><span class="st '+st+'">'+({ok:'충족',no:'미충족',wait:'승인 대기',tbd:'확정 대기'}[st])+'</span><span>'+d+'</span></div>').join('')+'</div>';
+  }
+  return h + '</div></div>';
+}
+
+/* ============================== 질문 위젯 ============================== */
+function qWidget(id){
+  const q = QMAP[id]; if(!q) return '';
+  const g = QGROUPS.find(x=>x.id===q.g);
+  let h = '<div class="q" data-q="'+id+'">';
+  h += '<div class="qh"><span class="qid">'+id+'</span>'+(q.p?'<span class="tag red">우선</span>':'')+'<span class="tag info">'+esc(g.name)+'</span>'+(q.ref?'<span class="tag keep">'+esc(q.ref)+'</span>':'')+(q.u?'<span class="tag new">추가</span>':'')+(q.u && apiCanEditQ(id)?'<span class="no-print" style="margin-left:auto;display:inline-flex;gap:4px"><button type="button" class="btn" data-uq-edit="'+id+'">수정</button><button type="button" class="btn" data-uq-del="'+id+'">삭제</button></span>':'')+'</div>';
+  h += '<div class="qt">'+esc(q.t)+'</div>';
+  if(q.c) h += '<div class="ctx">'+esc(q.c)+'</div>';
+  if(q.res) h += '<div class="res">'+esc(q.res)+'</div>';
+  if(q.type==='matrix'){
+    h += '<table class="matrix"><tr><th>항목</th><th>처리 주체</th><th>확인 부서</th></tr>';
+    q.rows.forEach((r,i)=>{
+      h += '<tr><td>'+esc(r)+'</td><td><select data-mx="'+i+'" data-k="o"><option value=""></option>'+q.o.map(o=>'<option>'+esc(o)+'</option>').join('')+'</select></td><td><input type="text" data-mx="'+i+'" data-k="d" placeholder="확인 부서"></td></tr>';
+    });
+    h += '</table>';
+  } else if(q.type!=='text'){
+    h += '<div class="vopts">'+q.o.map(o=>'<button type="button" class="chip" data-opt="'+esc(o)+'">'+esc(o)+'</button>').join('')+'</div>';
+    if(q.type==='multi') h += '<div class="small muted" style="margin-top:-4px">복수 선택</div>';
+  }
+  h += '<textarea data-a placeholder="답변·메모 (현업 설명, 예외, 근거 자료 등)"></textarea>';
+  h += '<div class="row"><label class="small muted">상태</label><select data-st><option value="">-</option><option>확정</option><option>추가 확인</option><option>보류</option></select><button type="button" class="btn pri no-print" data-done="'+id+'" style="display:none">확정 처리 → 5번 확정내역으로</button></div>';
+  if(APIMODE) h += '<div class="qlast" data-qlast></div>'+cmtWidget('Q:'+id);
+  return h + '</div>';
+}
+function paintQ(el){
+  const id = el.dataset.q; if(!id || !QMAP[id]) return;
+  const x = qState(id), q = QMAP[id];
+  qsa('.chip', el).forEach(c=>c.classList.toggle('on', x.o.includes(c.dataset.opt)));
+  const ta = qs('textarea[data-a]', el); if(ta !== document.activeElement) ta.value = x.a || '';
+  const st = qs('select[data-st]', el); st.value = x.st || '';
+  const dn = qs('[data-done]', el); if(dn) dn.style.display = x.st==='확정' && !x.dt && canDone() ? '' : 'none';
+  const ql = qs('[data-qlast]', el); if(ql) ql.textContent = apiLastText(SV.q[id]);
+  if(q.type==='matrix') qsa('[data-mx]', el).forEach(inp=>{ if(inp===document.activeElement) return; const r = x.m[inp.dataset.mx] || {}; inp.value = r[inp.dataset.k] || ''; });
+  el.classList.toggle('answered', !!answered(id));
+}
+function syncQ(id){ qsa('.q[data-q="'+id+'"]').forEach(paintQ); qsa('[data-qdot="'+id+'"]').forEach(d=>d.classList.toggle('done', !!answered(id))); save(); }
+document.addEventListener('click', e=>{
+  const chip = e.target.closest('.q .chip');
+  if(chip){
+    const el = chip.closest('.q[data-q]'), id = el && el.dataset.q, q = QMAP[id]; if(!q) return;
+    const x = qState(id), v = chip.dataset.opt;
+    if(q.type==='multi'){ x.o = x.o.includes(v) ? x.o.filter(a=>a!==v) : x.o.concat(v); }
+    else { x.o = x.o[0]===v ? [] : [v]; }
+    if(!x.st && x.o.length) x.st = '확정';
+    syncQ(id); return;
+  }
+});
+document.addEventListener('input', e=>{
+  const el = e.target.closest('.q[data-q]'); if(!el) return;
+  const id = el.dataset.q; if(!QMAP[id]) return;
+  if(e.target.matches('[data-cin]')) return;   // 댓글 입력칸은 답이 아님
+  const x = qState(id);
+  if(e.target.matches('textarea[data-a]')) x.a = e.target.value;
+  else if(e.target.matches('[data-mx]')){ const i = e.target.dataset.mx; x.m[i] = x.m[i] || {}; x.m[i][e.target.dataset.k] = e.target.value; }
+  else if(e.target.matches('select[data-st]')){ x.st = e.target.value; if(x.st==='확정' && canDone()){ markDone(id); return; } }
+  syncQ(id);
+});
+document.addEventListener('change', e=>{
+  const el = e.target.closest('.q[data-q]'); if(!el || !QMAP[el.dataset.q]) return;
+  if(e.target.matches('select')){ const id = el.dataset.q, x = qState(id);
+    if(e.target.matches('[data-st]')){ x.st = e.target.value; if(x.st==='확정' && canDone()){ markDone(id); return; } }
+    else if(e.target.matches('[data-mx]')){ const i = e.target.dataset.mx; x.m[i] = x.m[i] || {}; x.m[i][e.target.dataset.k] = e.target.value; }
+    syncQ(id); }
+});
+
+/* 의견(화면·프로세스·흐름) 위젯 */
+const VOPT = ['이대로 좋음','일부 수정 필요','다시 논의 필요'];
+function fbWidget(key, label){
+  return '<div class="verdict" data-fbkey="'+key+'"><div class="small" style="font-weight:700">'+esc(label||'현업 의견')+'</div><div class="vopts">'+VOPT.map(v=>'<button type="button" class="chip fbchip" data-v="'+v+'">'+v+'</button>').join('')+'</div><textarea data-fbm placeholder="수정할 점, 현업에서 실제로 하는 방식, 빠진 항목 등"></textarea>'+(APIMODE?'<div class="qlast" data-fblast></div>':'')+'</div>';
+}
+function paintFb(el){
+  const k = el.dataset.fbkey, x = S.fb[k] || {};
+  qsa('.fbchip', el).forEach(c=>c.classList.toggle('on', x.v===c.dataset.v));
+  const ta = qs('textarea', el); if(ta!==document.activeElement) ta.value = x.m || '';
+  const fl = qs('[data-fblast]', el); if(fl) fl.textContent = apiLastText(SV.fb[k]);
+}
+document.addEventListener('click', e=>{
+  const c = e.target.closest('.fbchip'); if(!c) return;
+  const el = c.closest('[data-fbkey]'), k = el.dataset.fbkey; S.fb[k] = S.fb[k] || {};
+  S.fb[k].v = S.fb[k].v===c.dataset.v ? '' : c.dataset.v;
+  qsa('[data-fbkey="'+k+'"]').forEach(paintFb); markScrDots(); save();
+});
+document.addEventListener('input', e=>{
+  if(!e.target.matches('[data-fbm]')) return;
+  const el = e.target.closest('[data-fbkey]'), k = el.dataset.fbkey; S.fb[k] = S.fb[k] || {}; S.fb[k].m = e.target.value; markScrDots(); save();
+});
+
+/* ============================== 렌더 ============================== */
+function goScreen(id){
+  qsa('.scr').forEach(s=>s.classList.toggle('on', s.dataset.id===id));
+  qsa('#scrList button').forEach(b=>b.classList.toggle('on', b.dataset.id===id));
+  const sec = qs('#s-scr'); window.scrollTo({top: sec.getBoundingClientRect().top + window.scrollY - 110, behavior:'smooth'});
+}
+/* 질문 링크 — 질문지(4절)에 있으면 카드로, 인터뷰 결과(5절)에 있으면 표의 해당 행으로(강조) */
+function goQ(id){
+  const card = qs('#qBody .q[data-q="'+id+'"]');
+  const el = card || qs('#resBlocks tr[data-resq="'+id+'"]'); if(!el) return;
+  window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 130, behavior:'smooth'});
+  if(card){ card.style.outline = '2px solid var(--chg)'; setTimeout(()=>card.style.outline='', 1600); }
+  else { el.classList.add('hit'); setTimeout(()=>{ const r = qs('#resBlocks tr[data-resq="'+id+'"]'); if(r) r.classList.remove('hit'); }, 1600); }
+}
+document.addEventListener('click', e=>{
+  const g = e.target.closest('[data-goscr]'); if(g){ goScreen(g.dataset.goscr); return; }
+  const q = e.target.closest('[data-goq]'); if(q){ goQ(q.dataset.goq); }
+});
+
+function renderLanes(which){
+  const P = PROC[which], el = qs('#lanes-'+which);
+  el.style.gridTemplateColumns = '130px repeat('+PROC.phases.length+', minmax(160px,1fr))';
+  let h = '<div class="hd" style="border-left:0"></div>' + PROC.phases.map(p=>'<div class="hd">'+p+'</div>').join('');
+  for(const ln of P.lanes){
+    h += '<div class="ln">'+ln+'</div>';
+    P.cells[ln].forEach(cell=>{
+      h += '<div class="cell">'+cell.map(st=>{
+        const cls = st.m==='new'?' new':st.m==='chg'?' chg':st.m==='out'?' out':'';
+        const tag = st.m==='new'?'<span class="tag new">신규</span> ':st.m==='chg'?'<span class="tag chg">변경</span> ':'';
+        return '<div class="step'+cls+'">'+(st.org?'<div class="org">['+esc(st.org)+']</div>':'')+tag+esc(st.t)+(st.s?'<br><span class="go" data-goscr="'+st.s+'">'+st.s+' '+esc(SMAP[st.s].name)+' →</span>':'')+((st.q||[]).filter(q=>QMAP[q]).length?'<div class="sq">'+st.q.filter(q=>QMAP[q]).map(q=>'<span class="lnk q" data-goq="'+q+'">'+q+'</span>').join('')+'</div>':'')+'</div>';
+      }).join('')+'</div>';
+    });
+  }
+  el.innerHTML = h;
+}
+function stepHtml(st){
+  const cls = st.m==='new'?' new':st.m==='chg'?' chg':st.m==='out'?' out':'';
+  const tag = st.m==='new'?'<span class="tag new">신규</span> ':st.m==='chg'?'<span class="tag chg">변경</span> ':'';
+  return '<div class="step'+cls+'">'+(st.org?'<div class="org">['+esc(st.org)+']</div>':'')+tag+esc(st.t)+(st.s?'<br><span class="go" data-goscr="'+st.s+'">'+st.s+' '+esc(SMAP[st.s].name)+' →</span>':'')+((st.q||[]).filter(q=>QMAP[q]).length?'<div class="sq">'+st.q.filter(q=>QMAP[q]).map(q=>'<span class="lnk q" data-goq="'+q+'">'+q+'</span>').join('')+'</div>':'')+'</div>';
+}
+function renderMerged(){
+  const el = qs("#lanes-merge"), A = PROC.asis, T = PROC.tobe;
+  const lanes = T.lanes.slice(); A.lanes.forEach(l=>{ if(!lanes.includes(l)) lanes.push(l); });
+  const GAP = "<div class=\"gp\"></div>", n = PROC.phases.length;
+  el.style.gridTemplateColumns = "40px " + lanes.map(()=>"minmax(150px,1fr) minmax(150px,1fr)").join(" 16px ");
+  const cell = (c, cls) => "<div class=\"half "+cls+"\">"+(c&&c.length?c.map(stepHtml).join(""):"<span class=\"none\">—</span>")+"</div>";
+  let h = "<div class=\"cn\"></div>" + lanes.map(ln=>"<div class=\"ah\">"+esc(ln)+"</div>").join(GAP)
+        + lanes.map(()=>"<div class=\"sh as\">As-Is</div><div class=\"sh to\">To-Be</div>").join(GAP);
+  PROC.phases.forEach((p,i)=>{ const last = i===n-1 ? " last" : "";
+    h += "<div class=\"ph"+(i===0?" first":"")+"\"><span>"+p+"</span></div>" + lanes.map(ln=>cell((A.cells[ln]||[])[i],"as"+last)+cell((T.cells[ln]||[])[i],"to"+last)).join(GAP);
+  });
+  el.innerHTML = h;
+}
+function renderProc(){
+  renderMerged();
+}
+function renderScreens(){
+  let list = '';
+  for(const grp of [['담당','담당자 화면'],['학생','학생 화면']]){
+    list += '<div class="grp">'+grp[1]+'</div>';
+    SCREENS.filter(s=>s.who===grp[0]).forEach(s=>{
+      list += '<button data-id="'+s.id+'"><span class="dot" data-scrdot="'+s.id+'"></span><span><span class="tag '+KIND[s.kind][1]+'">'+KIND[s.kind][0]+'</span> '+esc(s.name)+'</span></button>';
+    });
+  }
+  qs('#scrList').innerHTML = list;
+  qs('#scrBody').innerHTML = SCREENS.map((s,i)=>
+    '<div class="scr'+(i===0?' on':'')+'" data-id="'+s.id+'">'+
+    '<div class="scr-head"><span class="muted small">'+s.id+'</span><h3>'+esc(s.name)+'</h3><span class="tag '+KIND[s.kind][1]+'">'+KIND[s.kind][0]+'</span><span class="tag info">'+(s.who==='학생'?'학생':'담당자')+'</span><span class="tag keep">오픈 '+s.stage+'</span>'+(s.code?'<span class="tag keep">'+esc(s.code)+'</span>':'')+'<span class="tag keep">'+s.fn+'</span></div>'+
+    '<p>'+esc(s.sum)+'</p>'+
+    '<ul class="chg-list">'+s.changes.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>'+
+    shotHtml(s.id)+'<div class="ab"><div><div class="lbl as">As-Is (현재)</div>'+mock(s.asis)+'</div><div><div class="lbl to">To-Be (개편 후)</div>'+mock(s.tobe)+'</div></div>'+
+    fbWidget('scr-'+s.id, '이 화면에 대한 현업 의견')+cmtWidget('SCR:'+s.id)+
+    (s.qs.length?'<div class="qs-in"><div class="ttl">이 화면 관련 질문 <span class="small muted" style="font-weight:400">— 누르면 질문지(4번) 또는 인터뷰 확정내역(5번)의 해당 질문으로 갑니다</span></div><ul style="margin:0;padding-left:18px" class="small">'+s.qs.filter(id=>QMAP[id]).map(id=>'<li><span class="lnk q" data-goq="'+id+'">'+id+'</span> '+esc(plainT(QMAP[id].t))+'</li>').join('')+'</ul></div>':'')+
+    '</div>').join('');
+  qsa('#scrList button').forEach(b=>b.onclick=()=>goScreen(b.dataset.id));
+  qs('#scrList button').classList.add('on');
+}
+function markScrDots(){
+  SCREENS.forEach(s=>{ const f = S.fb['scr-'+s.id]; const d = qs('[data-scrdot="'+s.id+'"]'); if(d) d.classList.toggle('done', !!(f && (f.v || (f.m||'').trim()))); });
+}
+function flowLinks(st){
+  return (st.s||[]).map(s=>'<span class="lnk" data-goscr="'+s+'">'+s+' '+esc(SMAP[s].name)+'</span>').join('') + (st.q||[]).map(q=>'<span class="lnk q" data-goq="'+q+'">'+q+'</span>').join('');
+}
+function renderQ(){
+  const open = QUESTIONS.filter(isOpen);
+  qs('#qBody').innerHTML = open.length ? open.map(q=>qWidget(q.id)).join('') : '<p class="small muted">남은 질문이 없습니다. 새 질문은 아래 「질문 추가」로 넣으세요.</p>';
+  qsa('#qBody [data-cmt]').forEach(paintCmt);
+  renderResults();
+}
+/* 5절 「인터뷰 결과」 — 확정일(S.q[id].dt)별 블록, 날짜 오름차순(최신이 맨 아래). 읽기 전용 */
+function ansText(q){
+  const x = S.q[q.id] || {}, parts = [];
+  if(x.o && x.o.length) parts.push(x.o.join(', '));
+  if(q.type==='matrix' && x.m){ const mm = (q.rows||[]).map((r,i)=>{ const v = x.m[i] || {}; return v.o || v.d ? r+': '+(v.o||'')+(v.d?' ('+v.d+')':'') : ''; }).filter(Boolean); if(mm.length) parts.push(mm.join('\n')); }
+  if(x.a && x.a.trim()) parts.push(x.a.trim());
+  return parts.join(' / ');
+}
+const ST_TAG = {'확정':'new','추가 확인':'chg','보류':'red'};
+function renderResults(){
+  const el = qs('#resBlocks'); if(!el) return;
+  const done = QUESTIONS.filter(q=>!isOpen(q));
+  const dates = [...new Set(done.map(q=>S.q[q.id].dt))].sort();
+  el.innerHTML = dates.length ? dates.map(d=>{
+    const qd = done.filter(q=>S.q[q.id].dt===d);
+    const head = '<div class="resblk" data-dt="'+esc(d)+'"><h3>'+esc(String(d).replace(/-/g,'.'))+' 인터뷰 확정내역</h3>';
+    if(!qd.length) return head+'<p class="small muted">이 날짜에 확정된 질문이 없습니다.</p></div>';
+    return head+'<div class="tblw"><table class="t small rt"><thead><tr><th>번호</th><th>질문</th><th>답변</th><th>확정 결론</th><th>상태</th></tr></thead><tbody>'+
+      QGROUPS.map(g=>{ const qq = qd.filter(q=>q.g===g.id); if(!qq.length) return '';
+        return '<tr class="gh"><td colspan="5">'+esc(g.name)+'</td></tr>'+
+          qq.map(q=>{ const x = S.q[q.id], a = ansText(q);
+            const res = q.res ? esc(q.res) : (a ? esc(a) : '<span class="muted">—</span>');
+            return '<tr data-resq="'+q.id+'"><td style="white-space:nowrap"><b>'+q.id+'</b>'+(q.u?' <span class="tag new">추가</span>':'')+(q.w?'<br><span class="tag keep" title="이 질문으로 풀린 확정 대기 항목">'+esc(q.w)+'</span>':'')+'</td><td>'+esc(plainT(q.t))+'</td><td class="ans">'+(a?esc(a):'<span class="muted">—</span>')+'</td><td class="ans">'+res+'</td><td style="white-space:nowrap">'+(x.st?'<span class="tag '+(ST_TAG[x.st]||'keep')+'">'+esc(x.st)+'</span>':'<span class="muted">-</span>')+(canDone() && !isFixed(q.id)?'<br><button type="button" class="btn no-print" data-undo="'+q.id+'" style="font-size:11.5px;padding:1px 7px;margin-top:4px">질문지로 되돌리기</button>':'')+'</td></tr>'; }).join('');
+      }).join('')+'</tbody></table></div></div>';
+  }).join('') : '<p class="small muted">아직 확정된 질문이 없습니다.</p>';
+}
+/* ============================== 결정사항·이슈(5절) — 작업계획에서 옮긴 표 ============================== */
+/* 새 키가 없는 옛 data.js로 열어도 이 표들만 비고 나머지는 그대로 동작하게 기본값으로 읽는다 */
+const DECISIONS = window.INTERVIEW_DATA.DECISIONS || {rows:[], note:''};
+const ISSUES = window.INTERVIEW_DATA.ISSUES || [];
+const DEFECTS = window.INTERVIEW_DATA.DEFECTS || [];
+const RISKS = window.INTERVIEW_DATA.RISKS || [];
+/* 데이터의 **굵게**·`코드` 표기 — esc 먼저 한 뒤 태그로 바꾼다 */
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`([^`]+)`/g, '<code>$1</code>');
+/* 출처 칸의 P번호 — 있는 질문이면 질문으로 가는 링크 */
+const pLinks = h => h.replace(/\bP\d{2}\b/g, id => QMAP[id] ? '<span class="lnk q" data-goq="'+id+'">'+id+'</span>' : id);
+const STATE_TAG = {'확정':'new', '대기':'chg'};
+const stTag = s => '<span class="tag '+(STATE_TAG[s]||'keep')+'">'+esc(s)+'</span>';
+function tbl(head, rows, cell){
+  return '<thead><tr>'+head.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map((c,i)=>'<td>'+cell(c,i,r)+'</td>').join('')+'</tr>').join('')+'</tbody>';
+}
+function renderDecisions(){
+  qs('#decTable').innerHTML = tbl(['#','결정','출처','반영 위치'], DECISIONS.rows, (c,i)=> i===0 ? '<b>'+esc(c)+'</b>' : i===2 ? pLinks(md(c)) : md(c));
+  qs('#decNote').innerHTML = md(DECISIONS.note);
+  qs('#issueTable').innerHTML = tbl(['#','항목','필요 세션','무엇을 확인하면 확정되나','확인처','상태'], ISSUES, (c,i)=> i===0 ? '<b>'+esc(c)+'</b>' : i===5 ? stTag(c) : md(c));
+  qs('#defectTable').innerHTML = tbl(['ID','결함','영향','처리 세션','상태'], DEFECTS, (c,i)=> i===0 ? '<b>'+esc(c)+'</b>' : i===4 ? stTag(c) : md(c));
+  qs('#riskTable').innerHTML = tbl(['위험','영향','대응'], RISKS, c=>md(c));
+}
+
+function today(){ const d = new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+/* 확정 처리 — 확정일 기록 후 질문지에서 빼서 결과의 해당 날짜 블록으로 */
+function markDone(id){
+  if(!QMAP[id] || !canDone()) return; const x = qState(id); if(x.dt) return;
+  x.st = '확정'; x.dt = today();
+  renderQ(); qsa('.q[data-q]').forEach(paintQ); save(); goQ(id);
+}
+/* 질문지로 되돌리기 — 확정 취소(확정일 제거). API 모드의 고정 질문(data.js에 확정일이 있음)은 되돌리지 않는다 — 로컬 data.js를 고친 뒤 배포 */
+function undoDone(id){
+  if(!QMAP[id] || !canDone() || isFixed(id)) return; const x = qState(id);
+  delete x.dt; if(x.st==='확정') x.st = '';
+  renderQ(); qsa('.q[data-q]').forEach(paintQ); save(); goQ(id);
+}
+document.addEventListener('click', e=>{
+  const d = e.target.closest('[data-done]'); if(d){ markDone(d.dataset.done); return; }
+  const u = e.target.closest('[data-undo]'); if(u){ undoDone(u.dataset.undo); }
+});
+
+/* ============================== 저장·인쇄 ============================== */
+function download(name, text, type){
+  const b = new Blob([text], {type}); const a = document.createElement('a');
+  a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+document.addEventListener('click', e=>{
+  const b = e.target.closest('[data-act]'); if(!b) return;
+  const act = b.dataset.act;
+  if(act==='datajs'){ download('졸업인증개편작업.data.js', buildDataJs(), 'text/javascript;charset=utf-8'); setDirty(false); }
+  else if(act==='print'){ window.print(); }
+  else if(act==='deploy'){ deployLocal(); }
+});
+/* 배포(로컬 원본 전용) — jeolup-run:deploy 프로토콜(배포버튼_등록.reg로 HKCU에 등록)이 작업관리\배포.bat을 실행한다.
+   배포는 폴더의 파일을 올리므로, 이 화면에서 바꾸고 「저장」하지 않은 내용은 올라가지 않는다 */
+function deployLocal(){
+  if(dirty && !confirm('저장 안 된 변경이 있습니다. 배포는 폴더의 졸업인증개편작업.data.js 파일을 올리므로, 이 화면의 변경은 「저장」으로 data.js를 내려받아 바꾼 뒤에야 올라갑니다.\n\n그래도 지금 폴더의 파일로 배포할까요?')) return;
+  location.href = 'jeolup-run:deploy';
+  toast('배포 창(cmd)을 엽니다. 브라우저가 「열까요?」를 물으면 허용하세요.<br>창이 뜨지 않으면 작업관리 폴더의 <b>배포버튼_등록.reg</b>를 한 번 더블클릭해 등록하세요. <b>배포.bat</b>을 직접 더블클릭해도 됩니다.');
+}
+
+/* 메타 입력 */
+document.addEventListener('input', e=>{
+  if(e.target.matches('[data-meta]')){ S.meta[e.target.dataset.meta] = e.target.value; save(); }
+});
+
+/* ============================== 질문 추가(S.addQ) ============================== */
+let aqEdit = null;   // 수정 중인 추가 질문 id
+function nextUid(){ let n = 0; BASEQ.concat(S.addQ||[]).forEach(q=>{ const m = /^U(\d+)$/.exec((q&&q.id)||''); if(m) n = Math.max(n, +m[1]); }); return 'U'+String(n+1).padStart(2,'0'); }
+function aqTypeSync(){ qs('#aqOWrap').style.display = qs('#aqType').value==='text' ? 'none' : ''; }
+function resetAddQForm(){
+  aqEdit = null;
+  qs('#aqT').value = ''; qs('#aqC').value = ''; qs('#aqO').value = ''; qs('#aqType').value = 'single';
+  qs('#aqSave').textContent = '질문 추가'; qs('#aqCancel').style.display = 'none'; qs('#aqMsg').textContent = '';
+  aqTypeSync();
+}
+function initAddQ(){
+  qs('#aqG').innerHTML = QGROUPS.map(g=>'<option value="'+g.id+'">'+esc(g.name)+'</option>').join('');
+  qs('#aqType').onchange = aqTypeSync;
+  qs('#aqCancel').onclick = resetAddQForm;
+  qs('#aqSave').onclick = ()=>{
+    const g = qs('#aqG').value, t = qs('#aqT').value.trim(), c = qs('#aqC').value.trim(), type = qs('#aqType').value;
+    const o = qs('#aqO').value.split('\n').map(s=>s.trim()).filter(Boolean).filter((s,i,a)=>a.indexOf(s)===i);
+    const msg = qs('#aqMsg');
+    if(!t){ msg.textContent = '질문을 입력하세요.'; return; }
+    if(type!=='text' && !o.length){ msg.textContent = '보기를 한 줄에 하나씩 입력하세요.'; return; }
+    const nq = {id: aqEdit || (APIMODE ? '' : nextUid()), g, t};   // API 모드: 번호는 서버가 발급
+    if(c) nq.c = c;
+    if(type!=='single') nq.type = type;
+    if(type!=='text') nq.o = o;
+    const commit = (nq, editId)=>{
+      if(editId){
+        const i = S.addQ.findIndex(q=>q.id===editId); if(i<0){ resetAddQForm(); return; }
+        S.addQ[i] = nq;
+        const x = S.q[nq.id];   // 바뀐 보기·유형에 맞춰 기존 선택 정리 — API 모드는 save()가 이 답을 putAnswer로 따로 보낸다
+        if(x && x.o){ x.o = type==='text' ? [] : x.o.filter(v=>o.includes(v)); if(type==='single' && x.o.length>1) x.o = x.o.slice(0,1); }
+      } else S.addQ.push(nq);
+      const id = nq.id;
+      resetAddQForm(); applyAddQ(); renderQ(); save(); paintAll();
+      qs('#aqMsg').textContent = id+(S.addQ.some(q=>q.id===id)?' 저장했습니다.':'');
+      goQ(id);
+    };
+    if(APIMODE){ apiSaveQ(nq, aqEdit, commit); return; }
+    commit(nq, aqEdit);
+  };
+  aqTypeSync();
+}
+document.addEventListener('click', e=>{
+  const ed = e.target.closest('[data-uq-edit]');
+  if(ed){
+    const q = (S.addQ||[]).find(x=>x.id===ed.dataset.uqEdit); if(!q) return;
+    aqEdit = q.id;
+    qs('#aqG').value = q.g; qs('#aqT').value = q.t || ''; qs('#aqC').value = q.c || '';
+    qs('#aqType').value = q.type==='multi' || q.type==='text' ? q.type : 'single'; qs('#aqO').value = (q.o||[]).join('\n');
+    qs('#aqSave').textContent = q.id+' 수정 저장'; qs('#aqCancel').style.display = ''; qs('#aqMsg').textContent = '';
+    aqTypeSync();
+    const box = qs('#addQBox'); box.open = true; window.scrollTo({top: box.getBoundingClientRect().top + window.scrollY - 130, behavior:'smooth'});
+    return;
+  }
+  const del = e.target.closest('[data-uq-del]');
+  if(del){
+    const id = del.dataset.uqDel;
+    if(!confirm(id+' 추가 질문을 삭제할까요? 이 질문의 답변도 함께 지워집니다.')) return;
+    const commit = ()=>{
+      S.addQ = (S.addQ||[]).filter(q=>q.id!==id); delete S.q[id];
+      if(aqEdit===id) resetAddQForm();
+      applyAddQ(); renderQ(); save(); paintAll();
+    };
+    if(APIMODE){ apiDelQ(id, commit); return; }
+    commit();
+  }
+});
+/* 저장(데이터 파일) — 추가 질문을 각 그룹 끝의 정규 질문으로 합치고, 지금 답변(S)을 ANSWERS로 담은 data.js(같은 래퍼 형식) */
+function buildDataJs(){
+  const out = BASEQ.slice();
+  QUESTIONS.filter(q=>q.u).forEach(q=>{
+    const c = Object.assign({}, q); delete c.u;
+    let at = -1; out.forEach((x,i)=>{ if(x.g===c.g) at = i; });
+    out.splice(at<0 ? out.length : at+1, 0, c);
+  });
+  cleanS();
+  const qa = {}; out.forEach(q=>{ if(S.q[q.id]) qa[q.id] = S.q[q.id]; });   // 질문 순서대로, 없는 질문의 답은 버림
+  const ANSWERS = JSON.parse(JSON.stringify({meta: S.meta||{}, q: qa, scr: S.scr||{}, fb: S.fb||{}, extra: S.extra||''}));
+  const D = Object.assign({}, window.INTERVIEW_DATA, {QUESTIONS: out, ANSWERS});
+  return DATA_HEAD+'\nwindow.INTERVIEW_DATA = '+JSON.stringify(D, null, 1)+';\n';
+}
+
+function paintAll(){
+  qsa('[data-meta]').forEach(i=>i.value = (S.meta||{})[i.dataset.meta] || '');
+  qsa('.q[data-q]').forEach(paintQ);
+  qsa('[data-fbkey]').forEach(paintFb);
+  qsa('[data-cmt]').forEach(paintCmt);
+  markScrDots(); paintDirty();
+  if(APIMODE) apiPaintSt();
+}
+
+/* ============================== API 모드 — 구글 시트(Apps Script 웹 앱)와 읽고 쓰기 ==============================
+   시트가 원본이다. 브라우저(localStorage)에는 개인 코드·미전송 대기열·마지막으로 본 변경 번호만 둔다.
+   저장: save() → 바뀐 질문·의견만 골라 1초 모아 putAnswer/putFeedback(baseVer = 시트 ver). 못 보낸 것은 대기열에 남겨 다시 보낸다.
+   반영: 30초마다 changes. 보내지 않은 내 변경이 있는 칸은 덮어쓰지 않는다(보낼 때 충돌로 알림). 입력 중인 칸은 paintQ 규칙대로 건드리지 않는다. */
+const AK = {code:'gradcert-api-code', pend:'gradcert-api-pending', seen:'gradcert-api-seen'};
+const SV = {q:{}, fb:{}};          // 시트의 현재 값 {value, ver, by, at}
+const AQBY = {};                   // 추가 질문 작성자 — 수정·삭제 버튼은 작성자·dev에게만
+const CMT_OPEN = new Set();        // 펼쳐 둔 댓글 칸(다시 그려도 유지)
+const RE_FBK = /^scr-[A-Z]\d{2}$/;
+const U_FLOOR = BASEQ.reduce((n,q)=>{ const m = /^U(\d+)$/.exec(q.id||''); return m ? Math.max(n, +m[1]) : n; }, 0);   // addQ의 uFloor
+let ME = null, CODE = '', READY = false, LASTSEQ = 0, COMMENTS = [], NEWS = [];
+let flushT = null, retryT = null, flushing = false, netFail = false, renderLater = false;
+/* 확정 처리·되돌리기는 dev만(로컬 모드는 그대로) */
+const canDone = () => !APIMODE || !!(ME && ME.role==='dev');
+function apiCanEditQ(id){ return !APIMODE || !!(ME && (ME.role==='dev' || AQBY[id]===ME.name)); }
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k, v){ try{ if(v==null) localStorage.removeItem(k); else localStorage.setItem(k, v); }catch(e){} }
+const clone = v => v==null ? v : JSON.parse(JSON.stringify(v));
+/* 고정 질문 — 배포 사본 data.js의 원본 ANSWERS에 확정일(dt)이 있는 질문(S가 아니라 파일 값으로 판정).
+   확정내역에 data.js 값으로 늘 보이고, 시트 값은 받지도(state·changes) 보내지도(apiDirtyKeys) 않는다. 시트에 행이 남아 있어도 무시만 한다.
+   사이트에서 막 확정한 질문은 data.js에 받기 전까지 고정이 아니다. 판정 규칙은 시트답변받기.mjs buildFromExport와 같다 */
+const FIXA = clone((window.INTERVIEW_DATA.ANSWERS || {}).q || {});
+const isFixed = id => !!(APIMODE && FIXA[id] && FIXA[id].dt);
+function stab(v){ if(Array.isArray(v)) return '['+v.map(stab).join(',')+']'; if(v && typeof v==='object') return '{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+stab(v[k])).join(',')+'}'; return JSON.stringify(v===undefined ? null : v); }
+function normA(x){ x = x || {}; const v = {o: Array.isArray(x.o) ? x.o.slice() : [], m: x.m && typeof x.m==='object' ? clone(x.m) : {}, a: x.a || '', st: x.st || ''}; if(x.dt) v.dt = x.dt; return v; }
+function normF(x){ x = x || {}; return {v: x.v || '', m: x.m || ''}; }
+const NORM = {q: normA, fb: normF};
+function fmtAt(iso){ const d = new Date(iso); if(!iso || isNaN(d)) return ''; const p = n=>String(n).padStart(2,'0'); return p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes()); }
+function apiLastText(sv){ return sv && sv.by ? '최종 수정: '+sv.by+' · '+fmtAt(sv.at) : ''; }
+const ERRT = {bad_code:'개인 코드가 맞지 않습니다.', blocked:'틀린 코드가 많아 10분 동안 모든 접속이 막혔습니다. 잠시 뒤 다시 시도하세요.', forbidden:'권한이 없습니다(작성자 또는 개발 담당자만).', dt_dev_only:'확정일 기록·취소는 개발 담당자만 할 수 있습니다.', u_full:'추가 질문 번호(U99)가 다 찼습니다.', not_found:'이미 삭제되었거나 없는 항목입니다.', busy:'서버가 바쁩니다. 잠시 뒤 다시 보냅니다.', bad_question:'질문 내용이 올바르지 않습니다.', bad_text:'댓글이 비었거나 너무 깁니다(5,000자 이하).', bad_value:'값이 올바르지 않거나 너무 깁니다(5,000자 이하).', not_setup:'시트 설정(setup)이 끝나지 않았습니다.', server:'서버 오류가 났습니다.'};
+const errText = e => ERRT[e] || ('오류: '+e);
+const NETMSG = '서버에 연결하지 못했습니다. 인터넷 연결을 확인한 뒤 다시 누르세요.';
+
+/* 요청 — POST text/plain JSON(사전 요청 없음), 302 리다이렉트는 fetch가 따라간다. 연결 실패는 throw */
+async function api(op, body){
+  let r;
+  try{
+    const res = await fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(Object.assign({op, code: CODE}, body||{}))});
+    r = await res.json();
+  }catch(e){ netFail = true; apiPaintSt(); throw e; }
+  if(netFail){ netFail = false; apiPaintSt(); }
+  r = r || {ok:false, error:'server'};
+  if(r.error==='bad_code' && op!=='login' && READY) apiLogout('개인 코드가 더 이상 맞지 않습니다. 다시 넣어 주세요.');
+  return r;
+}
+
+/* 시트 값과 다른 질문·의견 = 보낼 것 */
+function apiDirtyKeys(){
+  if(!APIMODE || !READY) return [];
+  const out = [];
+  Object.keys(S.q).forEach(id=>{ if(!QMAP[id] || isFixed(id)) return; const sv = SV.q[id]; if(stab(normA(S.q[id])) !== stab(normA(sv && sv.value))) out.push(['q', id]); });
+  Object.keys(S.fb||{}).forEach(k=>{ if(!RE_FBK.test(k)) return; const sv = SV.fb[k]; if(stab(normF(S.fb[k])) !== stab(normF(sv && sv.value))) out.push(['fb', k]); });
+  return out;
+}
+function apiPersistPending(){
+  if(!APIMODE || !READY || !ME) return;
+  const p = {by: ME.name, q:{}, fb:{}}; let n = 0;
+  apiDirtyKeys().forEach(([k,id])=>{ const sv = SV[k][id]; p[k][id] = {value: NORM[k]((k==='q' ? S.q : S.fb)[id]), baseVer: sv ? sv.ver : 0}; n++; });
+  lsSet(AK.pend, n ? JSON.stringify(p) : null);
+}
+function apiReadPending(){ try{ const p = JSON.parse(lsGet(AK.pend) || 'null'); if(p && ME && p.by===ME.name) return p; }catch(e){} return {q:{}, fb:{}}; }
+function apiSave(){ if(!READY) return; apiPersistPending(); apiPaintSt(); clearTimeout(flushT); flushT = setTimeout(apiFlush, 1000); }
+
+async function apiFlush(){
+  clearTimeout(flushT); clearTimeout(retryT);
+  if(flushing || !READY) return;
+  flushing = true; apiPaintSt();
+  let retry = false;
+  const skip = new Set();
+  try{
+    for(let guard = 0; guard < 300; guard++){
+      const d = apiDirtyKeys().filter(([k,id])=>!skip.has(k+':'+id)); if(!d.length) break;
+      const [kind, k] = d[0], isQ = kind==='q', sv = SV[kind][k], baseVer = sv ? sv.ver : 0;
+      const value = NORM[kind]((isQ ? S.q : S.fb)[k]);
+      let r;
+      try{ r = await api(isQ ? 'putAnswer' : 'putFeedback', isQ ? {qid:k, value, baseVer} : {key:k, value, baseVer}); }
+      catch(e){ retry = true; break; }
+      if(!READY) break;   // 코드 무효로 로그아웃됨 — 대기열은 남아 있다
+      if(r.ok){ SV[kind][k] = {value, ver: r.ver, by: r.by, at: r.at}; apiPaintKey(kind, k); continue; }
+      if(r.conflict){ apiConflict(kind, k, value, r.current); skip.add(kind+':'+k); continue; }
+      if(r.error==='busy' || r.error==='server' || r.error==='blocked'){ retry = true; if(r.error==='blocked') toast(esc(errText('blocked')), 'err'); break; }
+      /* 되돌릴 수 없는 거부(dt_dev_only·bad_value 등) — 시트 값으로 되돌리고 알린다 */
+      toast('<b>'+esc(apiKeyLabel(kind, k))+'</b> 저장 거부 — '+esc(errText(r.error))+' 시트의 값으로 되돌렸습니다.<div class="mine">'+esc(apiValText(kind, k, value))+'</div>', 'err', true);
+      apiPaintKey(kind, k, apiAdopt(kind, k, sv)); skip.add(kind+':'+k);
+    }
+  } finally {
+    flushing = false; apiPersistPending(); apiPaintSt();
+    if(retry) retryT = setTimeout(apiFlush, 15000);
+  }
+}
+/* 시트 값(cur)을 이 화면의 값으로 — 바꾸기 전 값을 돌려준다 */
+function apiAdopt(kind, k, cur){
+  if(cur) SV[kind][k] = clone(cur); else delete SV[kind][k];
+  const tgt = kind==='q' ? S.q : S.fb, before = tgt[k];
+  tgt[k] = cur ? clone(cur.value) : NORM[kind]();
+  return before;
+}
+/* 한 칸 다시 그리기 — 확정일이 생기거나 없어지면 질문지(4절)↔확정내역(5절)을 옮겨야 하므로 전체를 다시 그린다 */
+function apiPaintKey(kind, k, before){
+  if(kind==='fb'){ qsa('[data-fbkey="'+k+'"]').forEach(paintFb); markScrDots(); return; }
+  const x = S.q[k] || {};
+  if(before !== undefined && !!(before && before.dt) !== !!x.dt){ apiRerenderQ(); return; }
+  qsa('.q[data-q="'+k+'"]').forEach(paintQ);
+  qsa('[data-qdot="'+k+'"]').forEach(d=>d.classList.toggle('done', !!answered(k)));
+  if(x.dt) renderResults();
+}
+/* 질문지 전체 다시 그리기 — 질문지 안에서 입력 중이면 입력칸을 벗어날 때까지 미룬다 */
+function apiRerenderQ(){
+  const a = document.activeElement, qb = qs('#qBody');
+  if(a && qb && qb.contains(a) && a.matches('textarea,input,select')){ renderLater = true; return; }
+  renderLater = false; applyAddQ(); renderQ(); paintAll();
+}
+document.addEventListener('focusout', e=>{ if(renderLater && e.target.closest && e.target.closest('#qBody')) setTimeout(()=>{ if(renderLater) apiRerenderQ(); }, 0); });
+function apiKeyLabel(kind, k){ return kind==='q' ? k : '화면 '+k.slice(4)+' 의견'; }
+function apiValText(kind, k, v){
+  v = v || {};
+  if(kind==='fb') return [v.v, v.m].filter(Boolean).join(' / ') || '(빈 값)';
+  const q = QMAP[k] || {}, parts = [];
+  if(v.o && v.o.length) parts.push(v.o.join(', '));
+  Object.keys(v.m||{}).forEach(i=>{ const r = v.m[i] || {}; if(r.o || r.d) parts.push(((q.rows||[])[i]||i)+': '+(r.o||'')+(r.d?' ('+r.d+')':'')); });
+  if(v.a && v.a.trim()) parts.push(v.a.trim());
+  if(v.st) parts.push('상태: '+v.st);
+  return parts.join('\n') || '(빈 값)';
+}
+function apiConflictToast(kind, k, mine, cur){
+  const who = cur && cur.by ? ' ('+esc(cur.by)+' · '+fmtAt(cur.at)+')' : '';
+  toast('<b>'+esc(apiKeyLabel(kind, k))+'</b> — 다른 사람이 먼저 바꿨습니다'+who+'. 화면을 시트 값으로 바꿨습니다. 내가 넣으려던 값은 아래와 같습니다. 필요하면 다시 넣어 주세요.<div class="mine">'+esc(apiValText(kind, k, mine))+'</div>', '', true);
+}
+function apiConflict(kind, k, mine, cur){ apiPaintKey(kind, k, apiAdopt(kind, k, cur)); apiConflictToast(kind, k, mine, cur); }
+function toast(html, cls, sticky){
+  let box = qs('#toasts'); if(!box){ box = document.createElement('div'); box.id = 'toasts'; box.className = 'no-print'; document.body.appendChild(box); }
+  const t = document.createElement('div'); t.className = 'tst '+(cls||''); t.innerHTML = '<button type="button" class="btn xs x">닫기</button>'+html;
+  t.querySelector('.x').onclick = ()=>t.remove(); box.appendChild(t);
+  if(!sticky) setTimeout(()=>t.remove(), 8000);
+}
+
+/* 추가 질문 — 번호는 서버가 발급, 작성자는 따로 기억(data.js에 넣는 질문 형식은 로컬과 같게 id·g·t·c·type·o만) */
+function apiStripQ(q){ AQBY[q.id] = q.by; const n = {id: q.id, g: q.g, t: q.t}; if(q.c) n.c = q.c; if(q.type && q.type!=='single') n.type = q.type; if(q.type!=='text') n.o = (q.o||[]).slice(); return n; }
+async function apiSaveQ(nq, editId, commit){
+  const msg = qs('#aqMsg'), btn = qs('#aqSave');
+  if(!READY){ msg.textContent = '접속한 뒤에 저장할 수 있습니다.'; return; }
+  const q = Object.assign({}, nq); delete q.id;
+  btn.disabled = true; msg.textContent = '보내는 중…';
+  try{
+    const r = editId ? await api('editQ', {id: editId, q}) : await api('addQ', {q, uFloor: U_FLOOR});
+    if(!r.ok){ msg.textContent = errText(r.error); return; }
+    commit(apiStripQ(r.q), editId);
+  }catch(e){ msg.textContent = NETMSG; }
+  finally{ btn.disabled = false; }
+}
+async function apiDelQ(id, commit){
+  try{ const r = await api('delQ', {id}); if(r.ok) commit(); else alert(errText(r.error)); }
+  catch(e){ alert(NETMSG); }
+}
+
+/* 댓글 — 질문(Q:P12)·화면(SCR:A03)마다 */
+function cmtWidget(target){
+  if(!APIMODE) return '';
+  return '<details class="cmt no-print" data-cmt="'+target+'"'+(CMT_OPEN.has(target)?' open':'')+'><summary>댓글 <span data-cn></span></summary><div data-clist></div><div class="cin"><textarea data-cin placeholder="댓글을 남기면 다른 참여자도 봅니다"></textarea><button type="button" class="btn" data-csend>댓글 달기</button></div></details>';
+}
+function paintCmt(el){
+  const t = el.dataset.cmt, list = COMMENTS.filter(c=>c.target===t), open = list.filter(c=>!c.resolved).length;
+  qs('[data-cn]', el).textContent = list.length ? list.length+'개'+(open ? ' · 미해결 '+open : '') : '';
+  qs('[data-clist]', el).innerHTML = list.map(c=>'<div class="ci'+(c.resolved?' done':'')+'"><div class="cm"><b>'+esc(c.by)+'</b><span>'+fmtAt(c.at)+'</span>'+(c.resolved?'<span class="tag keep">해결</span>':'')+'<button type="button" class="btn xs" data-cres="'+esc(c.id)+'">'+(c.resolved?'해결 취소':'해결')+'</button></div><div class="ct">'+esc(c.text)+'</div></div>').join('');
+}
+function apiUpsertComment(c){ const i = COMMENTS.findIndex(x=>x.id===c.id); if(i>=0) COMMENTS[i] = c; else COMMENTS.push(c); qsa('[data-cmt="'+c.target+'"]').forEach(paintCmt); }
+document.addEventListener('toggle', e=>{ const d = e.target; if(d.matches && d.matches('details.cmt')){ if(d.open) CMT_OPEN.add(d.dataset.cmt); else CMT_OPEN.delete(d.dataset.cmt); } }, true);
+document.addEventListener('click', async e=>{
+  const s = e.target.closest('[data-csend]');
+  if(s){
+    const el = s.closest('[data-cmt]'), ta = qs('[data-cin]', el), text = ta.value.trim(); if(!text || !READY) return;
+    s.disabled = true;
+    try{ const r = await api('comment', {target: el.dataset.cmt, text}); if(r.ok){ ta.value = ''; apiUpsertComment(r.comment); } else toast('댓글 저장 실패 — '+esc(errText(r.error)), 'err'); }
+    catch(err){ toast(esc(NETMSG), 'err'); }
+    finally{ s.disabled = false; }
+    return;
+  }
+  const rs = e.target.closest('[data-cres]');
+  if(rs){
+    const c = COMMENTS.find(x=>x.id===rs.dataset.cres); if(!c || !READY) return;
+    rs.disabled = true;
+    try{ const r = await api('resolve', {id: c.id, resolved: !c.resolved}); if(r.ok) apiUpsertComment(r.comment); else toast('해결 표시 실패 — '+esc(errText(r.error)), 'err'); }
+    catch(err){ toast(esc(NETMSG), 'err'); }
+    finally{ rs.disabled = false; }
+  }
+});
+
+/* 시트 전체 받기(state) — 화면 값을 시트 값으로 바꾸고, 보내지 못한 내 변경은 시트 ver가 그대로일 때만 다시 보낼 값으로 둔다.
+   고정 질문은 data.js 값 그대로(시트 행은 SV에도 넣지 않는다) */
+function apiIngestState(r){
+  const pend = apiReadPending();
+  SV.q = {}; SV.fb = {};
+  Object.keys(r.answers||{}).forEach(id=>{ if(!isFixed(id)) SV.q[id] = r.answers[id]; });
+  Object.keys(r.feedback||{}).forEach(k=>{ SV.fb[k] = r.feedback[k]; });
+  S.q = {}; Object.keys(FIXA).forEach(id=>{ if(isFixed(id)) S.q[id] = clone(FIXA[id]); });
+  Object.keys(SV.q).forEach(id=>{ S.q[id] = clone(SV.q[id].value); });
+  S.fb = {}; Object.keys(SV.fb).forEach(k=>{ S.fb[k] = clone(SV.fb[k].value); });
+  Object.keys(AQBY).forEach(k=>delete AQBY[k]);
+  S.addQ = (r.addq||[]).filter(q=>q.state==='open').map(apiStripQ);
+  COMMENTS = r.comments || [];
+  LASTSEQ = r.lastSeq || 0;
+  const lost = [];
+  ['q','fb'].forEach(kind=>Object.keys(pend[kind]||{}).forEach(k=>{
+    if(kind==='q' && isFixed(k)) return;          // 그사이 고정된 질문의 미전송 변경은 버린다
+    const p = pend[kind][k], sv = SV[kind][k];
+    if((sv ? sv.ver : 0) === p.baseVer) (kind==='q' ? S.q : S.fb)[k] = clone(p.value);
+    else lost.push([kind, k, p.value, sv]);
+  }));
+  cleanS(); READY = true;
+  applyAddQ(); renderQ(); paintAll(); apiPaintWho();
+  lost.forEach(a=>apiConflictToast(...a));
+  apiPersistPending();
+  if(apiDirtyKeys().length) apiFlush();
+}
+async function apiLoadState(){
+  let r;
+  try{ r = await api('state'); }catch(e){ return false; }
+  if(!r.ok){ if(r.error!=='bad_code') toast('불러오기 실패 — '+esc(errText(r.error)), 'err'); return false; }
+  apiIngestState(r);
+  /* 새 소식 — 마지막으로 본 변경 번호 뒤에 다른 사람이 바꾼 것. 처음 오면 소식 없이 시작 */
+  const seenK = AK.seen+'-'+ME.name, raw = lsGet(seenK), seen = +raw || 0;
+  if(raw==null || seen > LASTSEQ) lsSet(seenK, String(LASTSEQ));
+  else if(seen < LASTSEQ){
+    try{ const c = await api('changes', {since: seen}); if(c.ok && c.reset) toast('마지막 방문 뒤 변경이 1,000건을 넘어 새 소식 목록은 생략했습니다.'); else if(c.ok) apiAddNews(c.events); }catch(e){}
+  }
+  return true;
+}
+/* 바뀐 것만 받기(changes) */
+function apiIngestChanges(r){
+  if((r.lastSeq||0) < LASTSEQ){ apiLoadState(); return; }   // 시트를 비운 경우(resetData)
+  const dirty = new Set(apiDirtyKeys().map(([k,id])=>k+':'+id));
+  let rer = false;
+  [['q', r.answers], ['fb', r.feedback]].forEach(([kind, m])=>Object.keys(m||{}).forEach(k=>{
+    const cur = m[k], sv = SV[kind][k];
+    if(kind==='q' && isFixed(k)) return;          // 고정 질문 — 시트 변경은 무시
+    if(sv && sv.ver >= cur.ver) return;         // 이미 가진 값(내가 저장한 것 포함)
+    if(dirty.has(kind+':'+k)) return;            // 보내지 않은 내 변경이 있는 칸 — 그대로 두고, 보낼 때 충돌로 알린다
+    const before = apiAdopt(kind, k, cur);
+    if(kind==='q' && !!(before && before.dt) !== !!cur.value.dt) rer = true; else apiPaintKey(kind, k);
+  }));
+  (r.addq||[]).forEach(q=>{
+    const i = S.addQ.findIndex(x=>x.id===q.id);
+    if(q.state==='open'){ const n = apiStripQ(q); if(i>=0) S.addQ[i] = n; else S.addQ.push(n); }
+    else { if(i>=0) S.addQ.splice(i, 1); if(aqEdit===q.id) resetAddQForm(); }
+    rer = true;
+  });
+  (r.comments||[]).forEach(apiUpsertComment);
+  LASTSEQ = r.lastSeq || LASTSEQ;
+  if(rer) apiRerenderQ();
+  apiAddNews(r.events);
+}
+async function apiPoll(){
+  if(!READY || document.hidden) return;
+  let r;
+  try{ r = await api('changes', {since: LASTSEQ}); }catch(e){ return; }
+  if(!READY) return;
+  if(!r.ok){ if(r.error==='blocked') toast(esc(errText('blocked')), 'err'); return; }
+  if(r.reset){ await apiLoadState(); return; }
+  apiIngestChanges(r);
+  if(!flushing && apiDirtyKeys().length) apiFlush();   // 연결이 돌아왔으면 대기열도 보낸다
+}
+
+/* 새 소식 — 다른 사람이 바꾼 것(같은 사람·같은 칸·같은 종류는 최신 하나만) */
+const KLBL = {putAnswer:'답변', putFeedback:'화면 의견', addQ:'질문 추가', editQ:'질문 수정', delQ:'질문 삭제', mergeQ:'정식 질문으로 편입', comment:'댓글', resolve:'댓글 해결 표시'};
+function apiNewsGo(ev){
+  let k = String(ev.key);
+  if(/^C\d+$/.test(k)){ const c = COMMENTS.find(x=>x.id===k); if(!c) return {label: k}; k = c.target.replace(/^Q:/, '').replace(/^SCR:/, 'scr-'); }
+  if(RE_FBK.test(k)) return {scr: k.slice(4), label: '화면 '+k.slice(4)};
+  return {q: QMAP[k] ? k : '', label: k};
+}
+function apiAddNews(evs){
+  (evs||[]).forEach(ev=>{ if(!ME || ev.by===ME.name) return; NEWS = NEWS.filter(x=>!(x.key===ev.key && x.kind===ev.kind && x.by===ev.by)); NEWS.push(ev); });
+  if(NEWS.length > 200) NEWS = NEWS.slice(-200);
+  if(!NEWS.length && ME) lsSet(AK.seen+'-'+ME.name, String(LASTSEQ));
+  apiPaintNews();
+}
+function apiPaintNews(){
+  const b = qs('#newsBtn'), p = qs('#newsPanel'); if(!b || !p) return;
+  b.hidden = !NEWS.length; qs('b', b).textContent = NEWS.length;
+  if(!NEWS.length) p.hidden = true;
+  if(p.hidden) return;
+  p.innerHTML = '<div class="nh"><span>마지막으로 확인한 뒤 다른 사람이 바꾼 것 '+NEWS.length+'건</span><button type="button" class="btn xs" id="newsRead">모두 읽음</button></div>'+
+    NEWS.slice().reverse().map(ev=>{ const g = apiNewsGo(ev); return '<button type="button" class="ni"'+(g.q ? ' data-goq="'+g.q+'"' : g.scr ? ' data-goscr="'+g.scr+'"' : '')+'><span class="muted">'+fmtAt(ev.at)+' · '+esc(ev.by)+'</span> '+esc(g.label)+' '+esc(KLBL[ev.kind]||ev.kind)+'</button>'; }).join('');
+  qs('#newsRead').onclick = ()=>{ NEWS = []; if(ME) lsSet(AK.seen+'-'+ME.name, String(LASTSEQ)); apiPaintNews(); };
+}
+
+/* 접속 — 개인 코드는 처음 한 번 넣으면 이 브라우저에 기억 */
+function apiShowLogin(msg, loading){
+  let o = qs('#login');
+  if(!o){ o = document.createElement('div'); o.id = 'login'; o.className = 'no-print'; document.body.appendChild(o); }
+  o.innerHTML = '<div class="lg"><h2>졸업인증 개편 — 현업 확인</h2>'+(loading ? '<p>시트에서 답을 불러오는 중입니다…</p>' :
+    '<p class="small">받은 <b>개인 링크</b>로 열면 코드 입력 없이 바로 들어갑니다. 개인 코드를 받았다면 아래에 넣으세요. 이 브라우저에 기억해 두므로 처음 한 번만 하면 됩니다. 여럿이 쓰는 PC라면 다 쓴 뒤 상단 「코드 지우기」를 누르세요.</p><div class="r"><input type="password" id="lgCode" autocomplete="off" placeholder="개인 코드"><button type="button" class="btn pri" id="lgGo">들어가기</button></div>')+
+    '<div class="msg" id="lgMsg">'+esc(msg||'')+'</div></div>';
+  if(!loading){ const inp = qs('#lgCode'), go = ()=>{ const v = inp.value.trim(); if(v) apiLogin(v, false); }; qs('#lgGo').onclick = go; inp.onkeydown = e=>{ if(e.key==='Enter') go(); }; setTimeout(()=>inp.focus(), 0); }
+}
+function apiHideLogin(){ const o = qs('#login'); if(o) o.remove(); }
+async function apiLogin(code, silent){
+  CODE = code;
+  if(silent) apiShowLogin('', true); else { const m = qs('#lgMsg'); if(m) m.textContent = '확인하는 중…'; }
+  let r;
+  try{ r = await api('login'); }
+  catch(e){
+    if(silent){ apiShowLogin('', true); qs('#lgMsg').textContent = '서버에 연결하지 못했습니다. 15초 뒤 다시 시도합니다.'; setTimeout(()=>apiLogin(code, true), 15000); }
+    else { const m = qs('#lgMsg'); if(m) m.textContent = NETMSG; }
+    return;
+  }
+  if(!r.ok){ CODE = ''; if(r.error==='bad_code') lsSet(AK.code, null); apiShowLogin(errText(r.error)); return; }
+  ME = {name: r.name, role: r.role}; lsSet(AK.code, code);
+  apiShowLogin('', true);
+  for(;;){
+    if(await apiLoadState()) break;
+    if(!CODE) return;   // 그 사이 코드가 무효가 됨
+    qs('#lgMsg').textContent = '불러오지 못했습니다. 15초 뒤 다시 시도합니다.';
+    await new Promise(res=>setTimeout(res, 15000));
+  }
+  apiHideLogin();
+}
+function apiLogout(msg){
+  ME = null; READY = false; CODE = ''; lsSet(AK.code, null);
+  clearTimeout(flushT); clearTimeout(retryT);
+  apiPaintWho(); apiPaintSt(); apiShowLogin(msg || '');
+}
+function apiPaintWho(){
+  const w = qs('#apiWho'); if(!w) return;
+  w.innerHTML = ME ? esc(ME.name)+(ME.role==='dev' ? ' (개발)' : '')+'<a id="apiOut" title="이 브라우저에 기억한 개인 코드를 지웁니다">코드 지우기</a>' : '';
+  const a = qs('#apiOut'); if(a) a.onclick = ()=>{ const n = apiDirtyKeys().length; if(n && !confirm('아직 보내지 못한 변경이 '+n+'건 있습니다. 코드를 지우면 이 변경은 보내지 않습니다. 계속할까요?')) return; lsSet(AK.pend, null); apiLogout(''); };
+  /* 안내문 — API 모드·역할에 맞게 */
+  const p = qs('#s-q .lead');
+  if(p) p.textContent = '아직 확정되지 않은 질문과 인터뷰 중 추가한 질문(U01…)입니다. 답과 메모는 입력하면 바로 공유 시트에 저장되고 다른 참여자도 봅니다.'+(canDone() ? ' 상태를 「확정」으로 바꾸면 오늘 날짜가 확정일로 기록되고 질문이 5번 「결정사항·이슈」 아래 인터뷰 확정내역의 해당 날짜 블록으로 옮겨집니다.' : ' 상태를 「확정」으로 고르면 개발 담당자가 확인한 뒤 5번 「결정사항·이슈」의 인터뷰 확정내역으로 옮깁니다.');
+  const s = qs('#addQBox summary .small');
+  if(s) s.textContent = '인터뷰 중 새로 나온 질문을 추가합니다. 번호(U01, U02…)는 저장할 때 정해지고, 선택한 그룹 끝에 「추가」 표시와 함께 모든 참여자에게 보입니다.';
+}
+function apiPaintSt(){
+  const el = qs('#apiSt'); if(!el) return;
+  const n = apiDirtyKeys().length;
+  let txt = '저장됨', cls = '';
+  if(!READY){ txt = '접속 전'; cls = 'busy'; }
+  else if(flushing){ txt = '저장 중…'; cls = 'busy'; }
+  else if(n && netFail){ txt = '전송 실패 '+n+'건 — 연결되면 다시 보냅니다'; cls = 'fail'; }
+  else if(n){ txt = '저장 대기 '+n+'건'; cls = 'busy'; }
+  else if(netFail){ txt = '서버 연결 끊김'; cls = 'fail'; }
+  el.textContent = txt; el.className = 'apist '+cls;
+}
+function initApi(){
+  if(!APIMODE) return;
+  const dp = qs('[data-act="deploy"]'); if(dp) dp.remove();   // 배포 버튼은 로컬 원본 전용 — 공개 사이트에는 두지 않는다
+  const dl = qs('[data-act="datajs"]');
+  dl.textContent = '백업 내려받기'; dl.classList.remove('pri');
+  dl.title = '지금 화면의 답변·추가 질문을 담은 data.js를 내려받습니다(보관용). 답은 입력하면 바로 시트에 저장됩니다.';
+  dl.insertAdjacentHTML('beforebegin', '<button type="button" class="btn" id="newsBtn" hidden>새 소식 <b>0</b></button><span class="apist busy" id="apiSt">접속 전</span><span class="apiwho" id="apiWho"></span>');
+  qs('.titlebar').insertAdjacentHTML('afterend', '<div id="newsPanel" class="no-print" hidden></div>');
+  qs('#newsBtn').onclick = ()=>{ const p = qs('#newsPanel'); p.hidden = !p.hidden; apiPaintNews(); };
+  qs('#newsPanel').addEventListener('click', e=>{ if(e.target.closest('.ni')) qs('#newsPanel').hidden = true; });   // 항목으로 이동하면 패널을 닫는다(상단 고정 영역이 커진 채로 두지 않게)
+  const pub = window.INTERVIEW_DATA.PUBLISHED; if(pub) qs('.pinfo').insertAdjacentHTML('beforeend', '<span>게시 <b>'+esc(pub)+'</b></span>');
+  window.addEventListener('online', ()=>{ apiPoll(); apiFlush(); });
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) apiPoll(); });
+  setInterval(apiPoll, 30000);
+  /* 개인 링크(…/2026jeolup/#code=개인코드) — 코드 입력 없이 접속. 읽은 즉시 주소창에서 지워 북마크·화면에 남기지 않는다.
+     기억해 둔 코드보다 링크의 코드를 앞세운다(같은 브라우저에서 다른 사람 링크를 열면 그 사람으로 접속) */
+  const m = /^#code=([^&]+)/.exec(location.hash || '');
+  if(m){ try{ history.replaceState(null, '', location.pathname + location.search); }catch(e){} }
+  const code = m ? decodeURIComponent(m[1]).trim() : lsGet(AK.code);
+  if(code) apiLogin(code, true); else apiShowLogin('');
+}
+
+/* 탭 강조 */
+const secs = qsa('section.sec');
+let tabHold = 0;
+const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+const markTab = id => qsa('#tabs a').forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+id));
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(ents=>{
+  if(tabHold > Date.now() || atBottom()) return;
+  ents.forEach(en=>{ if(en.isIntersecting) markTab(en.target.id); });
+}, {rootMargin:'-140px 0px -60% 0px'}) : null;
+/* 마지막 절은 짧아 판정 영역에 닿지 못함 — 탭을 누르면 그 탭을 바로 표시하고, 페이지 끝에서는 마지막 절을 표시 */
+qsa('#tabs a').forEach(a=>a.addEventListener('click', ()=>{ tabHold = Date.now() + 1000; markTab(a.getAttribute('href').slice(1)); }));
+window.addEventListener('scroll', ()=>{ if(tabHold <= Date.now() && atBottom()) markTab(secs[secs.length-1].id); }, {passive:true});
+
+load(); applyAddQ();
+renderCode(); renderProc(); renderScreens(); renderQ(); renderDecisions(); initAddQ();
+if(io) secs.forEach(s=>io.observe(s));
+window.addEventListener('load', paintAll);
+paintAll();
+initApi();
+</script>
+</body>
+</html>
