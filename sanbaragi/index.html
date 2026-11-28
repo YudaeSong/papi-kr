@@ -48,6 +48,10 @@ header.top p{margin:0 0 8px;color:var(--sub)}
 .safety h2{margin:0 0 4px;font-size:19px;color:var(--warn)}
 .safety p{margin:0 0 4px}
 .safety a.go{display:inline-block;margin-top:8px;padding:9px 14px;border-radius:8px;background:var(--warn);color:var(--bg);text-decoration:none;font-weight:700}
+.video{margin:0 0 16px}
+.video a{display:inline-block;padding:11px 18px;border-radius:8px;background:var(--accent);color:var(--bg);text-decoration:none;font-weight:700}
+.video span{display:block;margin-top:6px;color:var(--sub);font-size:16px}
+@media print{.video{display:none}}
 .bar{background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0}
 .tools{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
 .tools input[type=search]{flex:1 1 220px;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
@@ -157,6 +161,7 @@ footer .safety{color:var(--ink)}
     <p id="lead"></p>
   </header>
   <aside class="safety" id="safetyBox" aria-label="안전 안내"></aside>
+  <div class="video hidden" id="videoBox"></div>
 </div>
 <div class="bar">
   <div class="wrap">
@@ -173,7 +178,7 @@ footer .safety{color:var(--ink)}
 </div>
 <script src="tabs.js?v=b26381f830"></script>
 <script src="search.js?v=01a66714cf"></script>
-<script src="guide-data.js?v=0bb3f2d19d"></script>
+<script src="guide-data.js?v=552b6652f9"></script>
 <script>
 (function(){
   const T = window.TUTORIAL;
@@ -194,6 +199,12 @@ footer .safety{color:var(--ink)}
   document.getElementById("safetyBox").innerHTML =
     `<h2>⚠ ${esc(T.safety.title)}</h2>${T.safety.lines.map(l => `<p>${rich(l)}</p>`).join('')}` +
     `<a class="go" href="#${esc(T.safety.jumpTo)}" data-go="${esc(T.safety.jumpTo)}">${esc(T.safety.jumpLabel)}</a>`;
+  // 영상 단추 — 바깥 주소는 이 칸에서만 건다(rich()는 절 안 연결만 허용). https 주소가 없으면 그리지 않는다
+  if (T.video && /^https:\/\//.test(T.video.url || '')) {
+    const v = document.getElementById('videoBox');
+    v.innerHTML = `<a href="${esc(T.video.url)}" target="_blank" rel="noopener">▶ ${esc(T.video.label)}</a><span>${esc(T.video.note)}</span>`;
+    v.classList.remove('hidden');
+  }
   document.getElementById('foot').innerHTML =
     `<div class="safety"><h2>⚠ ${esc(T.safety.title)}</h2>${T.safety.lines.map(l => `<p>${rich(l)}</p>`).join('')}</div>` +
     `<p>${esc(T.planNote)}</p><p>Android 앱 기준 · ${esc(T.updated)} 현재 · 일부 기능은 기기와 권한 설정에 따라 쓸 수 없을 수 있습니다.</p>`;

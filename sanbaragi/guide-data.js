@@ -7,6 +7,8 @@ window.TUTORIAL = {
   lead: '처음 쓰는 분을 위한 따라 하기 안내입니다. 위에서부터 순서대로 하면 첫 산행을 마칠 수 있습니다.',
   updated: '2026-11-23',
   planNote: '요금제는 별도로 안내합니다.',
+  // 맨 위 안전 안내 아래의 영상 단추. url이 https 주소일 때만 그린다(비우면 단추 없음). 영상 파일은 사이트에 올리지 않고 게시된 곳의 주소만 건다.
+  video: { label: '영상으로 먼저 보기', note: '산행공지 게시글 복사부터 산행 후기 등록까지 따라 하는 영상입니다(약 3분).', url: 'https://youtube.com/shorts/saJ9GYNrZ48' },
   safety: {
     title: '안전이 먼저입니다',
     lines: [
