@@ -31,6 +31,7 @@
   const statCmp = (k) => (a, b) => (b.stats[k] ?? -1) - (a.stats[k] ?? -1);
   registerSource({
     id: 'ncs', name: 'NCS', kind: 'library',
+    defaultLic: 'all', // 전곡이 「홍보 영상 불가」 등급이라 「허용만」으로 시작하면 항상 0곡으로 보인다
     notice: '<b>NCS(NoCopyrightSounds) — 개인 크리에이터의 자기 영상·방송은 무료, 수익 창출 가능.</b> 긴 영상은 <b>설명란에 출처 필수</b>(Shorts·Reels·TikTok은 불필요). '
       + '<b>브랜드·게임·영화/TV, 유료 광고·협찬 영상(본인 채널 포함)은 유료 라이선스</b>가 필요합니다. 음원 단독 배포·판매, 길이 맞춤 이상의 변형은 금지. '
       + '<b>출처 문구는 곡 페이지의 「Copy credit」 문구를 그대로 쓰세요</b>(곡마다 문구가 달라 「출처 복사」의 문구는 참고용 초안). '

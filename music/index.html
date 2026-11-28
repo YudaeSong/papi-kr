@@ -389,7 +389,7 @@ const STREAM_URL = 'https://fms-stream.papi-syd.workers.dev/stream';
 // location.origin 만 쓰면 폴더 경로가 빠져 다른 화면(사이트 첫 화면)으로 데이터를 보내게 된다.
 const APP_BASE = location.origin + location.pathname.replace(/\/[^/]*$/, '');
 // sources/*.js 주소에 붙이는 버전. 호스팅이 파일을 10분쯤 캐시하므로, 소스 스크립트를 고치면 이 값을 바꿔 화면과 어긋나지 않게 한다.
-const ASSET_VER = '20261128';
+const ASSET_VER = '20261129';
 const GAS_TIMEOUT_MS = 30000; // Apps Script 는 밖으로 나가는 요청에 제한 시간을 둘 수 없어, 화면이 멈추지 않게 여기서 끊는다
 
 // ---------- 상태 ----------
@@ -1383,6 +1383,9 @@ function registerSource(def) {
   $('panel-yt').before(p);
   const el = st.el;
   p.querySelectorAll('[data-x]').forEach((x) => (el[x.dataset.x] = x));
+  // 라이선스 필터의 처음 값은 「허용만」이다. 전곡이 숨김 등급인 소스(NCS)는 그대로면 항상 0곡이라 소스 정의의 defaultLic 로 처음 값을 바꾼다.
+  // 등급 분류(licClass)와 곡마다 붙는 「홍보 영상 불가」 표시는 바뀌지 않는다.
+  if (LIC_SHOW[def.defaultLic]) el.lic.value = def.defaultLic;
   el.count = tab.querySelector('.tag');
   ['sort', 'genre'].forEach((k) => el[k].addEventListener('change', () => updateSrc(st)));
   el.lic.addEventListener('change', () => (def.kind === 'search' && st.searchQ != null ? runSrcSearch(st) : updateSrc(st)));
